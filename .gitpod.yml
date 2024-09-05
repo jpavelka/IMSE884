@@ -1,0 +1,6 @@
+tasks:
+  - name: Setup
+    init: |
+      npm install
+    command: |
+      npm run dev
