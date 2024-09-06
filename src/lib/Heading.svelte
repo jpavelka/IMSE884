@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { onMount } from "svelte";
     import { sections } from "./stores";
     export let level: string | undefined = undefined;
     export let refId: string;
@@ -44,14 +45,23 @@
     }
     $: returnId = $sections.returnIds[refId];
     let data: HTMLElement;
-    $: headingText =  `${includeDispSecNum ? (!!level ? secNum : '') + (!!level ? ": " : "") : ""}${data?.innerHTML}`;
+    $: headingText = `${includeDispSecNum ? (!!level ? secNum : '') + (!!level ? ": " : "") : ""}${data?.innerHTML}`;
     $: sections.update(s => {
         s.headingTexts[refId] = headingText;
         return s;
     })
+    onMount(() => {
+        setTimeout(() => {
+            headingText = `${includeDispSecNum ? (!!level ? secNum : '') + (!!level ? ": " : "") : ""}${data?.innerHTML}`;
+            sections.update(s => {
+                s.headingTexts[refId] = headingText;
+                return s;
+            })
+        }, 250)
+    })
 </script>
 
-<span style="display:none" class="headingData" bind:this={data}><slot /></span>
+<span style="display:none" bind:this={data}><slot /></span>
 <span style="display:none" id={refId + 'Context'}>
     <slot name="context" />
 </span>

@@ -1,39 +1,44 @@
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
+const mathSafe = (content) => {
+	const regexpStart = '<Math[^>]*>'
+	const regexpEnd = '</Math[^>]*>'
+	let converted = [];
+	let unconverted = content;
+	let mt = unconverted.match(regexpStart);
+	while (!!mt) {
+		let idx = mt.index;
+		let s = mt[0];
+		converted.push(unconverted.slice(0, idx));
+		converted.push(s);
+		unconverted = unconverted.slice(idx + s.length);
+		mt = unconverted.match(regexpEnd);
+		idx = mt.index;
+		s = mt[0];
+		let math = unconverted.slice(0, idx);
+		math = math.replaceAll('_', '{:underscore:}');
+		if (!math.match('String.raw')) {
+			math = '{String.raw`' + math + '`}';
+		}
+		converted.push(math);
+		converted.push(s);
+		unconverted = unconverted.slice(idx + s.length);
+		mt = unconverted.match(regexpStart);
+	}
+	converted.push(unconverted);
+	return converted.join('');
+}
+
 function customPP() {
 	return {
-		name: 'emoji',
+		name: 'mathSafe',
 		markup: ({ content, filename }) => {
 			if (filename.search('src/sections') < 0) {
 				return
 			}
-			const regexpStart = '<Math[^>]*>'
-			const regexpEnd = '</Math[^>]*>'
-			let converted = [];
-			let unconverted = content;
-			let mt = unconverted.match(regexpStart);
-			while (!!mt) {
-				let idx = mt.index;
-				let s = mt[0];
-				converted.push(unconverted.slice(0, idx));
-				converted.push(s);
-				unconverted = unconverted.slice(idx + s.length);
-				mt = unconverted.match(regexpEnd);
-				idx = mt.index;
-				s = mt[0];
-				let math = unconverted.slice(0, idx);
-				math = math.replaceAll('_', '{:underscore:}');
-				if (!math.match('String.raw')) {
-					math = '{String.raw`' + math + '`}';
-				}
-				converted.push(math);
-				converted.push(s);
-				unconverted = unconverted.slice(idx + s.length);
-				mt = unconverted.match(regexpStart);
-			}
-			converted.push(unconverted);
-			return { code: converted.join('') }
+			let code = mathSafe(content);
+			return { code: code }
 		}
 	}
 }

@@ -1,5 +1,6 @@
 <script>
     import Heading from "$lib/Heading.svelte";
+    import GraphTheory from "./GraphTheory.svelte";
     import Symbols from "./Symbols.svelte";
 </script>
 
@@ -7,4 +8,6 @@
     Appendix
     <span slot=context>Extra content you may find useful for this course.</span>
 </Heading>
+
 <Symbols/>
+<GraphTheory/>

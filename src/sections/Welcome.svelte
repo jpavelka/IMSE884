@@ -25,7 +25,11 @@
 </BodyText>
 
 <BodyText>
-    More specifically, we will begin by <Key>exploring a selection of different combinatorial optimization problems</Key> and specialized algorithms for solving them. We'll then discuss <Key>preliminaries on integer programming</Key>, which we will see can itself be used as a tool for combinatorial optimization (as well as other types of problems).
+    As far as prerequisites, you should have some <Key>familiarity with linear algebra</Key>, at a minimum the basic mechanics of <Key>matrix math (addition/multiplication)</Key>. Topics such as linear rank and determinants with surface as well. Some familiarity with other optimization topics, especially <Key>linear programming</Key>, will also prove helpful.
+</BodyText>
+
+<BodyText>
+    We will begin the class by by <Key>exploring a selection of different combinatorial optimization problems</Key> and specialized algorithms for solving them. We'll then discuss <Key>preliminaries on integer programming</Key>, which we will see can itself be used as a tool for combinatorial optimization (as well as other types of problems).
 </BodyText>
 
 <BodyText>

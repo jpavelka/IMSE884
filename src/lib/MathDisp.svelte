@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { equations, printMode, sections } from "./stores";
+    import { equations, printMode } from "./stores";
     import KatexDisp from "./KatexDisp.svelte";
     import { refNumbering } from "$lib";
 
@@ -15,7 +15,7 @@
     let eqnNum = "";
     if (refId !== "") {
         refId = refNumbering(equations, refId, 'eqn');
-        eqnNum = $equations.numbers[refId]
+        eqnNum = $equations.numbers[refId];
         if (name !== "") {
             equations.update(e => {
                 e.names[refId] = name;
@@ -41,7 +41,7 @@
     style="float:right;font-size:1.4rem;"
     href={"#" + returnId}
     on:click={() => {
-        sections.update((s) => {
+        equations.update((s) => {
             delete s.returnIds[refId];
             return s;
         });

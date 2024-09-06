@@ -1,6 +1,4 @@
 const macros = {
-    '\\max': '\\text{max}',
-    '\\min': '\\text{min}',
     '\\st': '\\text{s.t.}',
     '\\R': '\\mathbb{R}',
     '\\Z': '\\mathbb{Z}',

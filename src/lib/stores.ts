@@ -49,6 +49,18 @@ const equations: Writable<{
   names: {}
 })
 
+const problems: Writable<{
+  numRefs: {[key: string]: number},
+  returnIds: {[key: string]: string},
+  names: {[key: string]: HTMLElement},
+  abbrevs: {[key: string]: HTMLElement}
+}> = writable({
+  numRefs: {},
+  returnIds: {},
+  names: {},
+  abbrevs: {}
+})
+
 const notebooks: Writable<{
   secCounts: {[key: string]: number},
   numbers: {[key: string]: string},
@@ -109,5 +121,5 @@ const highlightKeyPoints = writable(false);
 export {
   sections, citations, figures, equations, showToc, notebooks,
   theorems, popupShown, notesMaxWidth, tocWidth, eqReferenced,
-  minPopupSideWidth, printMode, highlightKeyPoints
+  minPopupSideWidth, printMode, highlightKeyPoints, problems
 }
