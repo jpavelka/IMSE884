@@ -45,6 +45,10 @@
         dragView: false
       }
     }
+    let nodeLabelToId: {[key: string]: number} = {};
+    $: for (const n of convertedNodes) {
+      nodeLabelToId[n.label] = n.id;
+    }
     $: convertedEdges = edges.map(e => {
       const extraArgs: {[key: string]: any} = {};
       if (typeof e === 'string') {
@@ -52,12 +56,20 @@
           extraArgs.width = 5;
         }
         const spl = e.split('-');
-        e = {from: parseInt(spl[0]), to: parseInt(spl[1])}
+        const from = parseInt(spl[0]) || nodeLabelToId[spl[0]];
+        const to = parseInt(spl[1]) || nodeLabelToId[spl[1]];
+        e = {from: from, to: to}
+        if (spl.length > 2) {
+          e.label = `${spl[2]}`
+        }
       }
       return {...e, ...extraArgs}
     })
     if (directed) {
-      options.edges = {arrows: 'to'}
+      options.edges = {
+        arrows: 'to',
+        font: {size: 30, background: 'white'}
+      }
     }
 
     let container: HTMLElement;

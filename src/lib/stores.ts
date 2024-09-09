@@ -61,6 +61,12 @@ const problems: Writable<{
   abbrevs: {}
 })
 
+const definitions: Writable<{
+  plainText: {[key: string]: string}
+}> = writable({
+  plainText: {}
+})
+
 const notebooks: Writable<{
   secCounts: {[key: string]: number},
   numbers: {[key: string]: string},
@@ -121,5 +127,6 @@ const highlightKeyPoints = writable(false);
 export {
   sections, citations, figures, equations, showToc, notebooks,
   theorems, popupShown, notesMaxWidth, tocWidth, eqReferenced,
-  minPopupSideWidth, printMode, highlightKeyPoints, problems
+  minPopupSideWidth, printMode, highlightKeyPoints, problems,
+  definitions
 }

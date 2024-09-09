@@ -8,6 +8,8 @@
     import FigureRef from "$lib/FigureRef.svelte";
     import Footnote from "$lib/Footnote.svelte";
     import MathDisp from "$lib/MathDisp.svelte";
+    import Definition from "$lib/Definition.svelte";
+    import DefinitionRef from "$lib/DefinitionRef.svelte";
 
     const sampleNodes = [
         {id: 1, x: 0, y: 0.5},
@@ -42,7 +44,40 @@
     Familiarity with graph theory will be useful for this course. You don't need to know too much though, really just the basic definitions should be enough to understand the material. For interested readers, Reinhard Diestel's <em>Graph Theory</em> <CitationRef refId=diestel2018></CitationRef> is an excellent overview of the topic.
 </BodyText>
 <BodyText>
-    <em>Graph theory</em> is a branch of mathematics that studies a certain type of object called a graph. A <em>graph</em> is composed of two entities called <em>vertices</em> (also called <em>nodes</em>) and <em>edges</em> (also called <em>arcs</em>). Graphs are used to model relationships (denoted by the edges) between pairs of entities (represented by the nodes). More concretely, let a graph <Math>G=(V,E)</Math> be defined by the pair of sets <Math>V</Math> and <Math>E</Math>. <Math>V</Math> is the set of vertices, and the elements of <Math>E</Math> are pairs of vertices <Math>(v_1,v_2)</Math>, with <Math>v_1, v_2\in V</Math>.
+    <Definition refId=graphTheory>
+        Graph theory
+        <span slot=definition>
+            The branch of mathematics that studies <DefinitionRef refId=graph>graphs</DefinitionRef>.
+        </span>
+        <span slot=glossaryDisp>graph theory</span>
+    </Definition> is a branch of mathematics that studies a certain type of object called a graph. A <Definition refId=graph>
+        graph
+        <span slot=definition>
+            A mathematical object <Math>G=(V,E)</Math> consisting of a set of <DefinitionRef refId=vertex>vertices</DefinitionRef> <Math>V</Math> and a set of <DefinitionRef refId=edge>edges</DefinitionRef> <Math>E</Math>. Typically the vertices represent some object of interest, and the edges represent some pairwise relationship between two vertices.
+        </span>
+    </Definition> is composed of two sets <Math>V</Math> and <Math>E</Math> called the <Definition refId=vertex>
+        vertices
+        <span slot=definition>
+            Along with the edge, one of two main components of a <DefinitionRef refId=graph/>. They're typically the base object of interest in a graph, and visually represented by a circle in a diagram.
+        </span>
+        <span slot=glossaryDisp>vertex</span>
+    </Definition> (also called <Definition refId=node>
+        nodes
+        <span slot=definition>See <DefinitionRef refId=vertex/>.</span>
+        <span slot=glossaryDisp>node</span>
+    </Definition>) and <Definition refId=edge>
+        edges
+        <span slot=definition>
+            Along with the vertex, one of two main components of a <DefinitionRef refId=graph/>. They typically represent relationships between vertices.
+        </span>
+        <span slot=glossaryDisp>edge</span>
+    </Definition> (also called <Definition refId=arc>
+        arcs
+        <span slot=definition>
+            See <DefinitionRef refId=edge />.
+        </span>
+        <span slot=glossaryDisp>arc</span>
+    </Definition>), respectively. Graphs are used to model relationships (denoted by the edges) between pairs of entities (represented by the vertices). More concretely, let a graph <Math>G=(V,E)</Math> be defined by the pair of sets <Math>V</Math> and <Math>E</Math>. <Math>V</Math> is the set of vertices, and the elements of <Math>E</Math> are pairs of vertices <Math>(v_1,v_2)</Math>, with <Math>v_1, v_2\in V</Math>.
 </BodyText>
 <BodyText>
     Initially, these definitions feel rather abstract. But in practice graphs often have very natural interpretations. Generally they are used to model relationships between entities, e.g. the nodes are people signed up for some social network, and an edge is drawn between two people if they are friends. Another common interpretation is as a road network, when the vertices are cities on a map, and an edge is drawn between two cities if it is possible to drive from one city to the other. In this case, there is often a distance <Math>d_e</Math> associated with each <Math>e\in E</Math> that denotes the distance between two cities, and you are perhaps trying to find the shortest route that lets you get from one place to another.
@@ -66,7 +101,19 @@
 </Figure>
 
 <BodyText>
-    Sometimes it makes sense for the edges to be directional. For example, we might want to represent a road network with some one-way streets. Or perhaps we'd like to model teams from a sports league that have played each other, with the edges drawn "from" the winning team "to" the losing team. Such a graph with directed edges are called <em>directed graphs</em>, or <em>digraphs</em> for short. In these cases, the ordering of the vertices in each edge <Math>(v_1,v_2)\in E</Math> matters, and we'd say that the edge goes <em>from</em> <Math>v_1</Math> <em>to</em> <Math>v_2</Math>. <FigureRef refId=exampleDirectedGraph/> shows an example visualization of a directed graph. Note that it is entirely possible for digraph edges to exist in both directions between a pair of vertices, as we see with both <Math>(v_4,v_5)</Math> and <Math>(v_5,v_4)</Math> existing in the figure.
+    Sometimes it makes sense for the edges to be directional. For example, we might want to represent a road network with some one-way streets. Or perhaps we'd like to model teams from a sports league that have played each other, with the edges drawn "from" the winning team "to" the losing team. Such a graph with directed edges are called <Definition refId=directedGraph>
+        directed graphs
+        <span slot=definition>
+            A <DefinitionRef refId=graph/> whose edges are directed, so that for two vertices <Math>v_1, v_2\in V</Math> there is a difference between the edges <Math>(v_1,v_2)</Math> and <Math>(v_2,v_1)</Math>.
+        </span>
+        <span slot=glossaryDisp>directed graph</span>
+    </Definition>, or <Definition refId=digraph>
+        digraphs
+        <span slot=definition>
+            See <DefinitionRef refId=directedGraph/>.
+        </span>
+        <span slot=glossaryDisp>digraph</span>
+    </Definition> for short. In these cases, the ordering of the vertices in each edge <Math>(v_1,v_2)\in E</Math> matters, and we'd say that the edge goes <em>from</em> <Math>v_1</Math> <em>to</em> <Math>v_2</Math>. <FigureRef refId=exampleDirectedGraph/> shows an example visualization of a directed graph. Note that it is entirely possible for digraph edges to exist in both directions between a pair of vertices, as we see with both <Math>(4,5)</Math> and <Math>(5,4)</Math> existing in the figure.
 </BodyText>
 
 <Figure refId=exampleDirectedGraph>
@@ -81,27 +128,46 @@
 </Figure>
 
 <BodyText>
-    On a given graph <Math>G</Math>, a <em>walk</em> is a sequence of edges which joins a sequence of vertices, such that it denotes a way to "walk" from one vertex to another using the edges of the graph. So
+    In the context of digraphs, it is sometimes customary to denote the graph by <Math>D=(V,A)</Math> instead of <Math>G=(V,E)</Math>, using <Math>D</Math> (for digraph) in place of <Math>G</Math> for the graph and <Math>A</Math> (for arc) in place of <Math>E</Math> for the edge set. Indeed, this is the convention Wolsey takes in <CitationRef refId=wolsey2020/> and so we will try to follow that practice here.
+</BodyText>
+
+<BodyText>
+    On a given graph <Math>G</Math>, a <Definition refId=walk>
+        walk
+        <span slot=definition>
+            In graph theory, a sequence of edges which joins a sequence of vertices, such that it denotes a way to "walk" from vertex to vertex using the edges of the graph.
+        </span>
+        </Definition> is a sequence of edges which joins a sequence of vertices, such that it denotes a way to "walk" from vertex to vertex using the edges of the graph. So
     <MathDisp>
-        W=((v_1, v_2), (v_2, v_5), (v_4, v_5), (v_2, v_4), (v_2, v_3))
+        W=((1, 2), (2, 5), (4, 5), (2, 4), (2, 3))
     </MathDisp>
     is a walk in the graph shown in <FigureRef refId=exampleGraph/>, which represents traveling the sequence of vertices:
     <MathDisp>
-        v_1\rightarrow v_2\rightarrow v_5\rightarrow v_4\rightarrow v_2\rightarrow v_3
+        1\rightarrow 2\rightarrow 5\rightarrow 4\rightarrow 2\rightarrow 3
     </MathDisp>
 </BodyText>
 
 <BodyText>
-    A very similar notion is that of a <em>trail</em>, which is a walk in which all the edges are distinct. Note that the walk <Math>W</Math> from the previous paragraph is also a trail, since it does not repeat any edges. Meanwhile, a walk is called a <em>path</em> if all its vertices (and, therefore also it edges) are distinct. So <Math>W</Math> is <em>not</em> a path, since it travels to vertex <Math>v_2</Math> twice. But something like
+    A very similar notion is that of a <Definition refId=trail>
+        trail
+        <span slot=definition>
+            A <DefinitionRef refId=walk/> in which all the edges are distinct.
+        </span>
+    </Definition>, which is a walk in which all the edges are distinct. Note that the walk <Math>W</Math> from the previous paragraph is also a trail, since it does not repeat any edges. Meanwhile, a walk is called a <Definition refId=path>
+        path
+        <span slot=definition>
+            A <DefinitionRef refId=walk/> in which all the vertices are distinct.
+        </span>
+    </Definition> if all its vertices (and, therefore also it edges) are distinct. So <Math>W</Math> is <em>not</em> a path, since it travels to vertex <Math>2</Math> twice. But something like
     <MathDisp>
-        P=((v_1, v_2), (v_2, v_5), (v_4, v_5))
+        P=((1, 2), (2, 5), (4, 5))
     </MathDisp>
     <em>is</em> a path, which we can visualize as in <FigureRef refId=examplePath/>.
 </BodyText>
 
 <Figure refId=examplePath>
     <span slot=caption>
-        Visualization of a path <Math>P=((v_1, v_2), (v_2, v_5), (v_4, v_5))</Math>.
+        Visualization of a path <Math>P=((1, 2), (2, 5), (4, 5))</Math>.
     </span>
     <FixedNodeGraph 
         nodes={sampleNodes}
@@ -111,7 +177,22 @@
 </Figure>
 
 <BodyText>
-    A <em>circuit</em> is a trail that starts and ends at the vertex. Note that the circuit is defined based on a <em>trail</em>, so therefore cannot be repeated in a circuit, though vertices <em>can</em> repreat. A similar notion is the <em>cycle</em>, which is a path that begins and ends at the same vertex. A cycle is called a <em>Hamiltonian cycle</em> if it visits every vertex exactly once. An example Hamiltonian cycle is shown in <FigureRef refId=exampleHamCycle/>.
+    A <Definition refId=circuit>
+        circuit
+        <span slot=definition>
+            A <DefinitionRef refId=trail/> that starts and ends at the same vertex.
+        </span>
+    </Definition> is a trail that starts and ends at the vertex. Note that the circuit is defined based on a <em>trail</em>, so therefore cannot be repeated in a circuit, though vertices <em>can</em> repeat. A similar notion is the <Definition refId=cycle>
+        cycle
+        <span slot=definition>
+            A <DefinitionRef refId=path/> that begins and ends at the same vertex.
+        </span>
+    </Definition>, which is a path that begins and ends at the same vertex. A cycle is called a <Definition refId=hamCycle>
+        Hamiltonian cycle
+        <span slot=definition>
+            A <DefinitionRef refId=cycle/> in which every vertex is visited exactly once.
+        </span>
+    </Definition> if it visits every vertex exactly once. An example Hamiltonian cycle is shown in <FigureRef refId=exampleHamCycle/>.
 </BodyText>
 
 <Figure refId=exampleHamCycle>

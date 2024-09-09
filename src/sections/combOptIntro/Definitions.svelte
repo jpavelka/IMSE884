@@ -10,6 +10,7 @@
     import ProblemRef from "$lib/ProblemRef.svelte";
     import Footnote from "$lib/Footnote.svelte";
     import SectionRef from "$lib/SectionRef.svelte";
+    import Definition from "$lib/Definition.svelte";
 </script>
 
 <Heading level="2" refId="combOptDefs">
@@ -42,7 +43,12 @@
 </BodyText>
 
 <BodyText>
-    Time to bring it all together. The <a href=https://en.wikipedia.org/wiki/Combinatorial_optimization>Wikipedia page</a> on combinatorial optimization describes it as:
+    Time to bring it all together. The <a href=https://en.wikipedia.org/wiki/Combinatorial_optimization>Wikipedia page</a> on <Definition refId=combinatorialOptimization>
+        <span slot=definition>
+            A subfield of mathematical optimization that consists of finding an optimal object from a finite set of objects, where the set of feasible solutions is discrete or can be reduced to a discrete set.
+        </span>
+        combinatorial optimization
+    </Definition> describes it as:
     <BlockQuote>
         <BodyText>
             a subfield of mathematical optimization that consists of finding an optimal object from a finite set of objects, where the set of feasible solutions is discrete or can be reduced to a discrete set
