@@ -3,7 +3,7 @@ import { Cite } from "@citation-js/core";
 import { plugins } from '@citation-js/core';
 import * as bibtexPlugin from '@citation-js/plugin-bibtex';
 import * as cslPlugin from '@citation-js/plugin-csl';
-import bibtex from "./bibtex";
+import bibtex from "../bibtex";
 
 const sections: Writable<{
   hierarchy: Array<any>,

@@ -3,7 +3,11 @@ import { get, type Writable } from "svelte/store";
 
 const refNumbering = (refStore: Writable<any>, refId: string, refPre: string) => {
     refId = refPre + ":" + refId;
-    const sec = get(sections).hierarchy.length;
+    const sec = `${get(sections).hierarchy.length}`;
+    let secNum = sec;
+    if (Object.keys(get(sections).dispSecNums).includes(sec)) {
+        secNum = get(sections).dispSecNums[sec];
+    }
     if (!Object.keys(get(refStore).secCounts).includes(sec + '')) {
         refStore.update((f) => {
             f.secCounts[sec] = 0;
@@ -14,7 +18,7 @@ const refNumbering = (refStore: Writable<any>, refId: string, refPre: string) =>
         f.secCounts[sec] += 1;
         return f;
     });
-    const eqnNum = sec + "." + get(refStore).secCounts[sec];
+    const eqnNum = secNum + "." + get(refStore).secCounts[sec];
     refStore.update((f) => {
         f.numbers[refId] = eqnNum;
         return f;

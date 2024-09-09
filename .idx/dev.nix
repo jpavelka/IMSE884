@@ -11,7 +11,7 @@
   idx.workspace.onCreate = {
     npm-install = "npm install";
   };
-  idx.workspace.onStart = {
-    npm-run-dev = "npm run dev";
-  };
+  # idx.workspace.onStart = {
+  #   npm-run-dev = "npm run dev";
+  # };
 }

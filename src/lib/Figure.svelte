@@ -5,18 +5,34 @@
 
     refId = refNumbering(figures, refId, "fig");
     const figNum = $figures.numbers[refId];
+    $: returnId = $figures.returnIds[refId];
 </script>
 
-<div class="figDiv">
+<div class=figDiv id={refId}>
     <slot />
     <div class="caption"><b>Figure {figNum}:</b> <slot name="caption" /></div>
 </div>
+{#if !!returnId}    
+    <a
+    style="float:right;font-size:1.4rem;"
+    href={"#" + returnId}
+    on:click={() => {
+        figures.update((s) => {
+            delete s.returnIds[refId];
+            return s;
+        });
+    }}
+    >
+    ↩︎</a
+    >
+{/if}
 
 <style>
     .figDiv {
         max-width: 90%;
         margin: 1.5rem auto;
         overflow-x: auto;
+        overflow-y: hidden;
     }
     .caption {
         font-size: 1.2rem;

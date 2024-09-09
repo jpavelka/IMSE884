@@ -47,18 +47,5 @@ import Heading from "$lib/Heading.svelte";
         <li><Math>\Leftrightarrow</Math>: If and only if. It indicates the the statement to the left is logically equivalent to the statement on the right, e.g. <Math>a > b \Leftrightarrow -a < -b</Math>.</li>
         <li><Math>\floor{x}</Math>: The "floor" of the number <Math>x\in\R</Math>, i.e. the value resulting from rounding <Math>x</Math> down to the nearest integer. So <Math>\floor{1.3}=1</Math>.</li>
         <li><Math>\ceil{x}</Math>: The "ceiling" of the number <Math>x\in\R</Math>, i.e. the value resulting from rounding <Math>x</Math> up to the nearest integer. So <Math>\ceil{1.3}=2</Math>.</li>
-        <li><Math>f'</Math>: The derivative of some single-variable function <Math>f</Math>.</li>
-        <li><Math>f''</Math>: The second derivative of some single-variable function <Math>f</Math>.</li>
-        <li><Math>f'_{x_j}</Math>: The partial derivative of some multi-variable function <Math>f</Math> with respect to the variable <Math>x_j</Math>.</li>
-        <li><Math>\nabla f</Math>: The gradient of some multivariate function <Math>f</Math>, i.e. the vector of partial derivatives. So we have:
-            <MathDisp>
-            \nabla f(\x) = \begin{bmatrix}
-            f'_{x_1}(\x) \\
-            f'_{x_2}(\x) \\
-            \vdots \\
-            f'_{x_n}(\x)
-            \end{bmatrix}
-            </MathDisp>  The symbol <Math>\nabla</Math> is called the "nabla" symbol.</li>
-        <li><Math>\indicator_{\{\text{condition}\}}</Math>: A random variable that equals <Math>1</Math> if the condition in the subscript is true, and equals <Math>0</Math> if the condition is false.</li>
     </ul>
 </BodyText>

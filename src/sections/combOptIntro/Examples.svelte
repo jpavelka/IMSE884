@@ -4,6 +4,7 @@
     import ProblemRef from "$lib/ProblemRef.svelte";
     import Problem from "$lib/Problem.svelte";
     import SectionRef from "$lib/SectionRef.svelte";
+    import Key from "$lib/Key.svelte";
 </script>
 
 <Heading level=2 refId=exampleCOPs>
@@ -12,7 +13,7 @@
 </Heading>
 
 <BodyText>
-    It might take a few examples to really internalize the definition. So, let's go ahead and present a few <ProblemRef refId=combOpt/>s and examine how they fit the framework. Several of these are most convenient to define in the language of graph theory. If you've seen graphs before, then great! If not, you can brush up on the preliminaries in the appendix, <SectionRef refId=graphTheory/>.
+    It might take a few examples to really internalize the definition. So, let's go ahead and <Key>present a few <ProblemRef refId=combOpt/>s and examine how they fit the framework</Key>. Several of these are most convenient to define in the language of <Key>graph theory</Key>. If you've seen graphs before, then great! If not, you can brush up on the preliminaries in the appendix, <SectionRef refId=graphTheory/>.
 </BodyText>
 
 <BodyText>

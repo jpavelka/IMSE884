@@ -64,4 +64,13 @@ export default `
   publisher={Wiley}
 }
 
+@book{diestel2018,
+  title={Graph Theory},
+  author={Diestel, R.},
+  isbn={9783662575604},
+  series={Graduate Texts in Mathematics},
+  url={https://books.google.com/books?id=JQ1XtgEACAAJ},
+  year={2018},
+  publisher={Springer Berlin Heidelberg}
+}
 `
