@@ -6,8 +6,9 @@
     let div: HTMLElement;
     onMount(() => {
         setTimeout(() => {    
-            const itemEl = document.getElementById(refId + ':glossaryEntry');
-            div.innerHTML = itemEl?.innerHTML || '';
+            const itemEl = document.getElementById(refId + ':glossaryEntry') as HTMLElement;
+            itemEl.style.display = 'block';
+            div.appendChild(itemEl);
         }, 1)
     })
 </script>

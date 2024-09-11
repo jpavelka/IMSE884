@@ -13,6 +13,7 @@
     <span slot=context>Definitions of key terms.</span>
 </Heading>
 
+<div style="border-top:1pt solid #ddd"></div>
 {#each sortedKeys as defKey}
     <GlossaryItem refId={defKey} />
 {/each}

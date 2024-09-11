@@ -23,26 +23,26 @@
             <BodyText>
             <slot name=name/>
             {#if $$slots.abbrev}(<slot name=abbrev/>){/if}
+            {#if !!returnId}    
+                <a
+                style="font-size:1.4rem;"
+                href={"#" + returnId}
+                on:click={() => {
+                    problems.update((s) => {
+                        delete s.returnIds[refId];
+                        return s;
+                    });
+                }}
+                >
+                ↩︎</a
+                >
+            {/if}
             </BodyText>
         </div>
         <BodyText>
             <slot />
         </BodyText>
     </div>
-    {#if !!returnId}    
-        <a
-        style="float:right;font-size:1.4rem;"
-        href={"#" + returnId}
-        on:click={() => {
-            problems.update((s) => {
-                delete s.returnIds[refId];
-                return s;
-            });
-        }}
-        >
-        ↩︎</a
-        >
-    {/if}
 </div>
 
 <style>

@@ -10,14 +10,13 @@ export default `
   publisher={Wiley}
 }
 
-@book{nemWol1999,
+@book{nemWol2014,
   title={Integer and Combinatorial Optimization},
   author={Wolsey, L.A. and Nemhauser, G.L.},
-  isbn={9780471359432},
-  lccn={87034067},
+  isbn={9781118626863},
   series={Wiley Series in Discrete Mathematics and Optimization},
-  url={https://books.google.com/books?id=vvm4DwAAQBAJ},
-  year={1999},
+  url={https://books.google.com/books?id=MvBjBAAAQBAJ},
+  year={2014},
   publisher={Wiley}
 }
 

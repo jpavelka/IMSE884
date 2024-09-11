@@ -1,9 +1,5 @@
 import { readable, writable, type Writable } from "svelte/store";
-import { Cite } from "@citation-js/core";
-import { plugins } from '@citation-js/core';
-import * as bibtexPlugin from '@citation-js/plugin-bibtex';
-import * as cslPlugin from '@citation-js/plugin-csl';
-import bibtex from "../bibtex";
+import { getCitations } from "./bibUtils";
 
 const sections: Writable<{
   hierarchy: Array<any>,
@@ -93,28 +89,7 @@ const theorems: Writable<{
   thmTypes: {}
 })
 
-const citationsData = await Cite(bibtex);
-
-const citationsObj: { [key: string]: any } = {};
-for (const d of citationsData.data) {
-  const c = Cite(d);
-  const biblio = c.format('bibliography');
-  
-  let words = biblio.split(' ');  
-  for (const i in words) {
-    let word = words[i];
-    if (word.startsWith('http')) {
-      words[i] = `<a href=${word} target='_blank'>${word}</a>`;
-    }
-  }
-  citationsObj[d.id] = {
-    refStr: c.format('citation'),
-    biblio: words.join(' '),
-    referenced: false
-  }
-}
-
-const citations = writable(citationsObj);
+const citations = writable(await getCitations());
 const showToc = writable(false);
 const popupShown = writable(false);
 const notesMaxWidth = readable(800);

@@ -144,7 +144,7 @@
     Here's another common problem. It's a little harder to parse initially, but example that follows should help you work through it.
 </BodyText>
 
-<Problem refId=setCovering>
+<Problem refId=setCover>
     <span slot=name>Set Covering Problem</span>
     Let <Math>M</Math> and <Math>N</Math> be two sets. For each <Math>j\in N</Math>, there is a set <Math>S_j\subseteq M</Math> and a cost <Math>c_j\in\R</Math>. Let a <em>cover</em> be a set <Math>C\subseteq N</Math> such each element of <Math>M</Math> exists in at least one <Math>S_j,j\in C</Math>. The problem is to find minimum-cost cover, i.e.
     <MathDisp>

@@ -11,21 +11,21 @@
 <div class=figDiv id={refId}>
     <slot />
     <div class="caption"><b>Figure {figNum}:</b> <slot name="caption" /></div>
+    {#if !!returnId}    
+        <a
+        style="float:right;font-size:1.4rem;"
+        href={"#" + returnId}
+        on:click={() => {
+            figures.update((s) => {
+                delete s.returnIds[refId];
+                return s;
+            });
+        }}
+        >
+        ↩︎</a
+        >
+    {/if}
 </div>
-{#if !!returnId}    
-    <a
-    style="float:right;font-size:1.4rem;"
-    href={"#" + returnId}
-    on:click={() => {
-        figures.update((s) => {
-            delete s.returnIds[refId];
-            return s;
-        });
-    }}
-    >
-    ↩︎</a
-    >
-{/if}
 
 <style>
     .figDiv {
