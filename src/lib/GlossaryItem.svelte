@@ -2,13 +2,18 @@
     import { onMount } from "svelte";
 
     export let refId: string;
+    export let makeCopy = false;
     
     let div: HTMLElement;
     onMount(() => {
         setTimeout(() => {    
             const itemEl = document.getElementById(refId + ':glossaryEntry') as HTMLElement;
-            itemEl.style.display = 'block';
-            div.appendChild(itemEl);
+            if (makeCopy) {
+                div.innerHTML = itemEl.innerHTML;
+            } else {
+                itemEl.style.display = 'block';
+                div.appendChild(itemEl);
+            }
         }, 1)
     })
 </script>

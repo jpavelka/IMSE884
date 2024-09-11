@@ -10,7 +10,7 @@
 
 {#each hierarchy as s, i}
     <div class=tocItem>
-        <a class=tocA href={'#' + s.id} style={`margin-left: ${(s.level - 1) * 20}pt`}>{@html $sections.headingTexts[s.id]}</a>
+        <a class=tocA href={'#' + s.id} style={`margin-left: ${(s.level) * 15}pt`}>{@html $sections.headingTexts[s.id]}</a>
         {#if (s.hierarchy || []).length > 0}
             <span
                 class=tocExpand

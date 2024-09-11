@@ -90,7 +90,7 @@ const theorems: Writable<{
 })
 
 const citations = writable(await getCitations());
-const showToc = writable(false);
+const showMenu = writable(false);
 const popupShown = writable(false);
 const notesMaxWidth = readable(800);
 const tocWidth = readable(350);
@@ -100,7 +100,7 @@ const printMode = writable(false);
 const highlightKeyPoints = writable(false);
 
 export {
-  sections, citations, figures, equations, showToc, notebooks,
+  sections, citations, figures, equations, showMenu, notebooks,
   theorems, popupShown, notesMaxWidth, tocWidth, eqReferenced,
   minPopupSideWidth, printMode, highlightKeyPoints, problems,
   definitions

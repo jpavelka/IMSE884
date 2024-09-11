@@ -1,8 +1,8 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import TopBar from "$lib/TopBar.svelte";
-    import TOC from "$lib/TOC.svelte";
-    import { showToc, popupShown, notesMaxWidth, tocWidth, minPopupSideWidth, printMode, highlightKeyPoints } from "$lib/stores";
+    import Menu from "$lib/Menu.svelte";
+    import { showMenu, popupShown, notesMaxWidth, tocWidth, minPopupSideWidth, printMode, highlightKeyPoints } from "$lib/stores";
     import Sections from "../sections/Sections.svelte";
     import CurrentSectionDisp from "$lib/CurrentSectionDisp.svelte";
     
@@ -12,14 +12,14 @@
 
     const bodyClick = (e: MouseEvent) => {
         let el = e.target as HTMLElement;
-        if ($showToc && el?.id !== 'contentsClick') {
+        if ($showMenu && el?.id !== 'menuClick') {
             while (!['BODY', 'HTML'].includes(el.tagName)) {
-                if ([...el.classList].includes('toc')) {
+                if ([...el.classList].includes('menu')) {
                     return
                 }
                 el = el?.parentNode as HTMLElement;
             }
-            showToc.update(() => {
+            showMenu.update(() => {
                 return false
             });
         }
@@ -62,13 +62,13 @@
         <div style={'display:' + (stillLoading ? 'none' : 'block')}>
             <TopBar smallScreen={innerWidth < 500}/>
             <div class=underBar style={'visibility:' + (stillScrolling ? 'hidden' : 'visible')}>
-                <TOC />
+                <Menu />
                 <CurrentSectionDisp />
                 <div
                     class={
                         "notesContent" +
                         ($printMode ? ' notesPrint' : 
-                            ($showToc && (innerWidth - $tocWidth > $notesMaxWidth) ? ' noteContentShifted' : '') +
+                            ($showMenu && (innerWidth - $tocWidth > $notesMaxWidth) ? ' noteContentShifted' : '') +
                             ($popupShown && (innerWidth - $notesMaxWidth > $minPopupSideWidth) ? ' noteContentWithPopup' : '')
                         )
                     }
@@ -80,16 +80,6 @@
             {#if !$printMode}
                 <div class=footer>
                     © Copyright 2025, Jeffrey Pavelka
-                    <span
-                        class=footerActions
-                        role=button
-                        tabindex="0"
-                        aria-label="Highlight key points"
-                        on:keydown={() => highlightKeyPoints.update(x => !x)}
-                        on:click={() => highlightKeyPoints.update(x => !x)}
-                    >
-                        &#128273;
-                    </span>
                 </div>
             {/if}
         </div>

@@ -1,5 +1,5 @@
 <script lang=ts>
-    import { printMode, showToc } from "./stores";
+    import { printMode, showMenu } from "./stores";
 
     export let smallScreen = false;
 </script>
@@ -7,15 +7,15 @@
 {#if !$printMode}
     <div class=topBar>
         <div
-            id='contentsClick'
-            class=contents
+            id='menuClick'
+            class=menu
             role=button
             tabindex="0"
-            aria-label="Toggle show TOC"
-            on:keydown={() => {showToc.update(s => !s)}}
-            on:click={() => {showToc.update(s => !s)}}
+            aria-label="Toggle show menu"
+            on:keydown={() => {showMenu.update(s => !s)}}
+            on:click={() => {showMenu.update(s => !s)}}
         >
-            Contents
+            Menu
         </div>
         <div class=courseNum>
             IMSE 884
@@ -41,11 +41,12 @@
         justify-content: space-between;
         font-family: Georgia, serif;
         z-index: 4;
+        height: 2.5rem;
     }
     .topBar > div {
         padding: 0.5rem 1rem;
     }
-    .contents {
+    .menu {
         color: blue;
         cursor: pointer;
     }
