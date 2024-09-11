@@ -4,6 +4,7 @@
     import Key from "$lib/Key.svelte";
     import Definitions from "./Definitions.svelte";
     import Examples from "./Examples.svelte";
+    import Algorithms from "./Algorithms.svelte";
 </script>
 
 <Heading level="1" refId="combOptIntro">
@@ -17,3 +18,6 @@
 
 <Definitions />
 <Examples />
+<Algorithms />
+
+<!-- short section about working on a unified theory for combOpt problems (toward a unified theory)-->

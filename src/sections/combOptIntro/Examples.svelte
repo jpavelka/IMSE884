@@ -11,6 +11,8 @@
     import FigureRef from "$lib/FigureRef.svelte";
     import Footnote from "$lib/Footnote.svelte";
     import MathDisp from "$lib/MathDisp.svelte";
+    import ChooseObjVals from "$lib/drawing/ChooseObjVals.svelte";
+    import CitationRef from "$lib/CitationRef.svelte";
 </script>
 
 <Heading level=2 refId=exampleCOPs>
@@ -62,6 +64,7 @@
         ]}
         directed={true}
     />
+    <span slot=caption>An example shortest path problem.</span>
 </Figure>
 
 <BodyText>
@@ -90,6 +93,10 @@
     with <Math>N,c</Math>, and <Math>\mathcal{F}</Math> as we've just defined them.
 </BodyText>
 
+<BodyText>
+    While it may not be obvious from the graph theory framing, the <ProblemRef refId=shortestPath/> has <a href=https://en.wikipedia.org/wiki/Shortest_path_problem#Applications target=_blank>several applications</a>. For example, if you were to model a road network as a graph with arc costs representing travel times or distances, a shortest path problem can be used by a navigation app to decide how to route you from one location to another.
+</BodyText>
+
 <Heading level=3 refId=knapsackDef>
     Knapsack
     <span slot=context>Another example problem that fits the <ProblemRef refId=combOpt link={false}/> framework</span>
@@ -101,37 +108,64 @@
 
 <Problem refId=knapsack>
     <span slot=name>Knapsack Problem</span>
-    You are given a set <Math>J=\{1,\dots,n\}</Math> of <Math>n</Math> objects, a weight <Math>w_j</Math> and a value <Math>v_j</Math> for each <Math>j\in J</Math>, and an overall weight limit <Math>b</Math>. Select a set of objects whose combined weight is below the weight limit, such that the sum of their values is maximized.
+    You are given a set <Math>J</Math> of <Math>n</Math> objects, a weight <Math>w_j</Math> and a value <Math>v_j</Math> for each <Math>j\in J</Math>, and an overall weight limit <Math>b</Math>. Select a set of objects whose combined weight is below the weight limit, such that the sum of their values is maximized.
 </Problem>
 
-<BodyText>This fits the framework because...</BodyText>
+<BodyText>
+    The fit here is pretty natural. The set <Math>N</Math> from the <ProblemRef refId=combOpt/> definition is simply the set of objects <Math>J</Math>. The weights <Math>c_j</Math> for the <ProblemRef refId=combOpt/> are the values <Math>v_j</Math>, although since <ProblemRef refId=knapsack/> is a maximization problem and <ProblemRef refId=combOpt/> is defined as minimization, we have <Math>c_j=-v_j</Math>. The feasible subsets <Math>\mathcal{F}</Math> are simply the subsets of objects which together do not exceed the weight limit, i.e.
+    <MathDisp>
+        \mathcal{F} = \left\{S\subseteq J: \sum_{j\in S}w_j\leq b\right\}
+    </MathDisp>
+</BodyText>
+
+<BodyText>
+    The stereotypical framing for the <ProblemRef refId=knapsack /> is that of a hiker trying to decide what items be bring along on a trip. But the <a href=https://en.wikipedia.org/wiki/Knapsack_problem#Applications>applications</a> are numerous, with of course most not involving any type of backpack at all 😊.
+</BodyText>
 
 <Heading level=3 refId=otherExampleDefs>
     Other examples
     <span slot=context>Defining more sample <ProblemRef refId=combOpt/>s, to give a sense of the breadth of problems available.</span>
 </Heading>
 
-<!--
-
-<Problem refId=matching>
-    <span slot=name>Matching Problem</span>
-    4.4 (p73)
-</Problem>
+<BodyText>
+    Now that we've worked through it on a few examples, we'll skip formally specifying <Math>N</Math>, <Math>\mathcal{F}</Math>, and <Math>c</Math> for the next set of problems<Footnote>In fact, I'd say the formal specifications were never really the point. What we have is a collection of problems that feel similar, in that the possible solutions are "combinatorial" in some sense. The definition was developed post-hoc because mathematicians like definitions.</Footnote>.
+</BodyText>
 
 <Problem refId=assignment>
     <span slot=name>Assignment Problem</span>
-    p5, but also 4.3 (p67)
+    There are <Math>n</Math> people available to carry out <Math>n</Math> jobs. Each person is assigned to carry out exactly one job. Some individuals are better suited to particular jobs than others, so there is an estimated cost <Math>c_{ij}</Math> if person <Math>i</Math> is assigned to job <Math>j</Math>.
 </Problem>
+
+<BodyText>
+    An example where this might come up: Suppose a ride-hailing app has recently received four ride requests, and there are currently five drivers in the area that can pick them up. The app may decide to assign drivers to riders (with the fifth driver "assigned" to do nothing) by pairing them up so that the sum of distances the drivers travel to pick up their riders is minimized.
+</BodyText>
+
+<BodyText>
+    Here's another common problem. It's a little harder to parse initially, but example that follows should help you work through it.
+</BodyText>
+
+<Problem refId=setCovering>
+    <span slot=name>Set Covering Problem</span>
+    Let <Math>M</Math> and <Math>N</Math> be two sets. For each <Math>j\in N</Math>, there is a set <Math>S_j\subseteq M</Math> and a cost <Math>c_j\in\R</Math>. Let a <em>cover</em> be a set <Math>C\subseteq N</Math> such each element of <Math>M</Math> exists in at least one <Math>S_j,j\in C</Math>. The problem is to find minimum-cost cover, i.e.
+    <MathDisp>
+        \min_{C\subseteq N}\left\{\sum_{j\in C}c_j: \bigcup_{j\in C}S_j=M\right\}
+    </MathDisp>
+</Problem>
+
+<BodyText>
+    An example application may be a telecommunications company deciding where to build cell towers in a rural area. The set <Math>M</Math> is the set of cities that require service, and the set <Math>N</Math> is a set of potential tower locations. For each location <Math>j\in N</Math>, there is a set of cities <Math>S_j\subseteq N</Math> that can be served by a tower in that location. There is also a cost associated with building in that location, <Math>c_j</Math>. In this case, solving the <ProblemRef refId=setCover/> corresponds to finding the minimum-cost collection of towers to build, subject to each city getting service.
+</BodyText>
+
+<BodyText>
+    We'll wrap up this section with perhaps the most famous <ProblemRef refId=combOpt/> of all. The description here is lifted verbatim from <CitationRef refId=wolsey2020/>.
+</BodyText>
 
 <Problem refId=tsp>
     <span slot=name>Traveling Salesman Problem</span>
     <span slot=abbrev>TSP</span>
-    p7
+    A salesman must visit each of <Math>n</Math> cities exactly once and then return to his starting point. The time taken to travel from city <Math>i</Math> to city <Math>j</Math> is <Math>c_{ij}</Math>. Find the order in which he should make his tour so as to finish as quickly as possible.
 </Problem>
 
-<Problem refId=setCovering>
-    <span slot=name>Set Covering Problem</span>
-    p6
-</Problem>
-
--->
+<BodyText>
+    This intuitive problem, with obvious applications to e.g. routing delivery drivers, has a long and storied history in the world of optimization. We'll revisit it (as well as all the problems we've discussed so far) several times this course.
+</BodyText>

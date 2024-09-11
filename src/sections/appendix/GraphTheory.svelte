@@ -34,6 +34,20 @@
     const sampleCycleEdges = [
         '1-2', '2-4', '4-5', '3-5', '1-3'
     ];
+    const bipartiteNodes = [
+        {id: 1, x: 0, y: 0.9},
+        {id: 2, x: 0, y: 0.5},
+        {id: 3, x: 0, y: 0.1},
+        {id: 4, x: 1, y: 1},
+        {id: 5, x: 1, y: 0.67},
+        {id: 6, x: 1, y: 0.33},
+        {id: 7, x: 1, y: 0},
+    ]
+    const bipartiteEdges = [
+        '1-4', '1-5', '1-7',
+        '2-4', '2-6',
+        '3-5', '3-7',
+    ]
 </script>
 
 <Heading level=2 refId=graphTheory>
@@ -132,6 +146,27 @@
 </BodyText>
 
 <BodyText>
+    A graph <Math>G=(V,E)</Math> is called <Definition refId=bipartite>
+        bipartite
+        <span slot=definition>
+            A graph <Math>G=(V,E)</Math> where the vertex set <Math>V</Math> can be divided into two sets <Math>V_1</Math> and <Math>V_2</Math> such that every edge in <Math>E</Math> connects a vertex in <Math>V_1</Math> to a vertex in <Math>V_2</Math> (as in <FigureRef refId=exampleBipartiteGraph/>).
+        </span>
+        <span slot=glossaryDisp>bipartite graph</span>
+    </Definition> if its vertex set <Math>V</Math> can be divided into two sets <Math>V_1</Math> and <Math>V_2</Math> such that every edge in <Math>E</Math> connects a vertex in <Math>V_1</Math> to a vertex in <Math>V_2</Math>. An example of such a graph is shown in <FigureRef refId=exampleBipartiteGraph/>.
+</BodyText>
+
+<Figure refId=exampleBipartiteGraph>
+    <span slot=caption>
+        Visualization of a bipartite graph, with <Math>V_1=\{1,2,3\}</Math> and <Math>V_2=\{4,5,6,7\}</Math>
+    </span>
+    <FixedNodeGraph 
+        nodes={bipartiteNodes}
+        edges={bipartiteEdges}
+        width={300}
+    />
+</Figure>
+
+<BodyText>
     On a given graph <Math>G</Math>, a <Definition refId=walk>
         walk
         <span slot=definition>
@@ -182,7 +217,7 @@
         <span slot=definition>
             A <DefinitionRef refId=trail/> that starts and ends at the same vertex.
         </span>
-    </Definition> is a trail that starts and ends at the vertex. Note that the circuit is defined based on a <em>trail</em>, so therefore cannot be repeated in a circuit, though vertices <em>can</em> repeat. A similar notion is the <Definition refId=cycle>
+    </Definition> is a trail that starts and ends at the vertex. Note that the circuit is defined based on a <em>trail</em>, so therefore edges cannot be repeated in a circuit, though vertices <em>can</em> repeat. A similar notion is the <Definition refId=cycle>
         cycle
         <span slot=definition>
             A <DefinitionRef refId=path/> that begins and ends at the same vertex.

@@ -9,5 +9,5 @@
     <span slot=context>Extra content you may find useful for this course.</span>
 </Heading>
 
-<Symbols/>
 <GraphTheory/>
+<Symbols/>
