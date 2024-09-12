@@ -9,6 +9,7 @@
     import ShowIntegerPoints from "./drawing/ShowIntegerPoints.svelte";
     import ShowVertices from "./drawing/ShowVertices.svelte";
     import { checkPtFeasible, getConstraintInfo, getEdgeAndFeasibleIntersections, getVertices, pixToCoord } from "./drawing/utils";
+    import { windowInnerWidth } from "./stores";
 
     export let objective;
     export let inequalities;
@@ -54,12 +55,10 @@
         )
     }
     const vertices = getVertices(constraintInfo);
-    let innerWidth: number;
 </script>
 
-<svelte:window bind:innerWidth />
 <Figure {refId}>
-    <div style={`margin-bottom:1rem;${innerWidth - svgWidth < 50 ? 'overflow-x:scroll;' : ''}`}>
+    <div style={`margin-bottom:1rem;${$windowInnerWidth - svgWidth < 50 ? 'overflow-x:scroll;' : ''}`}>
         <svg
             style={`height:${svgHeight}px;width:${svgWidth}px`}
             class=svgBase

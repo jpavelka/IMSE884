@@ -1,6 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { Network } from "vis-network";
+    import { windowInnerWidth } from "./stores";
 
     export let nodes: Array<{[key: string]: any}>;
     export let edges: Array<string | {[key: string]: any}>;
@@ -10,9 +11,7 @@
     export let height = 350;
     export let options = {};
     
-    let innerWidth: number;
-
-    $: calcWidth = Math.min(width, Math.max((0.8 * innerWidth || 999999), 250));
+    $: calcWidth = Math.min(width, Math.max((0.8 * $windowInnerWidth || 999999), 250));
     $: calcHeight = calcWidth * (height / width);
     const nodeSize = 30;
     $: widthAvailable = calcWidth - nodeSize;
@@ -82,7 +81,6 @@
     });
 </script>
 
-<svelte:window bind:innerWidth />
 <div
   bind:this={container}
   class='fixedNodeGraph canvasBreadcrumb'

@@ -1,7 +1,7 @@
 <script lang='ts'>
     import { refNumbering } from "$lib";
     import BodyText from "./BodyText.svelte";
-    import { notebooks, printMode } from "./stores";
+    import { notebooks, printMode, windowInnerHeight, windowScrollY } from "./stores";
     import { afterUpdate } from 'svelte';
 
     export let colabId
@@ -25,13 +25,11 @@
     let seen = false;
     let posEl: HTMLElement;
     let pos;
-    let scrollY: number;
-    let innerHeight: number;
     afterUpdate(() => {
         pos = (posEl || {offsetTop: 0}).offsetTop;
-        if (pos > 0 && Math.abs(pos - scrollY) <= 2 * innerHeight) {
+        if (pos > 0 && Math.abs(pos - $windowScrollY) <= 2 * $windowInnerHeight) {
             seen = true;
-        } else if (pos > 0 && Math.abs(pos - scrollY) > 4 * innerHeight) {
+        } else if (pos > 0 && Math.abs(pos - $windowScrollY) > 4 * $windowInnerHeight) {
             seen = false;
         }
     })
@@ -39,7 +37,6 @@
     // todo: some method to update gist from colab
 </script>
 
-<svelte:window bind:scrollY bind:innerHeight />
 <div class=nbTitle><b>Notebook {nbNum}:</b> {desc}</div>
 <div id={gistId} bind:this={posEl}>
     {#if $printMode}

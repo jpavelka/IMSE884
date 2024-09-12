@@ -1,7 +1,7 @@
 <script lang="ts">
     import katex from "katex";
     import { macros } from "./latexMacros";
-    import { eqReferenced, printMode } from "./stores";
+    import { eqReferenced, printMode, windowInnerHeight, windowScrollY } from "./stores";
     import { afterUpdate } from "svelte";
 
     export let options;
@@ -29,11 +29,9 @@
     }
     let posEl: HTMLElement;
     let pos: number;
-    let scrollY: number;
-    let innerHeight: number;
     afterUpdate(() => {
         pos = (posEl || { offsetTop: 0 }).offsetTop;
-        if (pos > 0 && Math.abs(pos - scrollY) <= 2 * innerHeight) {
+        if (pos > 0 && Math.abs(pos - $windowScrollY) <= 2 * $windowInnerHeight) {
             seen = true;
         }
     });
@@ -49,7 +47,6 @@
 </svelte:head>
 
 <span style="display:none" bind:this={data}><slot /></span>
-<svelte:window bind:scrollY bind:innerHeight />
 <span
     bind:this={posEl}
     {style}

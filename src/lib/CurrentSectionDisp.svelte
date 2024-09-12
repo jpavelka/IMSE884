@@ -1,14 +1,11 @@
 <script lang='ts'>
-    import { printMode, sections } from "./stores";
+    import { printMode, sections, windowInnerWidth, windowInnerHeight, windowScrollY } from "./stores";
 
-    let scrollY: number;
-    let innerHeight: number;
-    let innerWidth: number;
     const smallWidth = 700;
 
     let secsToDisplay: Array<string> = [];
 
-    $: doNotShow = $printMode || (innerWidth || 0) < smallWidth;
+    $: doNotShow = $printMode || ($windowInnerWidth || 0) < smallWidth;
 
     $: {
         if (!doNotShow) {
@@ -19,7 +16,7 @@
                     return [refId, -1];
                 }
                 const el = document.getElementById(refId) as HTMLElement;
-                const ret: Array<any> = [refId, scrollY + 0.3 * innerHeight - el?.offsetTop]
+                const ret: Array<any> = [refId, $windowScrollY + 0.3 * $windowInnerHeight - el?.offsetTop]
                 return ret
             }).filter(
                 x => x[1] >= 0
@@ -63,7 +60,6 @@
     }
 </script>
 
-<svelte:window bind:scrollY bind:innerHeight bind:innerWidth />
 {#if doNotShow}
     <span></span>
 {:else}

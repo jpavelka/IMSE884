@@ -98,7 +98,7 @@
 </BodyText>
 
 <BodyText>
-    Graphs are typically represented visually as in <FigureRef refId=exampleGraph/>: Each vertex/node is represented as a circle in the diagram, while edges/arcs are denoted by lines between the circles. In the case if <FigureRef refId=exampleGraph/>, the graph being represented is the graph <Math>G=(V,E)</Math> with vertices:
+    Graphs are typically represented visually as in <FigureRef refId=exampleGraph/>: Each vertex/node is represented as a circle in the diagram, while edges/arcs are denoted by lines between the circles. In the case of <FigureRef refId=exampleGraph/>, the graph being represented is the graph <Math>G=(V,E)</Math> with vertices:
     <MathDisp>V=\{1,2,3,4,5\}</MathDisp>
     and edges:
     <MathDisp>E=\{(1,2), (1,3), (2,3), (2,4), (2,5), (3,5), (4,5)\}</MathDisp>

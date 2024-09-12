@@ -1,7 +1,7 @@
 <script lang=ts>
-    import { printMode, showMenu } from "./stores";
+    import { printMode, showMenu, windowInnerWidth } from "./stores";
 
-    export let smallScreen = false;
+    $: tooNarrow = $windowInnerWidth < 500;
 </script>
 
 {#if !$printMode}
@@ -20,7 +20,7 @@
         <div class=courseNum>
             IMSE 884
         </div>
-        {#if !smallScreen}
+        {#if !tooNarrow}
             <div class=term>
                 Spring 2025
             </div>

@@ -1,4 +1,4 @@
-import { readable, writable, type Writable } from "svelte/store";
+import { readable, writable, derived, type Writable } from "svelte/store";
 import { getCitations } from "./bibUtils";
 
 const sections: Writable<{
@@ -98,10 +98,13 @@ const minPopupSideWidth = readable(400);
 const eqReferenced: Writable<Array<string>> = writable([]);
 const printMode = writable(false);
 const highlightKeyPoints = writable(false);
+const windowInnerWidth = writable(0);
+const windowInnerHeight = writable(0);
+const windowScrollY = writable(0);
 
 export {
   sections, citations, figures, equations, showMenu, notebooks,
   theorems, popupShown, notesMaxWidth, tocWidth, eqReferenced,
   minPopupSideWidth, printMode, highlightKeyPoints, problems,
-  definitions
+  definitions, windowInnerWidth, windowInnerHeight, windowScrollY
 }

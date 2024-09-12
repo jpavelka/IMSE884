@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { popupShown, notesMaxWidth, minPopupSideWidth } from "./stores";
+    import { popupShown, notesMaxWidth, minPopupSideWidth, windowInnerWidth } from "./stores";
     export let show: Boolean
     export let divId = ''
     let popupEl: HTMLElement
@@ -19,17 +19,14 @@
             return keepPopupShown;
         }
     })
-    let innerWidth = 0;
     $: popupShown.update(() => {
         if (show) {
             return true;
         }
         return checkForOpenPopups();
     });
-    $: popupLoc = innerWidth - $notesMaxWidth > $minPopupSideWidth ? 'Side' : 'Center';
+    $: popupLoc = $windowInnerWidth - $notesMaxWidth > $minPopupSideWidth ? 'Side' : 'Center';
 </script>
-
-<svelte:window bind:innerWidth />
 
 <div
     bind:this={popupEl} 

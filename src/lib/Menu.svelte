@@ -1,6 +1,6 @@
 <script>
     import GlossaryLookup from "./GlossaryLookup.svelte";
-import Slider from "./Slider.svelte";
+    import Slider from "./Slider.svelte";
     import TocInner from "./TOCInner.svelte";
     import { sections, showMenu, highlightKeyPoints } from "./stores";
     import { slide } from "svelte/transition";

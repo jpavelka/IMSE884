@@ -2,11 +2,14 @@
     import { onMount } from "svelte";
     import TopBar from "$lib/TopBar.svelte";
     import Menu from "$lib/Menu.svelte";
-    import { showMenu, popupShown, notesMaxWidth, tocWidth, minPopupSideWidth, printMode, highlightKeyPoints } from "$lib/stores";
+    import {
+        showMenu, popupShown, notesMaxWidth, tocWidth,
+        minPopupSideWidth, printMode, windowInnerWidth,
+        windowInnerHeight, windowScrollY
+    } from "$lib/stores";
     import Sections from "../sections/Sections.svelte";
     import CurrentSectionDisp from "$lib/CurrentSectionDisp.svelte";
     
-    let innerWidth = 0;
     let stillLoading = true;
     let stillScrolling = true;
 
@@ -44,10 +47,14 @@
     }
 </script>
 
-<svelte:window bind:innerWidth />
+<svelte:window
+    bind:innerWidth={$windowInnerWidth}
+    bind:innerHeight={$windowInnerHeight}
+    bind:scrollY={$windowScrollY}
+/>
 
 <div style="
-    --totalWidth: {innerWidth};
+    --totalWidth: {$windowInnerWidth};
     --notesMaxWidth: {$notesMaxWidth};
     --tocWidth: {$tocWidth};
 ">
@@ -60,7 +67,7 @@
             </div>
         {/if}
         <div style={'display:' + (stillLoading ? 'none' : 'block')}>
-            <TopBar smallScreen={innerWidth < 500}/>
+            <TopBar />
             <div class=underBar style={'visibility:' + (stillScrolling ? 'hidden' : 'visible')}>
                 <Menu />
                 <CurrentSectionDisp />
@@ -68,8 +75,8 @@
                     class={
                         "notesContent" +
                         ($printMode ? ' notesPrint' : 
-                            ($showMenu && (innerWidth - $tocWidth > $notesMaxWidth) ? ' noteContentShifted' : '') +
-                            ($popupShown && (innerWidth - $notesMaxWidth > $minPopupSideWidth) ? ' noteContentWithPopup' : '')
+                            ($showMenu && ($windowInnerWidth - $tocWidth > $notesMaxWidth) ? ' noteContentShifted' : '') +
+                            ($popupShown && ($windowInnerWidth - $notesMaxWidth > $minPopupSideWidth) ? ' noteContentWithPopup' : '')
                         )
                     }
                 >
