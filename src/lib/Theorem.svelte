@@ -30,7 +30,7 @@
     <div class="underName"><slot /></div>
     {#if !!returnId}
         <a
-            style="float:right;font-size:1.4rem;"
+            style="float:right;font-size:var(--standardFontSize);"
             href={"#" + returnId}
             on:click={() => {
                 theorems.update((s) => {

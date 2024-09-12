@@ -1,7 +1,7 @@
 <script lang=ts>
-    import { printMode, showMenu, windowInnerWidth } from "./stores";
+    import { printMode, showMenu, windowInfo } from "./stores";
 
-    $: tooNarrow = $windowInnerWidth < 500;
+    $: tooNarrow = $windowInfo.innerWidth < 500;
 </script>
 
 {#if !$printMode}

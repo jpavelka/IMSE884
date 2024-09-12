@@ -25,7 +25,7 @@
             {#if $$slots.abbrev}(<slot name=abbrev/>){/if}
             {#if !!returnId}    
                 <a
-                style="font-size:1.4rem;"
+                style="font-size:var(--standardFontSize);"
                 href={"#" + returnId}
                 on:click={() => {
                     problems.update((s) => {

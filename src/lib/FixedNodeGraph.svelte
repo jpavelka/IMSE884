@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { Network } from "vis-network";
-    import { windowInnerWidth } from "./stores";
+    import { windowInfo } from "./stores";
 
     export let nodes: Array<{[key: string]: any}>;
     export let edges: Array<string | {[key: string]: any}>;
@@ -11,7 +11,7 @@
     export let height = 350;
     export let options = {};
     
-    $: calcWidth = Math.min(width, Math.max((0.8 * $windowInnerWidth || 999999), 250));
+    $: calcWidth = Math.min(width, Math.max((0.8 * $windowInfo.innerWidth || 999999), 250));
     $: calcHeight = calcWidth * (height / width);
     const nodeSize = 30;
     $: widthAvailable = calcWidth - nodeSize;

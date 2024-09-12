@@ -10,7 +10,7 @@
 
 <style>
     .bodyText {
-        font-size: 1.4rem;
+        font-size: var(--standardFontSize);
         margin-top: 1.5rem;
         line-height: 2.25rem;
     }

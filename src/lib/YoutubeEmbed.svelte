@@ -2,7 +2,7 @@
     export let videoId
     export let params = undefined
     import { afterUpdate } from 'svelte';
-    import { printMode, windowInnerHeight, windowScrollY } from './stores';
+    import { printMode, windowInfo } from './stores';
     import BodyText from './BodyText.svelte';
 
     let srcStr = "https://www.youtube.com/embed/" + videoId;
@@ -16,7 +16,7 @@
     let pos: number;
     afterUpdate(() => {
         pos = (posEl || {offsetTop: 0}).offsetTop;
-        if (pos > 0 && Math.abs(pos - $windowScrollY) <= 2 * $windowInnerHeight) {
+        if (pos > 0 && Math.abs(pos - $windowInfo.scrollY) <= 2 * $windowInfo.innerHeight) {
             seen = true;
         }
     })

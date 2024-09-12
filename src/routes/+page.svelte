@@ -3,19 +3,17 @@
     import TopBar from "$lib/TopBar.svelte";
     import Menu from "$lib/Menu.svelte";
     import {
-        showMenu, popupShown, notesMaxWidth, tocWidth,
-        minPopupSideWidth, printMode, windowInnerWidth,
-        windowInnerHeight, windowScrollY
+        showMenu, printMode, windowInfo, layoutInfo
     } from "$lib/stores";
     import Sections from "../sections/Sections.svelte";
     import CurrentSectionDisp from "$lib/CurrentSectionDisp.svelte";
-    
+
     let stillLoading = true;
     let stillScrolling = true;
 
     const bodyClick = (e: MouseEvent) => {
         let el = e.target as HTMLElement;
-        if ($showMenu && el?.id !== 'menuClick') {
+        if ($showMenu && el?.id !== 'menuClick' && $layoutInfo.notesLeft < $layoutInfo.menuWidth) {
             while (!['BODY', 'HTML'].includes(el.tagName)) {
                 if ([...el.classList].includes('menu')) {
                     return
@@ -45,18 +43,34 @@
     } catch {
 
     }
+    let innerWidth = 0;
+    let innerHeight = 0;
+    let scrollY = 0;
+    $: windowInfo.update(w => {
+        w.innerWidth = innerWidth;
+        w.innerHeight = innerHeight;
+        w.scrollY = scrollY;
+        return w;
+    })
+
 </script>
 
 <svelte:window
-    bind:innerWidth={$windowInnerWidth}
-    bind:innerHeight={$windowInnerHeight}
-    bind:scrollY={$windowScrollY}
+    bind:innerWidth={innerWidth}
+    bind:innerHeight={innerHeight}
+    bind:scrollY={scrollY}
 />
 
 <div style="
-    --totalWidth: {$windowInnerWidth};
-    --notesMaxWidth: {$notesMaxWidth};
-    --tocWidth: {$tocWidth};
+    --totalWidth: {$windowInfo.innerWidth};
+    --notesWidth: {$layoutInfo.notesWidth};
+    --menuWidth: {$layoutInfo.menuWidth};
+    --marginWidth: {$layoutInfo.marginWidth};
+    --notesLeft: {$layoutInfo.notesLeft};
+    --popupWidth: {$layoutInfo.popupWidth};
+    --popupLeft: {$layoutInfo.popupLeft};
+    --popupPadding: {$layoutInfo.popupPadding};
+    --standardFontSize: 1.4rem;
 ">
     <div class=allContent>
         {#if stillLoading}
@@ -71,15 +85,7 @@
             <div class=underBar style={'visibility:' + (stillScrolling ? 'hidden' : 'visible')}>
                 <Menu />
                 <CurrentSectionDisp />
-                <div
-                    class={
-                        "notesContent" +
-                        ($printMode ? ' notesPrint' : 
-                            ($showMenu && ($windowInnerWidth - $tocWidth > $notesMaxWidth) ? ' noteContentShifted' : '') +
-                            ($popupShown && ($windowInnerWidth - $notesMaxWidth > $minPopupSideWidth) ? ' noteContentWithPopup' : '')
-                        )
-                    }
-                >
+                <div class={"notesContent" + ($printMode ? ' notesPrint' : '')}>
                     <Sections />
                     <div class=afterNotes></div>
                 </div>
@@ -104,12 +110,12 @@
         max-width: var(--totalWidth);
     }
     .notesContent {
-        max-width: calc(min((var(--totalWidth) - 50) * 1px, var(--notesMaxWidth) * 1px));
-        padding: 1rem;
+        width: calc(var(--notesWidth) * 1px);
+        padding: 1rem 0;
         font-family: Georgia, serif;
         height: 100%;
         position: absolute;
-        left: calc(max(0px, (var(--totalWidth) - var(--notesMaxWidth)) / 2 * 1px));
+        left: calc(var(--notesLeft) * 1px);
         transition: all .5s;
         -webkit-transition: all .5s;
         -moz-transition: all .5s;
@@ -125,7 +131,7 @@
         left: 20px;
     }
     .noteContentShifted {
-        left: calc(var(--tocWidth) * 1px)
+        left: calc(var(--menuWidth) * 1px)
     }
     .loading {
         text-align: center;

@@ -1,7 +1,7 @@
 <script lang='ts'>
     import { refNumbering } from "$lib";
     import BodyText from "./BodyText.svelte";
-    import { notebooks, printMode, windowInnerHeight, windowScrollY } from "./stores";
+    import { notebooks, printMode, windowInfo } from "./stores";
     import { afterUpdate } from 'svelte';
 
     export let colabId
@@ -27,9 +27,9 @@
     let pos;
     afterUpdate(() => {
         pos = (posEl || {offsetTop: 0}).offsetTop;
-        if (pos > 0 && Math.abs(pos - $windowScrollY) <= 2 * $windowInnerHeight) {
+        if (pos > 0 && Math.abs(pos - $windowInfo.scrollY) <= 2 * $windowInfo.innerHeight) {
             seen = true;
-        } else if (pos > 0 && Math.abs(pos - $windowScrollY) > 4 * $windowInnerHeight) {
+        } else if (pos > 0 && Math.abs(pos - $windowInfo.scrollY) > 4 * $windowInfo.innerHeight) {
             seen = false;
         }
     })

@@ -1,11 +1,11 @@
 <script lang='ts'>
-    import { printMode, sections, windowInnerWidth, windowInnerHeight, windowScrollY } from "./stores";
+    import { printMode, sections, windowInfo } from "./stores";
 
     const smallWidth = 700;
 
     let secsToDisplay: Array<string> = [];
 
-    $: doNotShow = $printMode || ($windowInnerWidth || 0) < smallWidth;
+    $: doNotShow = $printMode || ($windowInfo.innerWidth || 0) < smallWidth;
 
     $: {
         if (!doNotShow) {
@@ -16,7 +16,7 @@
                     return [refId, -1];
                 }
                 const el = document.getElementById(refId) as HTMLElement;
-                const ret: Array<any> = [refId, $windowScrollY + 0.3 * $windowInnerHeight - el?.offsetTop]
+                const ret: Array<any> = [refId, $windowInfo.scrollY + 0.3 * $windowInfo.innerHeight - el?.offsetTop]
                 return ret
             }).filter(
                 x => x[1] >= 0

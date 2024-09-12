@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { popupShown, notesMaxWidth, minPopupSideWidth, windowInnerWidth } from "./stores";
+    import { popupShown, layoutInfo } from "./stores";
     export let show: Boolean
     export let divId = ''
     let popupEl: HTMLElement
@@ -25,13 +25,12 @@
         }
         return checkForOpenPopups();
     });
-    $: popupLoc = $windowInnerWidth - $notesMaxWidth > $minPopupSideWidth ? 'Side' : 'Center';
 </script>
 
 <div
     bind:this={popupEl} 
     style={`display:${show ? 'block' : 'none'}`}
-    class={`popup popup${popupLoc}`}
+    class={`popup popup${$layoutInfo.popupPlacement}`}
     id={divId}
 >
     <div
@@ -51,21 +50,18 @@
         border-radius: 10pt;
         position: absolute;
         background-color: #f4f4f4;
-        padding: 1rem;
+        padding: calc(var(--popupPadding) * 1px);
         box-shadow: 2px 3px 5px #999;
         z-index: 1;
-        max-width: 100%;
+        width: calc(var(--popupWidth) * 1px);
     }
     .popupCenter {
         left: 50%;
         transform: translateX(-50%);
-        max-width: calc(min(var(--notesMaxWidth) * 0.9, var(--totalWidth) * 0.8) * 1px);
-        min-width: calc(min(var(--notesMaxWidth) * 0.8, var(--totalWidth) * 0.7) * 1px);
     }
     .popupSide {
-        left: calc((var(--notesMaxWidth) + 20) * 1px);
+        left: calc(var(--popupLeft) * 1px);
         transform: translateY(-2rem);
-        width: calc((var(--totalWidth) - var(--notesMaxWidth) - 40) * 0.9 * 1px);
     }
     .popupTop {
         top: 0;

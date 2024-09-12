@@ -1,28 +1,33 @@
-<script>
+<script lang="ts">
     import GlossaryLookup from "./GlossaryLookup.svelte";
     import Slider from "./Slider.svelte";
     import TocInner from "./TOCInner.svelte";
-    import { sections, showMenu, highlightKeyPoints } from "./stores";
+    import { sections, highlightKeyPoints } from "./stores";
     import { slide } from "svelte/transition";
 
     let showToc = false;
-    const toggleTocFunc = () => {
+    const toggleTocFunc = (e: Event) => {
+        const target = e.target as HTMLElement
+        if (!['menuContentsText', 'menuContentsPlusMinus'].includes(target.id)) {
+            return
+        }
         showToc = !showToc;
     }
     let searchString = '';
 </script>
 
-<div class=menu style={`width:${$showMenu ? 'calc(var(--tocWidth) * 1px)' : '0px'}`}>
-    <div class=menuItem>
+<div class=menu>
+    <div
+        class="menuItem menuItemClick"
+        id=menuContentsText
+        role=button
+        tabindex="0"
+        aria-label="Toggle expand"
+        on:keydown={toggleTocFunc}
+        on:click={toggleTocFunc}
+    >
         Contents
-        <span
-            class=menuExpand
-            role=button
-            tabindex="0"
-            aria-label="Toggle expand"
-            on:keydown={toggleTocFunc}
-            on:click={toggleTocFunc}
-        >
+        <span class=menuExpand id=menuContentsPlusMinus>
             {showToc ? '-' : '+'}
         </span>
     </div>
@@ -48,7 +53,7 @@
 <style>
     .menu {
         height: calc(100% - 3.5rem);
-        width: 0;
+        width: calc(var(--menuWidth) * 1px);
         position: fixed;
         z-index: 3;
         top: 3.5rem;
@@ -66,6 +71,9 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+    }
+    .menuItemClick {
+        cursor: pointer;
     }
     .menuExpand {
         float: right;
