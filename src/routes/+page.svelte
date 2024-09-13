@@ -4,8 +4,9 @@
     import Menu from "$lib/Menu.svelte";
     import {
         showMenu, printMode, windowInfo, layoutInfo, popupShown,
+        popupsAllowed, scaleFactor,
 
-        popupsAllowed
+        prePrintScaleFactor
 
     } from "$lib/stores";
     import Sections from "../sections/Sections.svelte";
@@ -38,9 +39,23 @@
             }
             stillScrolling = false;
         }, 100);
-        window.onbeforeprint = () => printMode.update(() => true);
-        window.onafterprint = () => printMode.update(() => false)
+        window.onbeforeprint = () => {
+            printMode.update(() => true);
+            prePrintScaleFactor.update(() => $scaleFactor)
+            scaleFactor.update(f => 0.875);
+        }
+        window.onafterprint = () => {
+            printMode.update(() => false);
+            scaleFactor.update(() => $prePrintScaleFactor);
+        }
     });
+    $: {
+        try {
+            document.getElementsByTagName('html')[0].style.fontSize = `${100 * $scaleFactor}%`
+        } catch {
+
+        }
+    }
     try {
         document.onclick = bodyClick
     } catch {
@@ -79,6 +94,7 @@
     --popupLeft: {$layoutInfo.popupLeft};
     --popupPadding: {$layoutInfo.popupPadding};
     --standardFontSize: 1.4rem;
+    --scaleFactor: {$scaleFactor};
 ">
     <div class=allContent>
         {#if stillLoading}
@@ -149,7 +165,6 @@
     .notesPrint {
         left: auto;
         padding: 2rem;
-        font-size: 0.4rem;
     }
     .noteContentWithPopup {
         left: 20px;

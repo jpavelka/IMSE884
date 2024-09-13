@@ -2,7 +2,7 @@
     import GlossaryLookup from "./GlossaryLookup.svelte";
     import Slider from "./Slider.svelte";
     import TocInner from "./TOCInner.svelte";
-    import { sections, highlightKeyPoints } from "./stores";
+    import { sections, highlightKeyPoints, scaleFactor } from "./stores";
     import { slide } from "svelte/transition";
 
     let showToc = false;
@@ -43,6 +43,21 @@
     <div class=menuItem>
         Highlight key points
         <Slider bind:value={$highlightKeyPoints} />
+    </div>
+    <div class=menuItem>
+        Font size
+        <div>
+            <button
+                class=fontSizeButton
+                disabled={$scaleFactor === 1.5}
+                on:click={() => scaleFactor.update(f => f + 0.125)}
+            >+</button>
+            <button
+                class=fontSizeButton
+                disabled={$scaleFactor === 0.5}
+                on:click={() => scaleFactor.update(f => f - 0.125)}
+            >-</button>
+        </div>
     </div>
     <div class=menuItem style=display:block>
         Glossary lookup
@@ -85,52 +100,50 @@
         font-size: 2.5rem;
         font-family: 'Courier New', Courier, monospace;
     }
-
-.s--inner button span {
-    user-select: none;
-    pointer-events:none;
-    padding: 0.25em;
-}
-
-.s--inner button:focus {
-    outline: var(--accent-color) solid 1px;
-}
-
-.s--slider {
-    display: flex;
-    align-items: center;
-}
-
-.s--slider button {
-    width: 3em;
-    height: 1.6em;
-    position: relative;
-    margin: 0 0 0 0.5em;
-    background: var(--gray);
-    border: none;
-}
-
-.s--slider button::before {
-    content: '';
-    position: absolute;
-    width: 1.3em;
-    height: 1.3em;
-    background: #fff;
-    top: 0.13em;
-    right: 1.5em;
-    transition: transform 0.3s;
-}
-
-.s--slider button[aria-checked='true']{
-    background-color: var(--accent-color)
-}
-
-.s--slider button[aria-checked='true']::before{
-    transform: translateX(1.3em);
-    transition: transform 0.3s;
-}
-
-.s--slider button:focus {
-    box-shadow: 0 0px 0px 1px var(--accent-color);
-}
+    .fontSizeButton {
+        width: 3rem;
+        height: 2rem;
+        font-size: 1.4rem;
+        border-radius: 0.5rem;
+    }
+    .s--inner button span {
+        user-select: none;
+        pointer-events:none;
+        padding: 0.25em;
+    }
+    .s--inner button:focus {
+        outline: var(--accent-color) solid 1px;
+    }
+    .s--slider {
+        display: flex;
+        align-items: center;
+    }
+    .s--slider button {
+        width: 3em;
+        height: 1.6em;
+        position: relative;
+        margin: 0 0 0 0.5em;
+        background: var(--gray);
+        border: none;
+    }
+    .s--slider button::before {
+        content: '';
+        position: absolute;
+        width: 1.3em;
+        height: 1.3em;
+        background: #fff;
+        top: 0.13em;
+        right: 1.5em;
+        transition: transform 0.3s;
+    }
+    .s--slider button[aria-checked='true']{
+        background-color: var(--accent-color)
+    }
+    .s--slider button[aria-checked='true']::before{
+        transform: translateX(1.3em);
+        transition: transform 0.3s;
+    }
+    .s--slider button:focus {
+        box-shadow: 0 0px 0px 1px var(--accent-color);
+    }
 </style>

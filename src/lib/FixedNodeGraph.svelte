@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { Network } from "vis-network";
-    import { windowInfo } from "./stores";
+    import { scaleFactor, windowInfo } from "./stores";
 
     export let nodes: Array<{[key: string]: any}>;
     export let edges: Array<string | {[key: string]: any}>;
@@ -84,7 +84,7 @@
 <div
   bind:this={container}
   class='fixedNodeGraph canvasBreadcrumb'
-  style={`width:${calcWidth}px;height:${calcHeight}px;`}
+  style={`width:${calcWidth * $scaleFactor}px;height:${calcHeight * $scaleFactor}px;`}
 />
 
 <style>

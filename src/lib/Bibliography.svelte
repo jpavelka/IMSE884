@@ -1,7 +1,6 @@
 <script>
-    import Algorithms from "../sections/combOptIntro/Algorithms.svelte";
-import Heading from "./Heading.svelte";
-    import { citations, printMode } from "./stores";
+    import Heading from "./Heading.svelte";
+    import { citations } from "./stores";
 
     let citeList = [];
     for (const citeId of Object.keys($citations)) {
@@ -19,7 +18,7 @@ import Heading from "./Heading.svelte";
 <div class=bib>
     {#each citeList.sort() as ct}
         <div
-            class={'bibline' + ($printMode ? ' biblinePrintMode' : '')}
+            class=bibline
             id={ct.citeId}
         >
             {#if !!ct.image}
@@ -29,7 +28,7 @@ import Heading from "./Heading.svelte";
                         src={ct.image}
                         alt="Book cover"
                     />
-                    <div>
+                    <div style=flex-grow:1>
                         {@html ct.biblio}
                         {#if !!ct.libLink}
                             <div class=libLink>
@@ -56,9 +55,6 @@ import Heading from "./Heading.svelte";
         padding-bottom: 1rem;
         margin-bottom: 1rem;
         border-bottom: 1pt solid #ddd;
-    }
-    .biblinePrintMode {
-        font-size: 1rem;
     }
     .libLink {
         margin-top: 0.5rem;

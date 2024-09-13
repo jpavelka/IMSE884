@@ -1,5 +1,36 @@
-import { readable, writable, derived, type Writable } from "svelte/store";
+import { writable, derived, type Writable } from "svelte/store";
 import { getCitations } from "./bibUtils";
+import { browser } from "$app/environment";
+
+const createStorageSyncedStore = (
+  name: string,
+  defaultValue: string | number,
+  allowedValues: Array<string | number> | undefined = undefined,
+) => {
+  let currentStorageValue = defaultValue;
+  if (browser) {
+      currentStorageValue = localStorage.getItem(name) || defaultValue;
+      if (typeof(defaultValue) === 'number' && typeof(currentStorageValue) === 'string') {
+          currentStorageValue = parseFloat(currentStorageValue);
+      }
+  }
+  if (allowedValues !== undefined){
+      if (currentStorageValue === undefined){
+          currentStorageValue = defaultValue;
+      }
+      if (!allowedValues.includes(currentStorageValue)){
+          currentStorageValue = defaultValue;
+      }
+  }
+  const storageStore: Writable<string | number> = writable(currentStorageValue);
+  if (browser) {
+      storageStore.subscribe(val => {
+          
+          localStorage.setItem(name, val)
+      })
+  }
+  return storageStore
+}
 
 export const sections: Writable<{
   hierarchy: Array<any>,
@@ -96,6 +127,8 @@ export const popupsAllowed = writable(true);
 export const eqReferenced: Writable<Array<string>> = writable([]);
 export const printMode = writable(false);
 export const highlightKeyPoints = writable(false);
+export const scaleFactor = createStorageSyncedStore('scaleFactor', 1);
+export const prePrintScaleFactor = writable(1);
 export const windowInfo = writable({
   innerWidth: 0,
   innerHeight: 0,

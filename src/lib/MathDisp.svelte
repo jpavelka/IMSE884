@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { equations, printMode } from "./stores";
+    import { equations } from "./stores";
     import KatexDisp from "./KatexDisp.svelte";
     import { refNumbering } from "$lib";
 
@@ -28,7 +28,7 @@
 
 <div style="display:flex;align-items:center">
     <div style={"flex-grow:1;" + (ignoreOverflow ? "" : "overflow-x:auto")} id={refId}>
-        <KatexDisp {options} fontSize={$printMode ? parseFloat(fontSize) * 0.8 : fontSize} refId={refId}>
+        <KatexDisp {options} fontSize={fontSize} refId={refId}>
             <slot />
         </KatexDisp>
     </div>
