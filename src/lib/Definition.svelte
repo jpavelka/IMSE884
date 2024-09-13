@@ -89,15 +89,22 @@
         0% {
             color: black;
         }
-        50% {
-            color: green;
+        15% {
+            background-color: yellow;
             font-size: 1.5rem;
+        }
+        30% {
+            background-color: yellow;
+            font-size: var(--standardFontSize);
+        }
+        50% {
+            background-color: yellow;
         }
         100% {
             color: black;
         }
     }
     .blinkingText {
-        animation: blink 2s; 
+        animation: blink 10s; 
     }
 </style>

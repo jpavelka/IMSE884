@@ -17,7 +17,11 @@
                 role=button
                 tabindex="0"
                 aria-label="Toggle expand"
-                on:keydown={() => toggleExpand(i)}
+                on:keydown={(e) => {
+                    if (e.key === 'Enter') {
+                        toggleExpand(i);
+                    }
+                }}
                 on:click={() => toggleExpand(i)}
             >
                 {expand[i] ? '-' : '+'}

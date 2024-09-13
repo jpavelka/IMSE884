@@ -10,14 +10,18 @@
 {#if $printMode}
     <span></span>
 {:else}
-    <PopupToggle show={showPopup}>
+    <PopupToggle bind:show={showPopup}>
         <slot/>
     </PopupToggle><span
         class="footnote"
         role=button
         tabindex="0"
         aria-label="Toggle popup"
-        on:keydown={popupOpenClose}
+        on:keydown={(e) => {
+            if (e.key === 'Enter') {
+                popupOpenClose()
+            }
+        }}
         on:click={popupOpenClose}
     >[note]</span>
 {/if}

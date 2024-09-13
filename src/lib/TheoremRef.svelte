@@ -38,13 +38,17 @@
     };
 </script>
 
-<PopupToggle show={showPopup} divId={retId}></PopupToggle><span
+<PopupToggle bind:show={showPopup} divId={retId}></PopupToggle><span
     class="thmRef"
     id={retId}
     role=button
     tabindex="0"
     aria-label="Toggle popup"
-    on:keydown={popupOpenClose}
+    on:keydown={(e) => {
+        if (e.key === 'Enter') {
+            popupOpenClose()
+        }
+    }}
     on:click={popupOpenClose}
     >{$theorems.thmTypes[refId]} {$theorems.numbers[refId]}</span
 >

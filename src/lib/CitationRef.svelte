@@ -27,14 +27,18 @@
 </script>
 
 {#if citationExists}
-    <PopupToggle show={showPopup}>
+    <PopupToggle bind:show={showPopup}>
         <div style=font-size:1.3rem;overflow-x:auto; bind:this={popupContentEl} />
     </PopupToggle><span
         class="ref"
         role=button
         tabindex="0"
         aria-label="Toggle popup"
-        on:keydown={popupOpenClose}
+        on:keydown={(e) => {
+            if (e.key === 'Enter') {
+                popupOpenClose()
+            }
+        }}
         on:click={popupOpenClose}
     >
         {citeObj.refStr}

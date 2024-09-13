@@ -3,7 +3,10 @@
     import TopBar from "$lib/TopBar.svelte";
     import Menu from "$lib/Menu.svelte";
     import {
-        showMenu, printMode, windowInfo, layoutInfo
+        showMenu, printMode, windowInfo, layoutInfo, popupShown,
+
+        popupsAllowed
+
     } from "$lib/stores";
     import Sections from "../sections/Sections.svelte";
     import CurrentSectionDisp from "$lib/CurrentSectionDisp.svelte";
@@ -52,7 +55,12 @@
         w.scrollY = scrollY;
         return w;
     })
-
+    const closeAllPopups = () => {
+        popupsAllowed.update(() => false);
+        setTimeout(() => {
+            popupsAllowed.update(() => true);
+        }, 1000);
+    }
 </script>
 
 <svelte:window
@@ -85,6 +93,22 @@
             <div class=underBar style={'visibility:' + (stillScrolling ? 'hidden' : 'visible')}>
                 <Menu />
                 <CurrentSectionDisp />
+                {#if $popupShown && !$printMode && $layoutInfo.popupPlacement === 'Side'}
+                    <div
+                        class=popupsClose
+                        role=button
+                        tabindex="0"
+                        aria-label="Close popups"
+                        on:keydown={(e) => {
+                            if (e.key === 'Enter') {
+                                closeAllPopups()
+                            }
+                        }}
+                        on:click={closeAllPopups}
+                    >
+                        Close all popups
+                    </div>
+                {/if}
                 <div class={"notesContent" + ($printMode ? ' notesPrint' : '')}>
                     <Sections />
                     <div class=afterNotes></div>
@@ -205,5 +229,12 @@
         0% { transform: rotate(0deg); }
         33% { transform: rotate(90deg); }
         100% { transform: rotate(360deg); }
+    }
+    .popupsClose {
+        position:fixed;
+        right:calc(var(--marginWidth)*1pt);
+        font-style:italic;
+        color:gray;
+        cursor:pointer;
     }
 </style>

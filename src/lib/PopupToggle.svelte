@@ -1,9 +1,11 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { popupShown, layoutInfo } from "./stores";
+    import { popupShown, layoutInfo, popupsAllowed } from "./stores";
     export let show: Boolean
     export let divId = ''
     let popupEl: HTMLElement
+
+    $: show = $popupsAllowed ? show : false;
     const handleClose = (e: any) => {
         show = false;
     }
@@ -38,7 +40,11 @@
         role=button
         tabindex="0"
         aria-label="Toggle popup"
-        on:keydown={handleClose}
+        on:keydown={(e) => {
+            if (e.key === 'Enter') {
+                handleClose(e)
+            }
+        }}
         on:click={handleClose}
     >×</div>
     <slot/>

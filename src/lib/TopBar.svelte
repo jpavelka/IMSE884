@@ -12,7 +12,11 @@
             role=button
             tabindex="0"
             aria-label="Toggle show menu"
-            on:keydown={() => {showMenu.update(s => !s)}}
+            on:keydown={(e) => {
+                if (e.key === 'Enter') {
+                    showMenu.update(s => !s)
+                }
+            }}
             on:click={() => {showMenu.update(s => !s)}}
         >
             Menu

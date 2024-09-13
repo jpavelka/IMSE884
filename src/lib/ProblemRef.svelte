@@ -57,14 +57,18 @@
     >{@html probTextEl?.innerHTML}</svelte:element>
 {:else}
     {#if link}
-        <PopupToggle show={showPopup} divId={retId}></PopupToggle>
+        <PopupToggle bind:show={showPopup} divId={retId}></PopupToggle>
         <span
             class="eqRef"
             id={retId}
             role=button
             tabindex="0"
             aria-label="Toggle popup"
-            on:keydown={popupOpenClose}
+            on:keydown={(e) => {
+                if (e.key === 'Enter') {
+                    popupOpenClose()
+                }
+            }}
             on:click={popupOpenClose}
         >{@html probTextEl?.innerHTML}</span>
     {:else}

@@ -23,7 +23,11 @@
         role=button
         tabindex="0"
         aria-label="Toggle expand"
-        on:keydown={toggleTocFunc}
+        on:keydown={(e) => {
+            if (e.key === 'Enter') {
+                toggleTocFunc(e)
+            }
+        }}
         on:click={toggleTocFunc}
     >
         Contents

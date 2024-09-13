@@ -92,6 +92,7 @@ export const theorems: Writable<{
 export const citations = writable(await getCitations());
 export const showMenu = writable(false);
 export const popupShown = writable(false);
+export const popupsAllowed = writable(true);
 export const eqReferenced: Writable<Array<string>> = writable([]);
 export const printMode = writable(false);
 export const highlightKeyPoints = writable(false);

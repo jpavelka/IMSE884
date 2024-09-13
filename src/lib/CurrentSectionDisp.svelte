@@ -77,7 +77,11 @@
                     role=button
                     tabindex="0"
                     on:click={() => secContextDisp(sec)}
-                    on:keydown={() => secContextDisp(sec)}
+                    on:keydown={(e) => {
+                        if (e.key === 'Enter') {
+                            secContextDisp(sec)
+                        }
+                    }}
                     on:mouseover={() => secContextDisp(sec)}
                     on:focus={() => secContextDisp(sec)}
                 >
