@@ -142,6 +142,8 @@ export const layoutInfo = derived(
     const notesMaxWidth = 800;
     const openMenuWidth = 350;
     const minPopupSideWidth = 350;
+    const maxPopupSideWidth = 650;
+    const maxNotesLeft = 650;
     let notesWidth = Math.min(notesMaxWidth, $windowInfo.innerWidth - 3 * marginWidth);
     let menuWidth = $showMenu ? openMenuWidth : 0;
     let popupWidth = 0;
@@ -151,7 +153,7 @@ export const layoutInfo = derived(
     if ($popupShown) {
       if (spaceForSidePopup >= minPopupSideWidth) {
         popupPlacement = 'Side';
-        popupWidth = spaceForSidePopup;
+        popupWidth = Math.min(spaceForSidePopup, maxPopupSideWidth);
         notesLeft = marginWidth;
       } else {
         popupWidth = 0.85 * notesWidth;
@@ -165,6 +167,7 @@ export const layoutInfo = derived(
         notesLeft = Math.max(spaceForMenu / 2, $windowInfo.innerWidth - notesWidth - 2 * marginWidth);
       }
     }
+    notesLeft = Math.min(notesLeft, maxNotesLeft)
     return {
       notesWidth: notesWidth,
       menuWidth: menuWidth,

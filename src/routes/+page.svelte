@@ -164,7 +164,7 @@
     }
     .notesPrint {
         left: auto;
-        padding: 2rem;
+        padding: 4rem;
     }
     .noteContentWithPopup {
         left: 20px;
