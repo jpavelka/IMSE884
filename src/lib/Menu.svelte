@@ -108,44 +108,4 @@
         font-size: 1.4rem;
         border-radius: 0.5rem;
     }
-    .s--inner button span {
-        user-select: none;
-        pointer-events:none;
-        padding: 0.25em;
-    }
-    .s--inner button:focus {
-        outline: var(--accent-color) solid 1px;
-    }
-    .s--slider {
-        display: flex;
-        align-items: center;
-    }
-    .s--slider button {
-        width: 3em;
-        height: 1.6em;
-        position: relative;
-        margin: 0 0 0 0.5em;
-        background: var(--gray);
-        border: none;
-    }
-    .s--slider button::before {
-        content: '';
-        position: absolute;
-        width: 1.3em;
-        height: 1.3em;
-        background: #fff;
-        top: 0.13em;
-        right: 1.5em;
-        transition: transform 0.3s;
-    }
-    .s--slider button[aria-checked='true']{
-        background-color: var(--accent-color)
-    }
-    .s--slider button[aria-checked='true']::before{
-        transform: translateX(1.3em);
-        transition: transform 0.3s;
-    }
-    .s--slider button:focus {
-        box-shadow: 0 0px 0px 1px var(--accent-color);
-    }
 </style>

@@ -39,9 +39,9 @@
             {/if}
             </BodyText>
         </div>
-        <BodyText>
+        <BodyText><div>
             <slot />
-        </BodyText>
+        </div></BodyText>
     </div>
 </div>
 
@@ -56,5 +56,7 @@
     .problemTitle {
         font-weight: bold;
         margin-bottom: 0.5rem;
+        font-size: calc(1.1 * var(--standardFontSize));
+        text-decoration: underline;
     }
 </style>

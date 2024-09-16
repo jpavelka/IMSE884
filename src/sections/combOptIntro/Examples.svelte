@@ -35,7 +35,7 @@
 
 <Problem refId=shortestPath>
     <span slot=name>Shortest Path Problem</span>
-    Given a digraph <Math>D=(V,A)</Math>, two nodes <Math>s,t\in V</Math>, and non-negative arc costs <Math>c_{ij}</Math> for each <Math>i,j\in A</Math>, find a minimum-cost path from <Math>s</Math> to <Math>t</Math>.
+    Given a digraph <Math>D=(V,A)</Math>, two nodes <Math>s,t\in V</Math>, and non-negative arc distances <Math>c_{ij}</Math> for each <Math>i,j\in A</Math>, find a minimum-cost path from <Math>s</Math> to <Math>t</Math>.
 </Problem>
 
 <BodyText>
@@ -54,10 +54,10 @@
         ]}
         edges={[
             's-a-3',
-            's-b-4',
+            's-b-2',
             'a-c-5',
             'a-d-2',
-            'b-d-2',
+            'b-d-4',
             'd-c-2',
             'c-t-2',
             'd-t-6'
@@ -75,7 +75,7 @@
               &(b,d), (c,t), (d,c), (d,t) \}
         \end{align*}
     </MathDisp>
-    The weights <Math>c_j</Math> for each <Math>j\in N</Math> are the arc costs displayed in the diagram, so <Math>c_{sa}=3</Math>, <Math>c_{sb}=4</Math>, and so on. And the set <Math>\mathcal{F}</Math> of feasible subsets of <Math>N</Math> are sets of arcs that create a valid path from <Math>s</Math> to <Math>t</Math>. So for example we have
+    The weights <Math>c_j</Math> for each <Math>j\in N</Math> are the arc distances displayed in the diagram, so <Math>c_{sa}=3</Math>, <Math>c_{sb}=4</Math>, and so on. And the set <Math>\mathcal{F}</Math> of feasible subsets of <Math>N</Math> are sets of arcs that create a valid path from <Math>s</Math> to <Math>t</Math>. So for example we have
     <MathDisp>
         \begin{align*}
         \{(s,b),(b,d),(d,t)\}&\in\mathcal{F},\\
