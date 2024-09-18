@@ -16,6 +16,15 @@
 
 {#each includeObj as obj}
     {#if obj.match}
-        <GlossaryItem refId={obj.key} makeCopy={true} />
+        <div class=matchItem>
+            <GlossaryItem refId={obj.key} makeCopy={true} />
+        </div>
     {/if}
 {/each}
+
+<style>
+    .matchItem {
+        padding: 0.5rem;
+        border-top: 1pt solid lightgray;
+    }
+</style>

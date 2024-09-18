@@ -49,9 +49,12 @@
             scaleFactor.update(() => $prePrintScaleFactor);
         }
     });
+    const standardFontSize = '1.4rem'
     $: {
         try {
             document.getElementsByTagName('html')[0].style.fontSize = `${100 * $scaleFactor}%`
+            document.getElementsByTagName('body')[0].style.fontSize = `${standardFontSize}`
+            document.getElementsByTagName('body')[0].style.lineHeight = '2.25rem'
         } catch {
 
         }
@@ -93,7 +96,7 @@
     --popupWidth: {$layoutInfo.popupWidth};
     --popupLeft: {$layoutInfo.popupLeft};
     --popupPadding: {$layoutInfo.popupPadding};
-    --standardFontSize: 1.4rem;
+    --standardFontSize: {standardFontSize};
     --scaleFactor: {$scaleFactor};
 ">
     <div class=allContent>
@@ -247,7 +250,9 @@
     }
     .popupsClose {
         position:fixed;
+        font-size:calc(0.8 * var(--standardFontSize));
         right:calc(var(--marginWidth)*1pt);
+        top: 6rem;
         font-style:italic;
         color:gray;
         cursor:pointer;

@@ -15,7 +15,6 @@
         border: 1pt solid gray;
         margin: 0.5rem;
         padding-top: 0;
-        font-size: var(--standardFontSize);
     }
     .algoName {
         font-weight: bold;

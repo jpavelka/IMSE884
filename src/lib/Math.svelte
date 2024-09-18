@@ -12,9 +12,9 @@
 	};
 	let el: HTMLElement;
 	$: {
-		if (!!el) {
+		if (!!el && !alwaysRender) {
 			const parent = el.parentElement || {classList: []};
-			alwaysRender = ![...parent.classList].includes('bodyText');
+			alwaysRender = ![...parent.classList].includes('notesContent');
 		}
 	}
 </script>

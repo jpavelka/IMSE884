@@ -1,6 +1,5 @@
 <script lang='ts'>
     import { refNumbering } from "$lib";
-    import BodyText from "./BodyText.svelte";
     import { notebooks, printMode, windowInfo } from "./stores";
     import { afterUpdate } from 'svelte';
 
@@ -40,9 +39,7 @@
 <div class=nbTitle><b>Notebook {nbNum}:</b> {desc}</div>
 <div id={gistId} bind:this={posEl}>
     {#if $printMode}
-        <BodyText>
-            (Find the notebook at <a href={gistUrlBase + gistId}>{gistUrlBase}<wbr>{gistId}</a>)
-        </BodyText>
+        (Find the notebook at <a href={gistUrlBase + gistId}>{gistUrlBase}<wbr>{gistId}</a>)
     {:else}
         {#if seen}
             <iframe

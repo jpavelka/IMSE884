@@ -3,7 +3,6 @@
     export let params = undefined
     import { afterUpdate } from 'svelte';
     import { printMode, windowInfo } from './stores';
-    import BodyText from './BodyText.svelte';
 
     let srcStr = "https://www.youtube.com/embed/" + videoId;
     let linkStr = "https://www.youtube.com/watch?v=" + videoId;
@@ -24,9 +23,7 @@
 
 <div bind:this={posEl}>
     {#if $printMode}
-        <BodyText>
-            (Watch the video at <a href={linkStr}>{linkStr}</a>)
-        </BodyText>
+        (Watch the video at <a href={linkStr}>{linkStr}</a>)
     {:else}
         {#if seen}
             <iframe

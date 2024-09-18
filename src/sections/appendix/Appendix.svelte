@@ -8,6 +8,5 @@
     Appendix
     <span slot=context>Extra content you may find useful for this course.</span>
 </Heading>
-
 <GraphTheory/>
 <Symbols/>

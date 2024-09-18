@@ -66,7 +66,7 @@
     <slot name="context" />
 </span>
 {#if (levelInt || 1) === 1 && secNum !== '1'}
-    <hr style="margin-top:3rem;margin-bottom:5rem" />
+    <hr style="margin-top:3rem;margin-bottom:5rem;" />
 {/if}
 <svelte:element this={"h" + (levelInt || 1)} id={refId}>
     {@html headingText}
@@ -89,7 +89,6 @@
 <style>
     h1 {
         font-size: 2.2rem;
-        margin-bottom: 2.2rem;
     }
     h2 {
         font-size: 1.9rem;

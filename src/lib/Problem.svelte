@@ -1,5 +1,4 @@
 <script lang='ts'>
-    import BodyText from "./BodyText.svelte";
     import { problems } from "./stores";
 
     export let refId;
@@ -20,12 +19,10 @@
 <div class=problemContainer>
     <div id={refId}>
         <div class=problemTitle>
-            <BodyText>
             <slot name=name/>
             {#if $$slots.abbrev}(<slot name=abbrev/>){/if}
             {#if !!returnId}    
                 <a
-                style="font-size:var(--standardFontSize);"
                 href={"#" + returnId}
                 on:click={() => {
                     problems.update((s) => {
@@ -37,11 +34,10 @@
                 ↩︎</a
                 >
             {/if}
-            </BodyText>
         </div>
-        <BodyText><div>
+        <div>
             <slot />
-        </div></BodyText>
+        </div>
     </div>
 </div>
 
@@ -51,7 +47,6 @@
         padding: 1.7em;
         border: 1pt solid gray;
         margin: 0.5rem;
-        padding-top: 0;
     }
     .problemTitle {
         font-weight: bold;

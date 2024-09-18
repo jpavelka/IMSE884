@@ -19,7 +19,6 @@
         line-height: 2.2rem;
     }
     .directive {
-        font-size: var(--standardFontSize);
         font-weight: bold;
     }
     .child {

@@ -11,7 +11,4 @@
         border: 1pt solid gray;
         margin: 0.5rem;
     }
-    div {
-        margin-top: -1.5rem;
-    }
 </style>

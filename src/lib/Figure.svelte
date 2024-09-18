@@ -13,7 +13,7 @@
     <div class="caption"><b>Figure {figNum}:</b> <slot name="caption" /></div>
     {#if !!returnId}    
         <a
-        style="float:right;font-size:var(--standardFontSize);"
+        style="float:right;"
         href={"#" + returnId}
         on:click={() => {
             figures.update((s) => {

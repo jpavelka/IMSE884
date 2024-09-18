@@ -30,6 +30,19 @@ const mathSafe = (content) => {
 	return converted.join('');
 }
 
+const lineBreaks = (code) => {
+	const spl = code.split('</script>');
+	const script = spl[0] + '</script>';
+	let postScript = spl.slice(1).join('</script>').replace(/^\s*[\r\n]/gm, "<br><br>");
+	while (postScript.trim().slice(0, 4) === "<br>") {
+		postScript = postScript.trim().slice(4);
+	}
+	while (postScript.trim().slice(postScript.length - 4) === "<br>") {
+		postScript = postScript.trim().slice(0, postScript.length - 4)
+	}
+	return script + postScript
+}
+
 function customPP() {
 	return {
 		name: 'mathSafe',
@@ -38,6 +51,7 @@ function customPP() {
 				return
 			}
 			let code = mathSafe(content);
+			code = lineBreaks(code);
 			return { code: code }
 		}
 	}

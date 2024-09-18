@@ -1,6 +1,5 @@
 <script lang="ts">
     import { definitions } from "./stores";
-    import BodyText from "./BodyText.svelte";
 
     export let refId: string;
     export let plainText = '';
@@ -44,28 +43,26 @@
     >↩︎</a>{/if}
 </span>
 <div id={refId + ':glossaryEntry'} class=glossaryDisp style=display:none;>
-    <BodyText>
-        <div style=margin-top:-0.5rem;>
-            <a
-                class={'inGlossary'}
-                href=#{refId}
-                on:click={() => {
-                    linkToGlossary = true;
-                    makeBlink();
-                    setTimeout(() => {
-                        linkToGlossary = false;
-                        removeBlink();
-                    }, 300000)
-                }}
-            >
-                <span id={refId + ':glossaryDisp'}>
-                    {#if $$slots.glossaryDisp}<slot name=glossaryDisp />{:else}<slot 
-                    />{/if}{#if $$slots.context}&nbsp;(<slot name=context />){/if}</span></a>:
-            {#if $$slots.definition}
-                <slot name=definition />
-            {/if}
-        </div>
-    </BodyText>
+    <div>
+        <a
+            class={'inGlossary'}
+            href=#{refId}
+            on:click={() => {
+                linkToGlossary = true;
+                makeBlink();
+                setTimeout(() => {
+                    linkToGlossary = false;
+                    removeBlink();
+                }, 300000)
+            }}
+        >
+            <span id={refId + ':glossaryDisp'}>
+                {#if $$slots.glossaryDisp}<slot name=glossaryDisp />{:else}<slot 
+                />{/if}{#if $$slots.context}&nbsp;(<slot name=context />){/if}</span></a>:
+        {#if $$slots.definition}
+            <slot name=definition />
+        {/if}
+    </div>
 </div>
 
 <style>
@@ -78,8 +75,7 @@
     }
     .glossaryDisp {
         border-bottom: 1pt solid #ddd;
-        padding-bottom: 1rem;
-        margin-top: 0;
+        padding: 1rem 0;
     }
     .glossaryLink {
         vertical-align: super;
