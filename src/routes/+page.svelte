@@ -199,6 +199,11 @@
         transform: translateX(-50%);
         max-width: 90vw;
     }
+    :global(.spacer) {
+        display: block;
+        content: "";
+        margin-top: 2rem;
+    }
     @keyframes -global-line-pulse {
         0% {
             stroke-width: 2;
@@ -221,6 +226,7 @@
         background: white;
         border-top: 1pt solid lightgray;
         font-size: 0.8rem;
+        line-height: 1rem;
     }
     .footerActions {
         float: right;

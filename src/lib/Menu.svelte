@@ -64,7 +64,7 @@
             Glossary lookup
             <input
                 bind:value={searchString}
-                style=height:1.5rem;width:90%;
+                class=lookupBox
             />
             <GlossaryLookup searchString={searchString.trim()} />
         </div>
@@ -86,7 +86,8 @@
     }
     .menuItem {
         font-size: 1.6rem;
-        line-height: 2.1rem;transition: 0.3s;
+        line-height: 2.5rem;
+        transition: 0.3s;
         border-bottom: 1pt solid lightgray;
         padding: 0.5rem;
         display: flex;
@@ -107,5 +108,10 @@
         height: 2rem;
         font-size: 1.4rem;
         border-radius: 0.5rem;
+    }
+    .lookupBox {
+        font-size: calc(0.8 * var(--standardFontSize));
+        line-height: calc(1.2 * var(--standardFontSize));
+        width: 90%;
     }
 </style>

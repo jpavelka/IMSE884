@@ -18,17 +18,21 @@
     Example <ProblemRef refId=combOpt link={false}/>s
     <span slot=context>Presenting a few example <ProblemRef refId=combOpt link={false}/>s to help make sense of the definition.</span>
 </Heading>
+
 It might take a few examples to really internalize the definition. So, let's go ahead and <Key>present a few <ProblemRef refId=combOpt/>s and examine how they fit the framework</Key>. Several of these are most convenient to define in the language of <Key>graph theory</Key>. If you've seen graphs before, then great! If not, you can brush up on the preliminaries in the appendix, <SectionRef refId=graphTheory/>.
 
 <Heading level=3 refId=shortestPathDef>
     Shortest paths
     <span slot=context>Showing how a simple problem fits into the <ProblemRef refId=combOpt link={false}/> framework</span>
 </Heading>
+
 We'll start with a basic one:
+
 <Problem refId=shortestPath>
     <span slot=name>Shortest Path Problem</span>
     Given a digraph <Math>D=(V,A)</Math>, two nodes <Math>s,t\in V</Math>, and non-negative arc distances <Math>c_{ij}</Math> for each <Math>i,j\in A</Math>, find a minimum-cost path from <Math>s</Math> to <Math>t</Math>.
 </Problem>
+
 Pretty simple setup. We have some directed graph, maybe like the one below in <FigureRef refId=shortestPathFirstExample />. We want to find the lowest-cost path from node <Math>s</Math> on the left of the graph to node <Math>t</Math> on the right, where arc costs are written directly on each arc in the figure<Footnote>Why don't you go ahead and try to figure it out the best path by visual inspection. We'll come back and solve this example later.</Footnote>.
 
 <Figure refId=shortestPathFirstExample>
@@ -63,6 +67,7 @@ How does this fit into our definition of a <ProblemRef refId=combOpt/>? Well, ou
             &(b,d), (c,t), (d,c), (d,t) \}
     \end{align*}
 </MathDisp>
+
 The weights <Math>c_j</Math> for each <Math>j\in N</Math> are the arc distances displayed in the diagram, so <Math>c_{sa}=3</Math>, <Math>c_{sb}=4</Math>, and so on. And the set <Math>\mathcal{F}</Math> of feasible subsets of <Math>N</Math> are sets of arcs that create a valid path from <Math>s</Math> to <Math>t</Math>. So for example we have
 <MathDisp>
     \begin{align*}
@@ -103,10 +108,12 @@ The stereotypical framing for the <ProblemRef refId=knapsack /> is that of a hik
     <span slot=context>Defining more sample <ProblemRef refId=combOpt/>s, to give a sense of the breadth of problems available.</span>
 </Heading>
 Now that we've worked through it on a few examples, we'll skip formally specifying <Math>N</Math>, <Math>\mathcal{F}</Math>, and <Math>c</Math> for the next set of problems<Footnote>In fact, I'd say the formal specifications were never really the point. What we have is a collection of problems that feel similar, in that the possible solutions are "combinatorial" in some sense. The definition was developed post-hoc because mathematicians like definitions.</Footnote>.
+
 <Problem refId=assignment>
     <span slot=name>Assignment Problem</span>
     There are <Math>n</Math> people available to carry out <Math>n</Math> jobs. Each person is assigned to carry out exactly one job. Some individuals are better suited to particular jobs than others, so there is an estimated cost <Math>c_{ij}</Math> if person <Math>i</Math> is assigned to job <Math>j</Math>.
 </Problem>
+
 An example where this might come up: Suppose a ride-hailing app has recently received four ride requests, and there are currently five drivers in the area that can pick them up. The app may decide to assign drivers to riders (with the fifth driver "assigned" to do nothing) by pairing them up so that the sum of distances the drivers travel to pick up their riders is minimized.
 
 Here's another common problem. It's a little harder to parse initially, but example that follows should help you work through it.

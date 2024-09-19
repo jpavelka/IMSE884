@@ -9,12 +9,14 @@
     Welcome!
     <span slot=context>Where we discuss what to expect in this class and these notes.</span>
 </Heading>
+
 You're reading the class notes for <em>IMSE 884: Integer Programming and Combinatorial Optimization</em>, taught at Kansas State University during the Spring 2025 semester.
 
 <Heading level="2" refId="aboutTheCourse">
     About the course
     <span slot=context>Discussing topics and particulars of the course.</span>
 </Heading>
+
 As the name suggests, the aim of this course is to give an <Key>overview of the related fields of integer programming and combinatorial optimization</Key>, which together comprise a large portion of the <Key>best-studied and most widely-applicable problems</Key> in optimization and mathematical programming. <Key>We will lean more heavily on the theoretical aspects</Key> of the subject, spending most of our time on theory and algorithms that allow solutions to be found to these important problems. We will devote a relatively smaller amount of time to building and solving these types of models in practice.
 
 As far as prerequisites, you should have some <Key>familiarity with linear algebra</Key>, at a minimum the basic mechanics of <Key>matrix math (addition/multiplication)</Key>. Topics such as linear rank and determinants with surface as well. Some familiarity with other optimization topics, especially <Key>linear programming</Key>, will also prove helpful.
@@ -31,6 +33,7 @@ From there, we'll take a deep dive into the <Key>theory of solving integer progr
     Textbooks
     <span slot=context>Useful resources for students.</span>
 </Heading>
+
 The core of <Key>this course will be taught from these notes</Key>, thus students are <Key>not strictly required to obtain a separate textbook</Key>. But I will strongly suggest anyone taking the course find a copy of the second edition to Laurence Wolsey's book <Key><em>Integer Programming</em> <CitationRef refId=wolsey2020/>. A large portion of this course</Key>'s content is derived from this book (although we'll present things in a slightly different order), and you'll find further details there not covered in the notes.
 
 There are a few other sources that I recommend, whose contents is woven into this course. I have to start with the book <Key><em>Integer and Combinatorial Optimization</em> <CitationRef refId=nemWol2014/></Key>, written by Wolsey along with George Nemhauser, which is <Key>potentially <em>the</em> reference for this subject<Footnote>
@@ -41,6 +44,7 @@ There are a few other sources that I recommend, whose contents is woven into thi
     About the notes
     <span slot=context>Discussing how to use this site.</span>
 </Heading>
+
 I have an irrational aversion to paper and think digital formats have so much more to offer. But I <Key>couldn't find a digital note-creating system that had the features I wanted, so I built my own</Key>. The result is what you're seeing now. These notes will display and generally work <Key>better on wider screens</Key> (e.g. a computer monitor/laptop/tablet as opposed to your phone), but can be accessed by anything with a web browser. If physical copies are your thing, you can <Key>print these notes from your browser</Key>. From what I've seen, Chrome and Edge will create a decent PDF through their default print utility, while Firefox was lacking. <Key>Your mileage may vary</Key>.
 
 Additionally, <Key>I'd love to hear your feedback on the notes!</Key> That means both content (the notes are almost surely littered with typos and unclear wordings) and user experience. If you find mistakes or have any ideas for how to make the notes better, I'd love to hear about them! (Though I'm only a hack of a web developer, so my ability to deliver on any of your technical suggestions may be limited.) I will be keeping track of who has contributed to improving these notes, and will have a prize at the end of the semester for the student(s) responsible for the most/best improvements.

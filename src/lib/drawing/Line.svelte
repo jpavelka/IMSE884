@@ -53,7 +53,11 @@
 {/if}
 {#if !!mouseOverFunction}
     <line {x1} {y1} {x2} {y2} style={"stroke-width:10pt;stroke:black;stroke-opacity:0"}
+        role=button
+        tabindex={0}
         on:mouseover={mouseOverFunction}
+        on:focus={mouseOverFunction}
         on:mouseout={mouseOutFunction}
+        on:blur={mouseOutFunction}
     />
 {/if}

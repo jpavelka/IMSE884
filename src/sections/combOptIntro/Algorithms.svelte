@@ -12,6 +12,7 @@
     <ProblemRef refId=combOpt link={false} /> algorithms
     <span slot=context>Exploring special-purpose algorithms for some of our example <ProblemRef refId=combOpt link={false} />s</span>
 </Heading>
+
 <!-- After the previous section, you hopefully have a good feel for the types of problems we're discussing. By now, you probably want to know how to solve them. Countless research papers have been written discussing each of the problems we've defined, and numerous algorithms for solving each of them exist. In this section, we'll take a look at a few special-purpose algorithms for solving some of the problems we've already defined. Get used to algorithms, prove correctness, all that good stuff.
 What is an algorithm, anyway?
 -->
@@ -19,6 +20,7 @@ What is an algorithm, anyway?
     <span slot=context>Examining a well-known algorithm for the <ProblemRef refId=shortestPath link={false} /></span>
     Dijkstra's shortest path algorithm
 </Heading>
+
 We'll first talk about an algorithm for the <ProblemRef refId=shortestPath /> known as Dijkstra's algorithm. As it turns out, this algorithm doesn't just find the shortest <Math>s-t</Math> path as the problem requires, but will in fact find the shortest paths from <Math>s</Math> to <em>every</em> other vertex in the graph.
 
 Let's use the graph in <FigureRef refId=shortestPathFirstExample /> as we illustrate the mechanics of the algorithm. Now, before we even start, we already know the shortest path from <Math>s</Math> to one other vertex. Namely, the shortest path from <Math>s</Math> to itself starts at <Math>s</Math> and goes... well, nowhere! You're already at your destination!<Footnote>

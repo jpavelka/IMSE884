@@ -40,12 +40,11 @@
         background-color: #ebebeb;
         width: 100%;
         border-bottom: 1pt solid gray;
-        padding: 0.5rem 0;
         display: flex;
         justify-content: space-between;
         font-family: Georgia, serif;
         z-index: 4;
-        height: 2.5rem;
+        line-height: 2.5rem;
     }
     .topBar > div {
         padding: 0.5rem 1rem;

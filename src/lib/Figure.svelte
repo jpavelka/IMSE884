@@ -30,7 +30,6 @@
 <style>
     .figDiv {
         max-width: 90%;
-        margin: 1.5rem auto;
         overflow-x: auto;
         overflow-y: hidden;
     }

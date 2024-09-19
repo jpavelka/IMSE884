@@ -10,6 +10,7 @@
     Intro to combinatorial optimization
     <span slot=context>Presenting the basics of the field of combinatorial optimization.</span>
 </Heading>
+
 In this section, we'll <Key>introduce the field of combinatorial optimization</Key>. We'll describe several common problems that fall under the combinatorial optimization umbrella. For a few of these problems, we'll also present special-case algorithms used to solve them.
 
 <Definitions />

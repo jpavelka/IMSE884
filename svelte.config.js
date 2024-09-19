@@ -33,12 +33,13 @@ const mathSafe = (content) => {
 const lineBreaks = (code) => {
 	const spl = code.split('</script>');
 	const script = spl[0] + '</script>';
-	let postScript = spl.slice(1).join('</script>').replace(/^\s*[\r\n]/gm, "<br><br>");
-	while (postScript.trim().slice(0, 4) === "<br>") {
-		postScript = postScript.trim().slice(4);
+	const insertStr = '<div class=spacer></div>'
+	let postScript = spl.slice(1).join('</script>').replace(/^\s*[\r\n]/gm, insertStr);
+	while (postScript.trim().slice(0, insertStr.length) === insertStr) {
+		postScript = postScript.trim().slice(insertStr.length);
 	}
-	while (postScript.trim().slice(postScript.length - 4) === "<br>") {
-		postScript = postScript.trim().slice(0, postScript.length - 4)
+	while (postScript.trim().slice(postScript.length - insertStr.length) === insertStr) {
+		postScript = postScript.trim().slice(0, postScript.length - insertStr.length)
 	}
 	return script + postScript
 }

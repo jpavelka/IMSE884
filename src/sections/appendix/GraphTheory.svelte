@@ -53,6 +53,7 @@
     Graph theory
     <span slot=context>Some basics from graph theory, which are useful for describing several common combinatorial optimization problems.</span>
 </Heading>
+
 Familiarity with graph theory will be useful for this course. You don't need to know too much though, really just the basic definitions should be enough to understand the material. For interested readers, Reinhard Diestel's <em>Graph Theory</em> <CitationRef refId=diestel2018></CitationRef> is an excellent overview of the topic.
 
 <Definition refId=graphTheory>
@@ -97,7 +98,7 @@ Graphs are typically represented visually as in <FigureRef refId=exampleGraph/>:
     and edges:
     <MathDisp>E=\{(1,2), (1,3), (2,3), (2,4), (2,5), (3,5), (4,5)\}</MathDisp>
 
-<Figure refId=exampleGraph>
+    <Figure refId=exampleGraph>
     <span slot=caption>
         Visualization of a graph.
     </span>
