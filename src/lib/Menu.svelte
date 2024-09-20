@@ -102,6 +102,7 @@
         cursor: pointer;
         font-size: 2.5rem;
         font-family: 'Courier New', Courier, monospace;
+        transform: translateY(calc(0.2 * var(--standardFontSize)));
     }
     .fontSizeButton {
         width: 3rem;

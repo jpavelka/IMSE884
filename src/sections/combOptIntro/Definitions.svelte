@@ -2,7 +2,6 @@
     import Heading from "$lib/Heading.svelte";
     import Key from "$lib/Key.svelte";
     import BlockQuote from "$lib/BlockQuote.svelte";
-    import Math from "$lib/Math.svelte";
     import CitationRef from "$lib/CitationRef.svelte";
     import Problem from "$lib/Problem.svelte";
     import MathDisp from "$lib/MathDisp.svelte";
@@ -56,7 +55,7 @@ For this class, we will adopt the formalism of <CitationRef refId=wolsey2020/> a
 <Problem refId=combOpt>
     <span slot=name>Combinatorial Optimization Problem</span>
     <span slot=abbrev>COP</span>
-    Given a finite set <Math>N=\{1,\dots,n\}</Math>, weights <Math>c_j</Math> for each <Math>j\in N</Math>, and a set <Math>\mathcal{F}</Math> of feasible subsets of <Math>N</Math>, find a minimum weight feasible subset, i.e.
+    Given a finite set $$N=\{1,\dots,n\}$$, weights $$c_j$$ for each $$j\in N$$, and a set $$\mathcal{F}$$ of feasible subsets of $$N$$, find a minimum weight feasible subset, i.e.
     <MathDisp>
         \min_{S\subseteq N}\left\{\sum_{j\in S}c_j:S\in\mathcal{F}\right\}
     </MathDisp>

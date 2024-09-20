@@ -1,6 +1,6 @@
 <script lang="ts">
     import Figure from "./Figure.svelte";
-    import InlineMath from "./Math.svelte";
+    import InlineMath from "./MathInline.svelte";
     import Axes from "./drawing/Axes.svelte";
     import ChooseObjVals from "./drawing/ChooseObjVals.svelte";
     import ChoosePoints from "./drawing/ChoosePoints.svelte";

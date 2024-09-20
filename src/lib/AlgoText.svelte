@@ -3,23 +3,28 @@
 </script>
 
 <span class=algoLine>
-    {#if type !== ''}
-        <span class=directive>
-            {type}
-        </span>
-    {/if}
-    <slot />
-    <div class=child>
-        <slot name=child/>
-    </div>    
+    <div style=margin-right:0.5rem;>&#8226;</div>
+    <div>
+        {#if type !== ''}
+            <span class=directive>
+                {type}
+            </span>
+        {/if}
+        <slot />
+    </div>
 </span>
+<div class=child>
+    <slot name=child/>
+</div>
 
 <style>
     .algoLine {
         line-height: 2.2rem;
+        display: flex;
     }
     .directive {
         font-weight: bold;
+        margin-right: 0.5rem;
     }
     .child {
         padding-left: 2rem;

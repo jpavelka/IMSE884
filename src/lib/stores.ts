@@ -88,6 +88,16 @@ export const problems: Writable<{
   abbrevs: {}
 })
 
+export const algorithms: Writable<{
+  numRefs: {[key: string]: number},
+  returnIds: {[key: string]: string},
+  names: {[key: string]: HTMLElement},
+}> = writable({
+  numRefs: {},
+  returnIds: {},
+  names: {},
+})
+
 export const definitions: Writable<{
   plainText: {[key: string]: string}
 }> = writable({

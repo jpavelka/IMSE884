@@ -1,14 +1,13 @@
 <script lang="ts">
-    import { problems, printMode } from "./stores";
+    import { algorithms, printMode } from "./stores";
     import PopupToggle from "./PopupToggle.svelte";
     
     export let refId: string;
-    export let desiredRefStyle = 'abbrev';
     export let link = true;
     
-    refId = "prob:" + refId;
-    const refNum = ($problems.numRefs[refId] || 0) + 1;
-    problems.update((s) => {
+    refId = "algo:" + refId;
+    const refNum = ($algorithms.numRefs[refId] || 0) + 1;
+    algorithms.update((s) => {
         if (!Object.keys(s.numRefs).includes(refId)) {
             s.numRefs[refId] = 0;
         }
@@ -36,7 +35,7 @@
                 linkEl.style.fontSize = "1.2rem";
                 linkEl.style.float = "right";
                 linkEl.onclick = () => {
-                    problems.update((s) => {
+                    algorithms.update((s) => {
                         s.returnIds[refId] = retId;
                         return s;
                     });
@@ -45,21 +44,20 @@
             }, timeout);
         }
     };
-    $: refStyle = !$problems.abbrevs[refId] ? 'name' : desiredRefStyle;
-    $: probTextEl = refStyle === 'name' ? $problems.names[refId] : $problems.abbrevs[refId];
+    $: algoTextEl = $algorithms.names[refId];
 </script>
 
 {#if $printMode}
     <svelte:element
         this={link ? 'a' : 'span'}
-        class={link ? 'probRef' : ''}
+        class={link ? 'algoRef' : ''}
         href={`#${refId}`}
-    >{@html probTextEl?.innerHTML}</svelte:element>
+    >{@html algoTextEl?.innerHTML}</svelte:element>
 {:else}
     {#if link}
         <PopupToggle bind:show={showPopup} divId={retId}></PopupToggle>
         <span
-            class="probRef"
+            class="algoRef"
             id={retId}
             role=button
             tabindex="0"
@@ -70,14 +68,14 @@
                 }
             }}
             on:click={popupOpenClose}
-        >{@html probTextEl?.innerHTML}</span>
+        >{@html algoTextEl?.innerHTML}</span>
     {:else}
-        {@html probTextEl?.innerHTML}
+        {@html algoTextEl?.innerHTML}
     {/if}
 {/if}
 
 <style>
-    .probRef {
+    .algoRef {
         color: green;
         cursor: pointer;
     }

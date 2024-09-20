@@ -1,5 +1,5 @@
 <script>
-    import InlineMath from "$lib/Math.svelte";
+    import InlineMath from "$lib/MathInline.svelte";
     import Line from "./Line.svelte";
     import PlotText from "./PlotText.svelte";
 

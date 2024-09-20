@@ -30,10 +30,10 @@ const mathSafe = (content) => {
 	return converted.join('');
 }
 
-const lineBreaks = (code) => {
-	const spl = code.split('</script>');
+const lineBreaks = (content) => {
+	const insertStr = '<div class=spacer></div>';
+	const spl = content.split('</script>');
 	const script = spl[0] + '</script>';
-	const insertStr = '<div class=spacer></div>'
 	let postScript = spl.slice(1).join('</script>').replace(/^\s*[\r\n]/gm, insertStr);
 	while (postScript.trim().slice(0, insertStr.length) === insertStr) {
 		postScript = postScript.trim().slice(insertStr.length);
@@ -44,6 +44,24 @@ const lineBreaks = (code) => {
 	return script + postScript
 }
 
+const mathShorthand = (content) => {
+	const spl = content.split('</script>');
+	let postScript = spl.slice(1).join('</script>');
+	let replaced = false;
+	let parity = 0;
+	while (postScript.includes('$$')) {
+		postScript = postScript.replace('$$', parity === 0 ? '<MathInline>' : '</MathInline>');
+		parity = (parity + 1) % 2;
+		replaced = true;
+	}
+	let scriptEnd = '</script>';
+	if (replaced && !spl[0].includes(`import MathInline from "$lib/MathInline.svelte"`)) {
+		scriptEnd = `import MathInline from "$lib/MathInline.svelte";` + scriptEnd;
+	}
+	const script = (spl[0] + scriptEnd);
+	return script + postScript;
+}
+
 function customPP() {
 	return {
 		name: 'mathSafe',
@@ -51,7 +69,7 @@ function customPP() {
 			if (filename.search('src/sections') < 0) {
 				return
 			}
-			let code = mathSafe(content);
+			let code = mathSafe(mathShorthand(content));
 			code = lineBreaks(code);
 			return { code: code }
 		}
