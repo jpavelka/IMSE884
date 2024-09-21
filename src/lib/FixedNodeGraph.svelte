@@ -6,14 +6,15 @@
     export let nodes: Array<{[key: string]: any}>;
     export let edges: Array<string | {[key: string]: any}>;
     export let boldEdges: Array<string> = [];
+    export let extraEdgeAttrs: {[key: string]: any} = {};
     export let directed = false;
     export let width = 500;
     export let height = 350;
-    export let options = {};
-    
+    export let nodeSize = 60;
+    export let options: {[key: string]: any} = {};
+
     $: calcWidth = Math.min(width, Math.max((0.8 * $windowInfo.innerWidth || 999999), 250));
     $: calcHeight = calcWidth * (height / width);
-    const nodeSize = 30;
     $: widthAvailable = calcWidth - nodeSize;
     $: heightAvailable = calcHeight - nodeSize;
 
@@ -38,10 +39,21 @@
       }
       return n
     });
-    options = {
-      interaction: {
+    if (!options.interaction) {
+      options.interaction = {
         zoomView: false,
         dragView: false
+      }
+    }
+    if (!options.nodes) {
+      options.nodes = {
+        margin: 1,
+        shape: 'circle'
+      }
+    }
+    if (!options.physics) {
+      options.physics = {
+        enabled: false
       }
     }
     let nodeLabelToId: {[key: string]: number} = {};
@@ -49,9 +61,10 @@
       nodeLabelToId[n.label] = n.id;
     }
     $: convertedEdges = edges.map(e => {
-      const extraArgs: {[key: string]: any} = {};
+      let extraArgs: {[key: string]: any} = {};
       if (typeof e === 'string') {
-        if (boldEdges.includes(e)) {
+        extraArgs = extraEdgeAttrs[e] || {};
+        if (boldEdges.includes(e.split('-').slice(0, 2).join('-'))) {
           extraArgs.width = 5;
         }
         const spl = e.split('-');
@@ -70,15 +83,28 @@
         font: {size: 30, background: 'white'}
       }
     }
-
+    $: finalConvertedNodes = convertedNodes.map(x => {
+      if (!!x.extraLabel) {
+        x.label += `\n${x.extraLabel}`
+      }
+      return x;
+    });
     let container: HTMLElement;
+    let network: Network;
     onMount(() => {
       const data = {
-        nodes: convertedNodes,
+        nodes: finalConvertedNodes,
         edges: convertedEdges,
       };
-      new Network(container, data, options);
+      network = new Network(container, data, options);
     });
+    $: if (!!network) {
+      network.setData({
+        nodes: finalConvertedNodes,
+        edges: convertedEdges
+      })
+      network.redraw();
+    }
 </script>
 
 <div

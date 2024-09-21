@@ -1,7 +1,7 @@
 import { sections } from "./stores";
 import { get, type Writable } from "svelte/store";
 
-const refNumbering = (refStore: Writable<any>, refId: string, refPre: string) => {
+export const refNumbering = (refStore: Writable<any>, refId: string, refPre: string) => {
     refId = refPre + ":" + refId;
     const sec = `${get(sections).hierarchy.length}`;
     let secNum = sec;
@@ -26,4 +26,22 @@ const refNumbering = (refStore: Writable<any>, refId: string, refPre: string) =>
     return refId;
 }
 
-export { refNumbering }
+export const exampleShortestPathNodes = [
+    {id: 1, label: 's', x: 0, y: 0.5},
+    {id: 2, label: 'a', x: 0.3, y: 1},
+    {id: 3, label: 'b', x: 0.3, y: 0},
+    {id: 4, label: 'c', x: 0.7, y: 1},
+    {id: 5, label: 'd', x: 0.7, y: 0},
+    {id: 6, label: 't', x: 1, y: 0.5},
+]
+
+export const exampleShortestPathEdges = [
+    's-a-3',
+    's-b-2',
+    'a-c-5',
+    'a-d-2',
+    'b-d-4',
+    'd-c-2',
+    'c-t-2',
+    'd-t-6'
+]

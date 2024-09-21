@@ -1,8 +1,12 @@
 <script>
+    import { exampleShortestPathEdges, exampleShortestPathNodes } from "$lib";
     import Algorithm from "$lib/Algorithm.svelte";
     import AlgorithmRef from "$lib/AlgorithmRef.svelte";
     import AlgoText from "$lib/AlgoText.svelte";
+    import InteractiveDijkstra from "$lib/InteractiveDijkstra.svelte";
+    import Figure from "$lib/Figure.svelte";
     import FigureRef from "$lib/FigureRef.svelte";
+    import FixedNodeGraph from "$lib/FixedNodeGraph.svelte";
     import Footnote from "$lib/Footnote.svelte";
     import Heading from "$lib/Heading.svelte";
     import ProblemRef from "$lib/ProblemRef.svelte";
@@ -56,7 +60,7 @@ For a formal specification of the algorithm, we'll need to define a few more obj
     <AlgoText type=while>
         $$|U|>0$$
         <span slot='child'>
-            <AlgoText>Set $$u=\argmin\{d(v):v\in U\}$$<Footnote>
+            <AlgoText>Set $$u\leftarrow\argmin\{d(v):v\in U\}$$<Footnote>
                 Choose the vertex with the shortest currently-best-known path from $$s$$
             </Footnote></AlgoText>
             <AlgoText type=for>
@@ -107,6 +111,14 @@ For a formal specification of the algorithm, we'll need to define a few more obj
 </Algorithm>
 
 Let's work a full example of <AlgorithmRef refId=dijkstra />
+
+<Figure refId=dijkstraExample>
+    <InteractiveDijkstra
+        nodes={exampleShortestPathNodes}
+        edges={exampleShortestPathEdges}
+    />
+    <span slot=caption>Stepping through an example of <AlgorithmRef refId=dijkstra />. Under the label for each vertex $$v\in V$$ is the pair $$(d(v),p(v))$$, i.e. the distance of the best-known $$s-v$$ path and the predecessor to $$v$$ on that path.</span>
+</Figure>
 
 <!-- Do we need to specify that G is connected? -->
 <!--

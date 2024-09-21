@@ -11,6 +11,7 @@
     import MathDisp from "$lib/MathDisp.svelte";
     import ChooseObjVals from "$lib/drawing/ChooseObjVals.svelte";
     import CitationRef from "$lib/CitationRef.svelte";
+    import { exampleShortestPathEdges, exampleShortestPathNodes } from "$lib";
 </script>
 
 <Heading level=2 refId=exampleCOPs>
@@ -36,24 +37,8 @@ Pretty simple setup. We have some directed graph, maybe like the one below in <F
 
 <Figure refId=shortestPathFirstExample>
     <FixedNodeGraph
-        nodes={[
-            {id: 1, label: 's', x: 0, y: 0.5},
-            {id: 2, label: 'a', x: 0.3, y: 1},
-            {id: 3, label: 'b', x: 0.3, y: 0},
-            {id: 4, label: 'c', x: 0.7, y: 1},
-            {id: 5, label: 'd', x: 0.7, y: 0},
-            {id: 6, label: 't', x: 1, y: 0.5},
-        ]}
-        edges={[
-            's-a-3',
-            's-b-2',
-            'a-c-5',
-            'a-d-2',
-            'b-d-4',
-            'd-c-2',
-            'c-t-2',
-            'd-t-6'
-        ]}
+        nodes={exampleShortestPathNodes}
+        edges={exampleShortestPathEdges}
         directed={true}
     />
     <span slot=caption>An example shortest path problem.</span>
