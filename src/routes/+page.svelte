@@ -204,6 +204,32 @@
         content: "";
         margin-top: 2rem;
     }
+    :global(button) {
+        background-color: lightgray;
+        border: 1pt solid black;
+        padding: 8px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: calc(0.8 * var(--standardFontSize));
+        margin: 5px;
+        cursor: pointer;
+        border-radius: 4pt;
+    }
+    :global(button:disabled) {
+        opacity: 0.6;
+    }
+    :global(button:hover) {
+        background-color: white;
+    }
+    :global(button:disabled:hover) {
+        background-color: lightgray;
+    }
+    :global(button:active) {
+        transform: translateY(1px);
+        background-color: lightgray;
+        opacity: 0.8;
+    }
     @keyframes -global-line-pulse {
         0% {
             stroke-width: 2;

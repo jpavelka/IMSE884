@@ -4,7 +4,9 @@
 
     export let nodes: Array<{[key: string]: any}>;
     export let edges: Array<string>;
-    export let nodeSize = 70;
+    export let nodeSize: undefined | number;
+    export let width: undefined | number;
+    export let height: undefined | number;
 
     let d: {[key: string]: number} = {};
     let dHist: Array<{[key: string]: number}> = [];
@@ -28,7 +30,8 @@
         edgeObj[source][target] = parseInt(dist);
     }
     $: vEdges = Object.keys(edgeObj[v || ''] || {}).map(u => `${v}-${u}`);
-    let extraEdgeAttrs: {[key: string]: any} = {}
+    $: shorterPaths = vEdges.map(e => e.split('-')[1]).filter(u => p[u] === v);
+    let extraEdgeAttrs: {[key: string]: any} = {};
     $: for (const e of edges) {
         let extra: {[key: string]: any} = {}
         let color = U.includes(e.split('-')[0]) ? '' : '#bc5';
@@ -54,6 +57,9 @@
             extraAttrs.color = {
                 background: n.label === v ? 'orange' : 'yellow',
             };
+        }
+        if (shorterPaths.includes(n.label)) {
+            extraAttrs.font = {color: '#d70'};
         }
         return {...n, ...extraAttrs}
     })
@@ -83,6 +89,17 @@
             }
         }
     }
+    let bestPath: Array<string> = [];
+    $: if (U.length === 0) {
+        bestPath = [];
+        let nextV = 't';
+        while (!!p[nextV]) {
+            bestPath = [nextV].concat(bestPath);
+            extraEdgeAttrs[`${p[nextV]}-${nextV}-${edgeObj[p[nextV]][nextV]}`].width = 5;
+            nextV = p[nextV];
+        }
+        bestPath = [nextV].concat(bestPath);
+    }
 </script>
 
 <FixedNodeGraph
@@ -91,9 +108,10 @@
     directed={true}
     nodeSize={nodeSize}
     extraEdgeAttrs={extraEdgeAttrs}
+    width={width}
+    height={height}
 />
-<div class=spacer></div>
-<div>
+<div class=buttonDiv>
     <button
         disabled={U.length === nodes.length}
         on:click={lastClick}
@@ -103,6 +121,28 @@
         on:click={nextClick}
     >Next</button>
 </div>
-{#if U.length === nodes.length}
-    Initialize: Set <MathInline>U=</MathInline>&nbsp;{'{' + U + '}'}. For each <MathInline>v\in V</MathInline>, <MathInline>p(v)</MathInline> is undefined and <MathInline>d(v)=\infty</MathInline> (except <MathInline>d(s)=0</MathInline>).
-{/if}
+{#key v}{#if U.length === nodes.length}
+    Initialize: Set <MathInline>U={'\\{'}{U}{'\\}'}</MathInline>. For each <MathInline>v\in V</MathInline>, <MathInline>p(v)</MathInline> is undefined and <MathInline>d(v)=\infty</MathInline> (except <MathInline>d(s)=0</MathInline>).
+{:else}
+    <div>
+        Minimum <MathInline>d(\cdot)</MathInline> value at vertex <MathInline>{v}</MathInline>.
+    </div>
+    <div><MathInline>U={'\\{'}{U}{'\\}'}</MathInline></div>
+    {#if shorterPaths.length === 0}
+        No shorter paths found.
+    {:else}
+        <div>Shorter path{shorterPaths.length === 1 ? '' : 's'} found to <MathInline>{shorterPaths}</MathInline> (with <MathInline>{v}</MathInline> as new predecessor).</div>
+    {/if}
+    {#if U.length === 0}
+        <div>Best <MathInline>s-t</MathInline> path: <MathInline>{bestPath.join(' \\rightarrow ')}</MathInline> (distance {d['t']})</div>
+    {/if}
+{/if}{/key}
+
+<div class=spacer/>
+
+<style>
+    .buttonDiv {
+        display: flex;
+        justify-content: center;
+    }
+</style>

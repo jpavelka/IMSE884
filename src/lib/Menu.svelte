@@ -49,12 +49,11 @@
             Font size
             <div>
                 <button
-                    class=fontSizeButton
+                    style=margin-right:0
                     disabled={$scaleFactor === 0.5}
                     on:click={() => scaleFactor.update(f => f - 0.125)}
                 >-</button>
                 <button
-                    class=fontSizeButton
                     disabled={$scaleFactor === 1.5}
                     on:click={() => scaleFactor.update(f => f + 0.125)}
                 >+</button>
@@ -103,12 +102,6 @@
         font-size: 2.5rem;
         font-family: 'Courier New', Courier, monospace;
         transform: translateY(calc(0.2 * var(--standardFontSize)));
-    }
-    .fontSizeButton {
-        width: 3rem;
-        height: 2rem;
-        font-size: 1.4rem;
-        border-radius: 0.5rem;
     }
     .lookupBox {
         font-size: calc(0.8 * var(--standardFontSize));

@@ -18,7 +18,7 @@
 </Heading>
 
 <!-- After the previous section, you hopefully have a good feel for the types of problems we're discussing. By now, you probably want to know how to solve them. Countless research papers have been written discussing each of the problems we've defined, and numerous algorithms for solving each of them exist. In this section, we'll take a look at a few special-purpose algorithms for solving some of the problems we've already defined. Get used to algorithms, prove correctness, all that good stuff.
-What is an algorithm, anyway?
+What is an algorithm, anyway? Exact, approximate. Contrast with heuristic.
 -->
 <Heading level=3 refId=dijkstraShortestPath>
     <span slot=context>Examining a well-known algorithm for the <ProblemRef refId=shortestPath link={false} /></span>
@@ -116,13 +116,15 @@ Let's work a full example of <AlgorithmRef refId=dijkstra />
     <InteractiveDijkstra
         nodes={exampleShortestPathNodes}
         edges={exampleShortestPathEdges}
+        width={600}
     />
     <span slot=caption>Stepping through an example of <AlgorithmRef refId=dijkstra />. Under the label for each vertex $$v\in V$$ is the pair $$(d(v),p(v))$$, i.e. the distance of the best-known $$s-v$$ path and the predecessor to $$v$$ on that path.</span>
 </Figure>
 
 <!-- Do we need to specify that G is connected? -->
 <!--
-knapsack dynamic programming
-tsp approximation algorithm?
+knapsack (to demonstrate dynamic programming)
+min spanning tree (Prim's (maybe Kruskals?) to demonstrate greedy, and lead into tsp 2-approx)(also need to define min spanning tree)
+tsp 2-approx?
 as much fun as this is, can we take a more unified approach?
 -->

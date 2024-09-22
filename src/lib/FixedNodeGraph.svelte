@@ -21,8 +21,8 @@
     $: convertedNodes = nodes.map(n => {
       n = JSON.parse(JSON.stringify(n))
       n.fixed = true;
-      n.x = n.x * widthAvailable;
-      n.y = -n.y * heightAvailable;
+      n.x = n.x * widthAvailable + nodeSize / 2;
+      n.y = heightAvailable - n.y * heightAvailable + nodeSize / 2;
       n.widthConstraint = {
         minimum: nodeSize,
         maximum: nodeSize
@@ -31,9 +31,9 @@
         minimum: nodeSize,
         maximum: nodeSize
       }
-      n.font = {
+      n.font = {...{
         size: 20
-      }
+      }, ...(n.font || {})}
       if (!n.label) {
         n.label = `${n.id}`;
       }
@@ -96,7 +96,14 @@
         nodes: finalConvertedNodes,
         edges: convertedEdges,
       };
-      network = new Network(container, data, options);
+      network = new Network(container, {}, options);
+      setTimeout(() => {
+        network.setData({
+          nodes: finalConvertedNodes,
+          edges: convertedEdges
+        })
+        network.redraw();
+      }, 1)
     });
     $: if (!!network) {
       network.setData({
