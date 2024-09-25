@@ -30,10 +30,18 @@ We'll start with a basic one:
 
 <Problem refId=shortestPath>
     <span slot=name>Shortest Path Problem</span>
-    Given a digraph $$D=(V,A)$$, two nodes $$s,t\in V$$, and non-negative arc distances $$c_{ij}$$ for each $$i,j\in A$$, find a minimum-cost path from $$s$$ to $$t$$.
+    <span slot=instance>
+        Digraph $$G=(V,E)$$, two nodes $$s,t\in V$$, non-negative edge costs $$c_{ij}\in\R_+$$ for each $$(i,j)\in E$$.
+    </span>
+    <span slot=problem>
+        Find a minimum-cost path in $$G$$ from $$s$$ to $$t$$, i.e.
+        <MathDisp>
+            \min_{P\subseteq E}\left\{\sum_{(i,j)\in P}c_{ij}:P\text{ is a path from }s\text{ to }t\right\}
+        </MathDisp>
+    </span>
 </Problem>
 
-Pretty simple setup. We have some directed graph, maybe like the one below in <FigureRef refId=shortestPathFirstExample />. We want to find the lowest-cost path from node $$s$$ on the left of the graph to node $$t$$ on the right, where arc costs are written directly on each arc in the figure<Footnote>Why don't you go ahead and try to figure it out the best path by visual inspection. We'll come back and solve this example later.</Footnote>.
+Pretty simple setup. We have some directed graph, maybe like the one below in <FigureRef refId=shortestPathFirstExample />. We want to find the lowest-cost path from node $$s$$ on the left of the graph to node $$t$$ on the right, where edge costs are written directly on each edge in the figure<Footnote>Why don't you go ahead and try to figure it out the best path by visual inspection. We'll come back and solve this example later.</Footnote>.
 
 <Figure refId=shortestPathFirstExample>
     <FixedNodeGraph
@@ -44,7 +52,7 @@ Pretty simple setup. We have some directed graph, maybe like the one below in <F
     <span slot=caption>An example shortest path problem.</span>
 </Figure>
 
-How does this fit into our definition of a <ProblemRef refId=combOpt/>? Well, our finite set $$N$$ is the set of arcs in the network, so
+How does this fit into our definition of a <ProblemRef refId=combOpt/>? Well, our finite set $$N$$ is the set of edges in the network, so
 <MathDisp>
     \begin{align*}
     N = \{&(s,a), (s,b), (a,d), (a,c),\\
@@ -52,7 +60,7 @@ How does this fit into our definition of a <ProblemRef refId=combOpt/>? Well, ou
     \end{align*}
 </MathDisp>
 
-The weights $$c_j$$ for each $$j\in N$$ are the arc distances displayed in the diagram, so $$c_{sa}=3$$, $$c_{sb}=4$$, and so on. And the set $$\mathcal{F}$$ of feasible subsets of $$N$$ are sets of arcs that create a valid path from $$s$$ to $$t$$. So for example we have
+The weights $$c_j$$ for each $$j\in N$$ are the edge distances displayed in the diagram, so $$c_{sa}=3$$, $$c_{sb}=4$$, and so on. And the set $$\mathcal{F}$$ of feasible subsets of $$N$$ are sets of edges that create a valid path from $$s$$ to $$t$$. So for example we have
 <MathDisp>
     \begin{align*}
     \{(s,b),(b,d),(d,t)\}&\in\mathcal{F},\\
@@ -69,7 +77,7 @@ since that path doesn't end at $$t$$. So we can see that the <ProblemRef refId=s
 </MathDisp>
 with $$N,c$$, and $$\mathcal{F}$$ as we've just defined them.
 
-While it may not be obvious from the graph theory framing, the <ProblemRef refId=shortestPath/> has <a href=https://en.wikipedia.org/wiki/Shortest_path_problem#Applications target=_blank>several applications</a>. For example, if you were to model a road network as a graph with arc costs representing travel times or distances, a shortest path problem can be used by a navigation app to decide how to route you from one location to another.
+While it may not be obvious from the graph theory framing, the <ProblemRef refId=shortestPath/> has <a href=https://en.wikipedia.org/wiki/Shortest_path_problem#Applications target=_blank>several applications</a>. For example, if you were to model a road network as a graph with edge costs representing travel times or distances, a shortest path problem can be used by a navigation app to decide how to route you from one location to another.
 
 <Heading level=3 refId=knapsackDef>
     Knapsack
@@ -78,7 +86,13 @@ While it may not be obvious from the graph theory framing, the <ProblemRef refId
 Here's another inuitive problem that fits the <ProblemRef refId=combOpt/> framework:
 <Problem refId=knapsack>
     <span slot=name>Knapsack Problem</span>
-    You are given a set $$J$$ of $$n$$ objects, a weight $$w_j$$ and a value $$v_j$$ for each $$j\in J$$, and an overall weight limit $$b$$. Select a set of objects whose combined weight is below the weight limit, such that the sum of their values is maximized.
+    <span slot=instance>A set $$J$$, numbers $$w_j\in\R_+$$ and $$v_j\in\R_+$$ for each $$j\in J$$, positive number $$b\in\R_+$$.</span>
+    <span slot=problem>
+        Find a subset $$S\subseteq J$$ satisfying $$\sum_{j\in S}w_j\leq b$$ that maximizes the total value $$\sum_{j\in S}v_j$$.
+    </span>
+    <span slot=plainEnglish>
+        You are going on a camping trip. There is some set of objects $$J$$ you are considering taking with you. Each object $$j\in J$$ weighs some amount $$w_j$$, and has a value to you of $$v_j$$ if you bring it on the trip. You are only constrained by the weight limit $$b$$ of your backpack. How can you maximize the value of items brought on the trip?
+    </span>
 </Problem>
 The fit here is pretty natural. The set $$N$$ from the <ProblemRef refId=combOpt/> definition is simply the set of objects $$J$$. The weights $$c_j$$ for the <ProblemRef refId=combOpt/> are the values $$v_j$$, although since <ProblemRef refId=knapsack/> is a maximization problem and <ProblemRef refId=combOpt/> is defined as minimization, we have $$c_j=-v_j$$. The feasible subsets $$\mathcal{F}$$ are simply the subsets of objects which together do not exceed the weight limit, i.e.
 <MathDisp>
@@ -95,25 +109,45 @@ Now that we've worked through it on a few examples, we'll skip formally specifyi
 
 <Problem refId=assignment>
     <span slot=name>Assignment Problem</span>
-    There are $$n$$ people available to carry out $$n$$ jobs. Each person is assigned to carry out exactly one job. Some individuals are better suited to particular jobs than others, so there is an estimated cost $$c_{ij}$$ if person $$i$$ is assigned to job $$j$$.
+    <span slot=instance>A complete bipartite graph $$G=(V_1,V_2,E)$$, edge costs $$c_{ij}\in\R$$ for each $$i\in V_1$$, $$j\in V_2$$.</span>
+    <span slot=problem>Find a minimum-cost perfect matching in $$G$$.</span>
+    <span slot=plainEnglish>
+        There are $$n$$ people available to carry out $$n$$ jobs. Each person is assigned to carry out exactly one job. Some individuals are better suited to particular jobs than others, so there is an estimated cost $$c_{ij}$$ if person $$i$$ is assigned to job $$j$$. How can you assign people to jobs such that the sum of the assignment costs is minimized?
+    </span>
 </Problem>
 
-An example where this might come up: Suppose a ride-hailing app has recently received four ride requests, and there are currently five drivers in the area that can pick them up. The app may decide to assign drivers to riders (with the fifth driver "assigned" to do nothing) by pairing them up so that the sum of distances the drivers travel to pick up their riders is minimized.
+An example where this might come up: Suppose a ride-hailing app has recently received four ride requests, and there are currently five drivers in the area that can pick them up. The app may decide to assign drivers to riders (with the fifth driver "assigned" to do nothing) by pairing them up in a way that minimizes the sum of distances the drivers travel to pick up their riders.
 
-Here's another common problem. It's a little harder to parse initially, but example that follows should help you work through it.
+Let's look at another graph-centric problem:
+<Problem refId=tsp>
+    <span slot=name>Minimum Spanning Tree Problem</span>
+    <span slot=abbrev>MST</span>
+    <span slot=instance>A graph $$G=(V,E)$$, costs $$c_{ij}\in\R$$ for each edge $$(i,j)\in E$$.</span>
+    <span slot=problem>Find a minimum-cost spanning tree in $$G$$.</span>
+</Problem>
+An example application here: A utility company is trying to build connections to all the houses in some neighborhood. They need <em>some</em> physical connection from their service to each house, i.e. they need a spanning tree connecting all of the houses.
+
+Here's another common problem. Admittedly, the mathematical definition is a little harder to parse initially. Hopefully the "plain English" example helps you work through it.
 <Problem refId=setCover>
     <span slot=name>Set Covering Problem</span>
-    Let $$M$$ and $$N$$ be two sets. For each $$j\in N$$, there is a set $$S_j\subseteq M$$ and a cost $$c_j\in\R$$. Let a <em>cover</em> be a set $$C\subseteq N$$ such each element of $$M$$ exists in at least one $$S_j,j\in C$$. The problem is to find minimum-cost cover, i.e.
-    <MathDisp>
-        \min_{C\subseteq N}\left\{\sum_{j\in C}c_j: \bigcup_{j\in C}S_j=M\right\}
-    </MathDisp>
+    <span slot=instance>Two sets $$M$$ and $$N$$, subsets $$S_j\subseteq M$$ for each $$j\in N$$, costs $$c_j\in\R$$ for each $$j\in N$$.</span>
+    <span slot=problem>Find a minimum-cost cover of $$M$$, i.e.
+        <MathDisp>\min_{C\subseteq N}\left\{\sum_{j\in C}c_j: \bigcup_{j\in C}S_j=M\right\}</MathDisp>
+    </span>
+    <span slot=plainEnglish>
+        A telecommunications company is deciding where to build cell towers in a rural area. The set $$M$$ is the set of cities that require service, and the set $$N$$ is a set of potential tower locations. For each location $$j\in N$$, there is a set of cities $$S_j\subseteq M$$ that can be served by a tower in that location. There is also a cost $$c_j$$ associated with building in that location. What is the lowest-cost collection of towers the company can build that brings service to all the cities?
+    </span>
 </Problem>
-An example application may be a telecommunications company deciding where to build cell towers in a rural area. The set $$M$$ is the set of cities that require service, and the set $$N$$ is a set of potential tower locations. For each location $$j\in N$$, there is a set of cities $$S_j\subseteq N$$ that can be served by a tower in that location. There is also a cost associated with building in that location, $$c_j$$. In this case, solving the <ProblemRef refId=setCover/> corresponds to finding the minimum-cost collection of towers to build, subject to each city getting service.
+More examples (airline flight planning)
 
 We'll wrap up this section with perhaps the most famous <ProblemRef refId=combOpt/> of all. The description here is lifted verbatim from <CitationRef refId=wolsey2020/>.
 <Problem refId=tsp>
     <span slot=name>Traveling Salesman Problem</span>
     <span slot=abbrev>TSP</span>
-    A salesman must visit each of $$n$$ cities exactly once and then return to his starting point. The time taken to travel from city $$i$$ to city $$j$$ is $$c_{ij}$$. Find the order in which he should make his tour so as to finish as quickly as possible.
+    <span slot=instance>A complete graph $$G=(V,E)$$, costs $$c_{ij}\in\R_+$$ for each edge $$(i,j)\in E$$.</span>
+    <span slot=problem>Find a minimum-distance tour in $$G$$.</span>
+    <span slot=plainEnglish>
+        A salesman must visit each of $$n$$ cities exactly once and then return to his starting point. The time taken to travel from city $$i$$ to city $$j$$ is $$c_{ij}$$. Find the order in which he should make his tour so as to finish as quickly as possible.
+    </span>
 </Problem>
 This intuitive problem, with obvious applications to e.g. routing delivery drivers, has a long and storied history in the world of optimization. We'll revisit it (as well as all the problems we've discussed so far) several times this course.

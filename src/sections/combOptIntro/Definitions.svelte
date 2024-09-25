@@ -38,7 +38,7 @@ Meanwhile, the <Key>definition of "combinatorial"</Key> (also from <a href=https
 
 Most useful for us is definition number 2, "of or relating to the enumeration of the number of ways of doing some specific task or of arranging items in a specific configuration." We will see that <Key>"combinatorial" describes the set of feasible solutions</Key> in the problems we are about to study.
 
-Time to bring it all together. The <a href=https://en.wikipedia.org/wiki/Combinatorial_optimization>Wikipedia page</a> on <Definition refId=combinatorialOptimization>
+Time to bring it all together. The <a href=https://en.wikipedia.org/wiki/Combinatorial_optimization>Wikipedia page</a> on <Definition>
     <span slot=definition>
         A subfield of mathematical optimization that consists of finding an optimal object from a finite set of objects, where the set of feasible solutions is discrete or can be reduced to a discrete set.
     </span>
@@ -55,8 +55,13 @@ For this class, we will adopt the formalism of <CitationRef refId=wolsey2020/> a
 <Problem refId=combOpt>
     <span slot=name>Combinatorial Optimization Problem</span>
     <span slot=abbrev>COP</span>
-    Given a finite set $$N=\{1,\dots,n\}$$, weights $$c_j$$ for each $$j\in N$$, and a set $$\mathcal{F}$$ of feasible subsets of $$N$$, find a minimum weight feasible subset, i.e.
-    <MathDisp>
-        \min_{S\subseteq N}\left\{\sum_{j\in S}c_j:S\in\mathcal{F}\right\}
-    </MathDisp>
+    <span slot=instance>
+        A finite set $$N=\{1,\dots,n\}$$, weights $$c_j\in\R$$ for each $$j\in N$$, a set $$\mathcal{F}$$ of feasible subsets of $$N$$.
+    </span>
+    <span slot=problem>
+        Find a minimum weight feasible subset, i.e.
+        <MathDisp>
+            \min_{S\subseteq N}\left\{\sum_{j\in S}c_j:S\in\mathcal{F}\right\}
+        </MathDisp>
+    </span>
 </Problem>

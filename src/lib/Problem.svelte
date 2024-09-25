@@ -35,9 +35,20 @@
                 >
             {/if}
         </div>
-        <div>
-            <slot />
+        <div class=section>
+            <span class=sectionHeader>Instance:</span>
+            <slot name=instance/>
         </div>
+        <div class=section>
+            <span class=sectionHeader>Problem:</span>
+            <slot name=problem/>
+        </div>
+        {#if $$slots.plainEnglish}
+            <div class=section>
+                <span class=sectionHeader>In English:</span>
+                <slot name=plainEnglish/>
+            </div>
+        {/if}
     </div>
 </div>
 
@@ -53,5 +64,11 @@
         margin-bottom: 0.5rem;
         font-size: calc(1.1 * var(--standardFontSize));
         text-decoration: underline;
+    }
+    .sectionHeader {
+        font-weight: bold;
+    }
+    .section {
+        margin-top: calc(0.7 * var(--standardFontSize));
     }
 </style>

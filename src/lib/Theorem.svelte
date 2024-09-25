@@ -16,7 +16,7 @@
     const thmDivId = refId;
     const proofDivId = "proofEl:" + refId;
     $: returnId = $theorems.returnIds[refId];
-    $: showProof = hideProof;
+    $: showProof = !hideProof;
 </script>
 
 <div
@@ -50,7 +50,7 @@
     >
         <div class="proofText">
             Proof:
-            {#if !hideProof}
+            {#if hideProof}
                 <button on:click={() => showProof = !showProof}>{showProof ? 'Hide' : 'Show'}</button>
             {/if}
         </div>
@@ -70,12 +70,11 @@
         margin-top: 1rem;
     }
     .thmName {
-        font-size: 1.3rem;
+        font-size: calc(1.05 * var(--standardFontSize));
         font-weight: bold;
         font-style: normal;
     }
     .underName {
-        margin-top: -1rem;
         padding-left: 1rem;
     }
     .proof {
@@ -86,7 +85,6 @@
     }
     .proofText {
         font-weight: bold;
-        margin-bottom: -1rem;
     }
     .proofContainer {
         padding-left: 0.5rem;

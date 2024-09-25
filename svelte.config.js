@@ -33,6 +33,9 @@ const mathSafe = (content) => {
 const lineBreaks = (content) => {
 	const insertStr = '<div class=spacer></div>';
 	const spl = content.split('</script>');
+	if (spl.length === 1) {
+		return content;
+	}
 	const script = spl[0] + '</script>';
 	let postScript = spl.slice(1).join('</script>').replace(/^\s*[\r\n]/gm, insertStr);
 	while (postScript.trim().slice(0, insertStr.length) === insertStr) {
@@ -46,6 +49,9 @@ const lineBreaks = (content) => {
 
 const mathShorthand = (content) => {
 	const spl = content.split('</script>');
+	if (spl.length === 1) {
+		return content;
+	}
 	let postScript = spl.slice(1).join('</script>');
 	let replaced = false;
 	let parity = 0;

@@ -4,9 +4,9 @@
 
     export let nodes: Array<{[key: string]: any}>;
     export let edges: Array<string>;
-    export let nodeSize: undefined | number;
-    export let width: undefined | number;
-    export let height: undefined | number;
+    export let nodeSize: undefined | number = undefined;
+    export let width: undefined | number = undefined;
+    export let height: undefined | number = undefined;
 
     let d: {[key: string]: number} = {};
     let dHist: Array<{[key: string]: number}> = [];
@@ -78,6 +78,10 @@
         pHist.push({...p});
         UHist.push([...U]);
         vHist.push(v);
+        if (U.length === 0) {
+            v = undefined;
+            return
+        }
         v = U.sort((a, b) => {
             return d[a] - d[b];
         })[0];
@@ -90,7 +94,7 @@
         }
     }
     let bestPath: Array<string> = [];
-    $: if (U.length === 0) {
+    $: if (U.length === 0 && !v) {
         bestPath = [];
         let nextV = 't';
         while (!!p[nextV]) {
@@ -117,25 +121,38 @@
         on:click={lastClick}
     >Last</button>
     <button
-        disabled={U.length === 0}
+        disabled={U.length === 0 && !v}
         on:click={nextClick}
     >Next</button>
 </div>
 {#key v}{#if U.length === nodes.length}
     Initialize: Set <MathInline>U={'\\{'}{U}{'\\}'}</MathInline>. For each <MathInline>v\in V</MathInline>, <MathInline>p(v)</MathInline> is undefined and <MathInline>d(v)=\infty</MathInline> (except <MathInline>d(s)=0</MathInline>).
-{:else}
+{:else if !!v}
     <div>
         Minimum <MathInline>d(\cdot)</MathInline> value at vertex <MathInline>{v}</MathInline>.
     </div>
-    <div><MathInline>U={'\\{'}{U}{'\\}'}</MathInline></div>
+    <div>
+        {#if U.length === 0}
+            <MathInline>U=\emptyset</MathInline>
+        {:else}
+            <MathInline>U={'\\{'}{U}{'\\}'}</MathInline>
+        {/if}
+    </div>
     {#if shorterPaths.length === 0}
         No shorter paths found.
     {:else}
         <div>Shorter path{shorterPaths.length === 1 ? '' : 's'} found to <MathInline>{shorterPaths}</MathInline> (with <MathInline>{v}</MathInline> as new predecessor).</div>
     {/if}
-    {#if U.length === 0}
-        <div>Best <MathInline>s-t</MathInline> path: <MathInline>{bestPath.join(' \\rightarrow ')}</MathInline> (distance {d['t']})</div>
-    {/if}
+{:else}
+    <div><MathInline>U</MathInline> is empty, main loop complete. Shortest path has distance <MathInline>d(t)={d['t']}</MathInline>. Constructing path:</div>
+    <ul style=margin:0>
+        {#each bestPath.toReversed() as u}
+            {#if u !== 's'}
+                <li>Predecessor of <MathInline>{u}</MathInline> is <MathInline>{p[u]}</MathInline></li>
+            {/if}
+        {/each}
+    </ul>
+    <div>Best <MathInline>s-t</MathInline> path: <MathInline>{bestPath.join(' \\rightarrow ')}</MathInline></div>
 {/if}{/key}
 
 <div class=spacer/>

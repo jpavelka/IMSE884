@@ -10,7 +10,7 @@
     $: if (plainText === '') {
         plainText = dispData?.innerText || data?.innerText || '';
         definitions.update(d => {
-            d.plainText[refId] = plainText;
+            d.plainText[refId] = plainText.trim();
             return d
         })
     }
@@ -30,7 +30,9 @@
 </script>
 
 <span style=display:none; bind:this={data} class=blinkingText><slot/></span>
-<span style=display:none; bind:this={dispData}><slot name=glossaryDisp/></span>
+{#if $$slots.glossaryDisp}
+    <span style=display:none; bind:this={dispData}><slot name=glossaryDisp/></span>
+{/if}
 <span id={refId} class=inText>
     <slot />{#if linkToGlossary}<a
         href=#{refId + ':glossaryEntry'}

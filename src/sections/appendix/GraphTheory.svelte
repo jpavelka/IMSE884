@@ -46,6 +46,32 @@
         '2-4', '2-6',
         '3-5', '3-7',
     ]
+    const disconnectedNodes = sampleNodes
+    const disconnectedEdges = [
+        '1-2',
+        '1-3',
+        '2-3',
+        '4-5'
+    ]
+    const spanTreeNodes = sampleNodes
+    const spanTreeEdges = sampleEdges
+    const spanTreeBoldEdges = [
+        '1-2', '2-5', '3-5', '4-5'
+    ]
+    const perfectMatchNodes = [
+        {id: 1, x: 0, y: 1},
+        {id: 2, x: 0.5, y: 1},
+        {id: 3, x: 1, y: 1},
+        {id: 4, x: 0, y: 0},
+        {id: 5, x: 0.5, y: 0},
+        {id: 6, x: 1, y: 0}
+    ]
+    const perfectMatchEdges = [
+        '1-2', '1-4', '1-5', '2-5', '2-3', '4-5', '5-6', '3-4', '3-6'
+    ]
+    const perfectMatchBoldEdges = [
+        '1-2', '5-6', '3-4'
+    ]
 </script>
 
 <Heading level=2 refId=graphTheory>
@@ -110,7 +136,7 @@ Graphs are typically represented visually as in <FigureRef refId=exampleGraph/>:
 Sometimes it makes sense for the edges to be directional. For example, we might want to represent a road network with some one-way streets. Or perhaps we'd like to model teams from a sports league that have played each other, with the edges drawn "from" the winning team "to" the losing team. Such a graph with directed edges are called <Definition refId=directedGraph>
     directed graphs
     <span slot=definition>
-        A <DefinitionRef refId=graph/> whose edges are directed, so that for two vertices $$v_1, v_2\in V$$ there is a difference between the edges $$(v_1,v_2)$$ and $$(v_2,v_1)$$.
+        A <DefinitionRef refId=graph/> whose edges are directed, so that for two vertices $$v_1, v_2\in V$$ there is a difference between the edges $$(v_1,v_2)$$ (going from $$v_1$$ to $$v_2$$) and $$(v_2,v_1)$$ (going from $$v_2$$ to $$v_1$$).
     </span>
     <span slot=glossaryDisp>directed graph</span>
 </Definition>, or <Definition refId=digraph>
@@ -132,7 +158,7 @@ Sometimes it makes sense for the edges to be directional. For example, we might 
     />
 </Figure>
 
-In the context of digraphs, it is sometimes customary to denote the graph by $$D=(V,A)$$ instead of $$G=(V,E)$$, using $$D$$ (for digraph) in place of $$G$$ for the graph and $$A$$ (for arc) in place of $$E$$ for the edge set. Indeed, this is the convention Wolsey takes in <CitationRef refId=wolsey2020/> and so we will try to follow that practice here.
+In the context of digraphs, it is sometimes customary to denote the graph by $$D=(V,A)$$ instead of $$G=(V,E)$$, using $$D$$ (for digraph) in place of $$G$$ for the graph and $$A$$ (for arc) in place of $$E$$ for the edge set. Indeed, this is the convention Wolsey takes in <CitationRef refId=wolsey2020/>, but we will stick with $$G=(V,E)$$ for both graphs and digraphs in this course.
 
 A graph $$G=(V,E)$$ is called <Definition refId=bipartite>
     bipartite
@@ -152,6 +178,18 @@ A graph $$G=(V,E)$$ is called <Definition refId=bipartite>
         width={300}
     />
 </Figure>
+
+A general graph is said to be a <Definition refId=completeGraph>
+    complete graph
+    <span slot=definition>
+        A <DefinitionRef refId=graph/> in which every pair of vertices is connected by an edge.
+    </span>
+</Definition> if every pair of vertices is connected by an edge. A complete graph with $n$ vertices is often denoted as $K_n$. A bipartite graph can also be called complete. A <Definition refId=completeBipartiteGraph>
+    complete bipartite graph
+    <span slot=definition>
+        A <DefinitionRef refId=bipartiteGraph/> in which $$(v_1,v_2)\in E$$ for any $$v_1\in V_1$$, $$v_2\in V_2$$.
+    </span>
+</Definition> is a bipartite graph with edges connected each vertex in $$V_1$$ to each vertex in $$V_2$$. If a complete bipartite graph has $$|V_1|=n$$ and $$|V_2|=m$$, then we may denote the graph by $$K_{n,m}$$.
 
 On a given graph $$G$$, a <Definition refId=walk>
     walk
@@ -223,3 +261,82 @@ A <Definition refId=circuit>
 </Figure>
 
 Note that walks, trails, paths, circuits, and cycles can all exist on directed graphs as well, with the natural restriction that the underlying walk must travel in the direction of the edges.
+
+A graph is said to be <Definition refId=connectedGraph>
+    connected
+    <span slot=definition>
+        A <DefinitionRef refId=graph/> in which there is a path between every pair of vertices.
+    </span>
+    <span slot=glossaryDisp>connected graph</span>
+</Definition> if there is a path between every pair of vertices in the graph. For example every graph we've seen so far in this section is connected. <FigureRef refId=exampleNotConnected/> shows a disconnected graph.
+
+<Figure refId=exampleNotConnected>
+    <span slot=caption>
+        Visualization of a disconnected graph.
+    </span>
+    <FixedNodeGraph 
+        nodes={disconnectedNodes}
+        edges={disconnectedEdges}
+    />
+</Figure>
+
+A graph is called <Definition refId=acyclicGraph>
+    acyclic
+    <span slot=definition>
+        A <DefinitionRef refId=graph/> in which there are no cycles.
+    </span>
+    <span slot=glossaryDisp>acyclic graph</span>
+</Definition> if it contains no cycles. Acyclic graphs are also sometimes called <Definition refId=forest>
+    forests
+    <span slot=definition>
+        See <DefinitionRef refId=acyclicGraph/>.
+    </span>
+    <span slot=glossaryDisp>forest</span>
+</Definition>. A connected forest is called a <Definition refId=tree>
+    tree
+    <span slot=definition>
+        A <DefinitionRef refId=connectedGraph>connected</DefinitionRef>, <DefinitionRef refId=acyclicGraph>acyclic</DefinitionRef> <DefinitionRef refId=graph/>.
+    </span>
+</Definition>. Given a graph $$G=(V,E)$$, as subset of $$E$$ is called a <Definition refId=spanningTree>spanning tree
+    <span slot=definition>
+        For a given <DefinitionRef refId=graph /> $$G=(V,E)$$, a subset of $$E$$ that creates a <DefinitionRef refId=tree /> over all the vertices of $$G$$.
+    </span>
+</Definition> of $$G$$ if it creates a tree over all the vertices of $$G$$. An example spanning tree is shown in <FigureRef refId=exampleSpanningTree/>.
+
+<Figure refId=exampleNotConnected>
+    <span slot=caption>
+        Visualization of a spanning tree.
+    </span>
+    <FixedNodeGraph 
+        nodes={spanTreeNodes}
+        edges={spanTreeEdges}
+        boldEdges={spanTreeBoldEdges}
+    />
+</Figure>
+
+For a given graph, a subset of the edges $$M\subseteq E$$ is called a <Definition refId=matching>
+    matching
+    <span slot=definition>
+        A subset $$M$$ of the edges of a <DefinitionRef refId=graph/> such that every vertex is included in at most one edge.
+    </span>
+</Definition> if every vertex is included in <em>at most</em> one edge. A <Definition refId=perfectMatching>
+    perfect matching
+    <span slot=definition>
+        A <DefinitionRef refId=matching/> in which every vertex is included in exactly one edge.
+    </span>
+</Definition> is a matching where every vertex is included in <em>exactly</em> one edge. An example perfect matching is given in <FigureRef refId=examplePerfectMatching/>.
+
+<Figure refId=examplePerfectMatching>
+    <span slot=caption>
+        Visualization of a perfect matching.
+    </span>
+    <FixedNodeGraph 
+        nodes={perfectMatchNodes}
+        edges={perfectMatchEdges}
+        boldEdges={perfectMatchBoldEdges}
+    />
+</Figure>
+
+
+
+
