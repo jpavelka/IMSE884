@@ -1,6 +1,7 @@
 <script>
     import Heading from "$lib/Heading.svelte";
     import GraphTheory from "./GraphTheory.svelte";
+    import Proofs from "./Proofs.svelte";
     import Symbols from "./Symbols.svelte";
 </script>
 
@@ -9,4 +10,5 @@
     <span slot=context>Extra content you may find useful for this course.</span>
 </Heading>
 <GraphTheory/>
+<Proofs/>
 <Symbols/>

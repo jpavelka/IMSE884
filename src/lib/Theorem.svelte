@@ -78,7 +78,6 @@
         padding-left: 1rem;
     }
     .proof {
-        font-size: 1.3rem;
         margin-top: 1rem;
         padding-left: 0.5rem;
         border-left: 1pt solid #ccc;

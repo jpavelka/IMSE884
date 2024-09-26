@@ -11,6 +11,9 @@
     import Heading from "$lib/Heading.svelte";
     import ProblemRef from "$lib/ProblemRef.svelte";
     import Theorem from "$lib/Theorem.svelte";
+    import Algorithms from "./Algorithms.svelte";
+    import MathDisp from "$lib/MathDisp.svelte";
+    import Appendix from "../appendix/Appendix.svelte";
 </script>
 
 <Heading level=3 refId=dijkstraShortestPath>
@@ -148,11 +151,35 @@ After you finish the above example, how about working through this longer one?
     <span slot=caption>Stepping through an example of <AlgorithmRef refId=dijkstra />. Under the label for each vertex $$v\in V$$ is the pair $$(d(v),p(v))$$, i.e. the distance of the best-known $$s-v$$ path and the predecessor to $$v$$ on that path.</span>
 </Figure>
 
-Now that you've seen the algorithm in action, there is one more thing left to do. We've said Dijkstra's is an <em>algorithm</em> for the <ProblemRef refId=shortestPath/>. According to our definition, to be an algorithm you must guarantee the output is an optimal solution. Is that the case here? How could we prove it?
+Now that you've seen the algorithm in action, there is one more thing left to do. We've said Dijkstra's is an <em>algorithm</em> for the <ProblemRef refId=shortestPath/>. According to our definition, to be an algorithm you must guarantee the output is an optimal solution to the problem at hand. To wrap up this section, we will now prove that <AlgorithmRef refId=dijkstra /> is indeed a valid algorithm.
 
 <Theorem refId=dijkstra>
     <AlgorithmRef refId=dijkstra/> solves the <ProblemRef refId=shortestPath/> by returning a shortest $$s-t$$ path.
     <span slot=proof>
-        This is a proof
+        For each vertex $$v\in V$$, let $$\text{dist}(v)$$ represent the length of a shortest $$s-v$$ path in $$G$$ (contrast this with $$d(v)$$, which is the length of the best-known path at any given time while running the algorithm). We intend to show that throughout the main iterations of <AlgorithmRef refId=dijkstra/>, whichever vertex $$u$$ we select from $$\argmin\{d(v):v\in U\}$$ will satisfy that in fact $$d(u) = \text{dist(u)}$$. That is, at each iteration, we have found the best path to each vertex we remove from $$U$$.
+
+        The proof goes by induction on the number of iterations of the algorithm. As a base case, it is clear that in the first iteration of the algorithm $$u=s$$ and $$d(s)=\text{dist}(s)=0$$.
+        
+        Now for the inductive step. Let's suppose for contradiction that, for the first time while running the algorithm, the vertex $$u$$ we've removed from $$U$$ actually has $$d(u) > \text{dist}(u)$$. That would mean there is a shorter $$s-u$$ path than the one found by the algorithm. The shortest path will look something like
+        <MathDisp>
+            v_0\rightarrow v_1\rightarrow \cdots\rightarrow v_{k-1}\rightarrow v_k
+        </MathDisp>
+        where $$v_0=s$$ and $$v_k=u$$.
+
+        Let $$i$$ be the smallest index with $$v_i\in U$$.<Footnote>We know $$i$$ exists, since at the very least $$v_k=u\in U$$.</Footnote> Then since $$v_{i-1}$$ is <em>not</em> in $$U$$, we know it was removed from $$U$$ in an earlier iteration, and thus by the inductive assumption we have $$d(v_{i-1}) = \text{dist}(v_{i-1})$$.
+
+        Furthermore, since $$v_{i-1}$$ precedes $$v_i$$ in the shortest $$s-u$$ path, the path
+        <MathDisp>
+            v_0\rightarrow v_1\rightarrow\cdots v_{i-1}\rightarrow v_i
+        </MathDisp>
+        must be a shortest $$s-v_i$$ path.<Footnote>Otherwise, there would be a shorter $$s-u$$ path that incorporates the shorter $$s-v_i$$ path.</Footnote> Bringing it all together, we have
+        <MathDisp>
+            d(v_i)\leq d(v_{i-1}) + c_{v_{i-1}v_i}= \text{dist}(v_{i-1}) + c_{v_{i-1}v_i}=\text{dist}(v_i)
+        </MathDisp>
+        Since $$v_i$$ precedes $$u$$ on the shortest $$s-u$$ path, we also have $$\text{dist}(v_i)\leq\text{dist}(u)$$. Combining these two inequalities with the initial assumption $$\text{dist}(u)<d(u)$$ gives
+        <MathDisp>
+            d(v_i)\leq \text{dist}(v_i)\leq\text{dist}(u) < d(u)
+        </MathDisp>
+        Thus $$v_i$$ is a vertex in $$U$$ with strictly smaller $$d$$ value than $$u$$, contradicting the selection of $$u$$ as the vertex to remove from $$U$$.
     </span>
 </Theorem>

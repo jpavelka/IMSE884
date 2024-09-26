@@ -119,7 +119,7 @@ Now that we've worked through it on a few examples, we'll skip formally specifyi
 An example where this might come up: Suppose a ride-hailing app has recently received four ride requests, and there are currently five drivers in the area that can pick them up. The app may decide to assign drivers to riders (with the fifth driver "assigned" to do nothing) by pairing them up in a way that minimizes the sum of distances the drivers travel to pick up their riders.
 
 Let's look at another graph-centric problem:
-<Problem refId=tsp>
+<Problem refId=mst>
     <span slot=name>Minimum Spanning Tree Problem</span>
     <span slot=abbrev>MST</span>
     <span slot=instance>A graph $$G=(V,E)$$, costs $$c_{ij}\in\R$$ for each edge $$(i,j)\in E$$.</span>

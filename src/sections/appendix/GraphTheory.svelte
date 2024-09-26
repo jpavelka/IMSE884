@@ -184,7 +184,7 @@ A general graph is said to be a <Definition refId=completeGraph>
     <span slot=definition>
         A <DefinitionRef refId=graph/> in which every pair of vertices is connected by an edge.
     </span>
-</Definition> if every pair of vertices is connected by an edge. A complete graph with $n$ vertices is often denoted as $K_n$. A bipartite graph can also be called complete. A <Definition refId=completeBipartiteGraph>
+</Definition> if every pair of vertices is connected by an edge. A complete graph with $$n$$ vertices is often denoted as $$K_n$$. A bipartite graph can also be called complete. A <Definition refId=completeBipartiteGraph>
     complete bipartite graph
     <span slot=definition>
         A <DefinitionRef refId=bipartiteGraph/> in which $$(v_1,v_2)\in E$$ for any $$v_1\in V_1$$, $$v_2\in V_2$$.

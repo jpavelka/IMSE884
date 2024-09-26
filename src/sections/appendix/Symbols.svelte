@@ -3,7 +3,7 @@
     import MathDisp from "$lib/MathDisp.svelte";
 </script>
 <Heading level=2 refId=symbols>
-    Special symbols
+    Symbol reference
     <span slot=context>A list of mathematical symbols and their usages.</span>
 </Heading>
 <ul>
