@@ -77,11 +77,16 @@
       }
       return {...e, ...extraArgs}
     })
-    if (directed) {
+    if (!options.edges) {
       options.edges = {
-        arrows: 'to',
         font: {size: 30, background: 'white'}
       }
+    }
+    if (directed) {
+      if (!options.edges.arrows) {
+        options.edges.arrows = {};
+      }
+      options.edges.arrows = 'to';
     }
     $: finalConvertedNodes = convertedNodes.map(x => {
       if (!!x.extraLabel) {
@@ -92,10 +97,6 @@
     let container: HTMLElement;
     let network: Network;
     onMount(() => {
-      const data = {
-        nodes: finalConvertedNodes,
-        edges: convertedEdges,
-      };
       network = new Network(container, {}, options);
       setTimeout(() => {
         network.setData({

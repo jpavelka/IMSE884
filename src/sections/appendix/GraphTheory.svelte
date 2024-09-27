@@ -8,6 +8,8 @@
     import MathDisp from "$lib/MathDisp.svelte";
     import Definition from "$lib/Definition.svelte";
     import DefinitionRef from "$lib/DefinitionRef.svelte";
+    import Theorem from "$lib/Theorem.svelte";
+    import ProblemRef from "$lib/ProblemRef.svelte";
 
     const sampleNodes = [
         {id: 1, x: 0, y: 0.5},
@@ -303,7 +305,7 @@ A graph is called <Definition refId=acyclicGraph>
     </span>
 </Definition> of $$G$$ if it creates a tree over all the vertices of $$G$$. An example spanning tree is shown in <FigureRef refId=exampleSpanningTree/>.
 
-<Figure refId=exampleNotConnected>
+<Figure refId=exampleSpanningTree>
     <span slot=caption>
         Visualization of a spanning tree.
     </span>
@@ -313,6 +315,28 @@ A graph is called <Definition refId=acyclicGraph>
         boldEdges={spanTreeBoldEdges}
     />
 </Figure>
+
+The following is a neat fact about spanning trees that we use in the main text while talking about <ProblemRef refId=mst/>. It states that adding an edge to a spanning tree will create a cycle, and subsequently removing any edge from that cycle will give another spanning tree.
+
+<Theorem refId=newSpanningTree thmType=proposition>
+    Let $$G=(V,E)$$ be a graph and $$T$$ a spanning tree in $$G$$. Take any edge $$e\in E$$. Then:
+    <ol>
+        <li>$$T\cup\{e\}$$ contains a cycle $$C$$.</li>
+        <li>Let $$e'$$ be any edge in $$C$$. Then $$T'=(T\cup\{e\})\setminus\{e'\}$$</li> is a spanning tree.
+    </ol>
+    <span slot=proof>
+        For claim 1, recall that a spanning tree is by definition connected, i.e. there is a path between any pair of vertices in the graph. Suppose the edge we add is $$e=(u,v)$$. Connectedness of $$G$$ implies there exists a path in $$T$$ starting at $$u$$ and ending at $$v$$. Then adding $$e$$ to that path gives you a new path starting and ending at $$u$$, i.e. a cycle.
+
+        Now for claim 2. Let $$e'=(u',v')$$ be the edge removed from $$C$$ to create $$T'$$. For $$T'$$ to still be a spanning tree, it must be acyclic (taken care of by the removal of $$e'$$) and it must still be connected, i.e. there must be a path between any pair of vertices in $$T'$$. So let $$x,y\in V$$ be two vertices. Since $$T$$ was a spanning tree, there was a path $$P$$ between $$x$$ and $$y$$ in $$T$$. If edge $$e'$$ is not part of that path, then the $$P$$ is a subset of $$T'$$, i.e. it is still a path between $$x$$ and $$y$$ in $$T'$$. Otherwise, if $$e'\in P$$, the $$x-y$$ path in $$T'$$ looks like:
+        <ul>
+            <li>Follow path $$P$$ from $$x$$ to $$u'$$</li>
+            <li>Route from $$u'$$ to $$v'$$ the "other way" around $$C$$</li>
+            <li>Follow path $$P$$ from $$v'$$ to $$y$$</li>
+        </ul>
+
+        Thus a path exists between any two vertices in $$T'$$.
+    </span>
+</Theorem>
 
 For a given graph, a subset of the edges $$M\subseteq E$$ is called a <Definition refId=matching>
     matching

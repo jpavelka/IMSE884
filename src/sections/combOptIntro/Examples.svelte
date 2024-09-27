@@ -122,7 +122,7 @@ Let's look at another graph-centric problem:
 <Problem refId=mst>
     <span slot=name>Minimum Spanning Tree Problem</span>
     <span slot=abbrev>MST</span>
-    <span slot=instance>A graph $$G=(V,E)$$, costs $$c_{ij}\in\R$$ for each edge $$(i,j)\in E$$.</span>
+    <span slot=instance>A connected graph $$G=(V,E)$$, costs $$c_{ij}\in\R$$ for each edge $$(i,j)\in E$$.</span>
     <span slot=problem>Find a minimum-cost spanning tree in $$G$$.</span>
 </Problem>
 An example application here: A utility company is trying to build connections to all the houses in some neighborhood. They need <em>some</em> physical connection from their service to each house, i.e. they need a spanning tree connecting all of the houses.

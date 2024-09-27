@@ -154,8 +154,7 @@
     </ul>
     <div>Best <MathInline>s-t</MathInline> path: <MathInline>{bestPath.join(' \\rightarrow ')}</MathInline></div>
 {/if}{/key}
-
-<div class=spacer/>
+<div style=margin-bottom:calc(0.5*var(--standardFontSize))/>
 
 <style>
     .buttonDiv {
