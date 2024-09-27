@@ -108,7 +108,7 @@ Let's go ahead and prove some statement by induction, to give you a feel for it.
         \sum_{i=1}^n i = \frac{n(n+1)}{2}
     </MathDisp>
     <span slot=proof>
-        The proof goes by induction. For the base case, note that
+        The proof goes by induction. For the base case, note that for $$n=1$$
         <MathDisp>
             \sum_{i=1}^1 i = 1 = \frac{1(2)}{2}
         </MathDisp>

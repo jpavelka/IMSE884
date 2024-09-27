@@ -91,7 +91,7 @@
         For all. We use this symbol when we want to specify that something should be done for all elements in some set. So if we're writing out the constraints for some model and we say $$x_j\geq 0\ \forall\ j\in\{1, 2, \cdots, n\}$$ we're just saying that each of $$x_1, x_2, \cdots, x_n$$ should be non-negative.        
     </span>
 </Symbol>
-<Symbol refId=conditionalSet searchStr={'\{|\},conditional'}>
+<Symbol refId=conditionalSet searchStr={'\{:\},conditional'}>
     $$\{x: x\textit{ satisfies some condition}\}$$
     <span slot=desc>
         Conditional set. This represents the set of all $$x$$ such that $$x$$ satisfies the condition to the right of the colon (:). For example, $$\{n\in\Z:5\leq n\leq 10\}$$ is the set of all integers between 5 and 10, i.e. $$\{5,6,7,8,9,10\}$$
@@ -101,7 +101,7 @@
     $$S^m$$
     <span slot=desc>
         The set of vectors with $$m$$ elements, all of which are from some set $$S$$. For example, $$\R^3$$ is the set of 3-element, real number vectors. So we could say
-        <MathDisp>
+        <MathDisp alwaysRender={true}>
             \begin{bmatrix}1 \\ 2.64 \\ -3\end{bmatrix}\in\R^3.
         </MathDisp>
     </span>
@@ -110,7 +110,7 @@
     $$S^{m\times n}$$
     <span slot=desc>
         The set of matrices with $$m$$ rows and $$n$$ columns, whose elements are from some set $$S$$. For example, $$\Z^{m\times n}$$ is the set of $$m\times n$$ matrices whose entries are all integers. So we could say
-        <MathDisp>
+        <MathDisp alwaysRender={true}>
             \begin{bmatrix}4 & 3 & 9 & 6\\ 0 & 4 & 8 & 5\\ 7 & 7 & 2 & 1\end{bmatrix} \in \Z^{3\times 4}.
         </MathDisp>
     </span>
@@ -125,7 +125,7 @@
     $$\identity$$
     <span slot=desc>
         A square matrix with all entries equal to 0, except the diagonal where all entries equal 1 (the size of the matrix is usually clear by context). This looks like:
-        <MathDisp>
+        <MathDisp alwaysRender={true}>
             \begin{bmatrix}
             1 & 0 & \cdots & 0 \\
             0 & 1 & \cdots & 0 \\

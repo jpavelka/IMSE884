@@ -1,6 +1,7 @@
 <script lang="ts">
     import GlossaryLookup from "./GlossaryLookup.svelte";
     import Slider from "./Slider.svelte";
+    import SymbolLookup from "./SymbolLookup.svelte";
     import TocInner from "./TOCInner.svelte";
     import { sections, highlightKeyPoints, scaleFactor, printMode } from "./stores";
     import { slide } from "svelte/transition";
@@ -13,7 +14,8 @@
         }
         showToc = !showToc;
     }
-    let searchString = '';
+    let glossarySearchString = '';
+    let symbolSearchString = '';
 </script>
 
 {#if !$printMode}
@@ -62,10 +64,18 @@
         <div class=menuItem style=display:block>
             Glossary lookup
             <input
-                bind:value={searchString}
+                bind:value={glossarySearchString}
                 class=lookupBox
             />
-            <GlossaryLookup searchString={searchString.trim()} />
+            <GlossaryLookup searchString={glossarySearchString.trim()} />
+        </div>
+        <div class=menuItem style=display:block>
+            Symbol lookup
+            <input
+                bind:value={symbolSearchString}
+                class=lookupBox
+            />
+            <SymbolLookup searchString={symbolSearchString.trim()} />
         </div>
     </div>
 {/if}

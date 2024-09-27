@@ -130,6 +130,8 @@ export const theorems: Writable<{
   thmTypes: {}
 })
 
+export const symbols: Writable<{[key: string]: string}> = writable({});
+
 export const citations = writable(await getCitations());
 export const showMenu = writable(false);
 export const popupShown = writable(false);
