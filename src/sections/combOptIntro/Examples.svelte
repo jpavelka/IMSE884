@@ -31,7 +31,7 @@ We'll start with a basic one:
 <Problem refId=shortestPath>
     <span slot=name>Shortest Path Problem</span>
     <span slot=instance>
-        Digraph $$G=(V,E)$$, two nodes $$s,t\in V$$, non-negative edge costs $$c_{ij}\in\R_+$$ for each $$(i,j)\in E$$.
+        Digraph $$G=(V,E)$$, two nodes $$s,t\in V$$, non-negative edge costs $$c_{ij}\in\R_{\geq0}$$ for each $$(i,j)\in E$$.
     </span>
     <span slot=problem>
         Find a minimum-cost path in $$G$$ from $$s$$ to $$t$$, i.e.
@@ -86,7 +86,7 @@ While it may not be obvious from the graph theory framing, the <ProblemRef refId
 Here's another inuitive problem that fits the <ProblemRef refId=combOpt/> framework:
 <Problem refId=knapsack>
     <span slot=name>Knapsack Problem</span>
-    <span slot=instance>A set $$J$$, numbers $$w_j\in\R_+$$ and $$v_j\in\R_+$$ for each $$j\in J$$, positive number $$b\in\R_+$$.</span>
+    <span slot=instance>A set $$J$$, positive numbers $$w_j\in\Z_{>0}$$ and $$v_j\in\R_{>0}\setminus\{0\}$$ for each $$j\in J$$, positive integer $$b\in\Z_{>0}$$.</span>
     <span slot=problem>
         Find a subset $$S\subseteq J$$ satisfying $$\sum_{j\in S}w_j\leq b$$ that maximizes the total value $$\sum_{j\in S}v_j$$.
     </span>
@@ -144,7 +144,7 @@ We'll wrap up this section with perhaps the most famous <ProblemRef refId=combOp
 <Problem refId=tsp>
     <span slot=name>Traveling Salesman Problem</span>
     <span slot=abbrev>TSP</span>
-    <span slot=instance>A complete graph $$G=(V,E)$$, costs $$c_{ij}\in\R_+$$ for each edge $$(i,j)\in E$$.</span>
+    <span slot=instance>A complete graph $$G=(V,E)$$, costs $$c_{ij}\in\R_{\geq0}$$ for each edge $$(i,j)\in E$$.</span>
     <span slot=problem>Find a minimum-distance tour in $$G$$.</span>
     <span slot=plainEnglish>
         A salesman must visit each of $$n$$ cities exactly once and then return to his starting point. The time taken to travel from city $$i$$ to city $$j$$ is $$c_{ij}$$. Find the order in which he should make his tour so as to finish as quickly as possible.

@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { createEventDispatcher } from "svelte";
     import FixedNodeGraph from "./FixedNodeGraph.svelte";
     import MathInline from "./MathInline.svelte";
 
@@ -13,7 +12,7 @@
     let UHist: Array<Array<string>> = [U];
     let T: Array<string> = [];
     let THist: Array<Array<string>> = [U];
-    let extraEdgeAttrs: {[key: string]: any} = {};;
+    let extraEdgeAttrs: {[key: string]: any} = {};
     const lastClick = () => {
         U = UHist[UHist.length - 1];
         UHist = UHist.slice(0, -1);
@@ -84,3 +83,10 @@
 {/if}
 {/key}
 <div style=margin-bottom:calc(0.5*var(--standardFontSize))/>
+
+<style>
+    .buttonDiv {
+        display: flex;
+        justify-content: center;
+    }
+</style>

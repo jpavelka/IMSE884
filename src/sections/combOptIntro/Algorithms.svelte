@@ -5,9 +5,10 @@
     import DefinitionRef from "$lib/DefinitionRef.svelte";
     import DijkstraAlgo from "./DijkstraAlgo.svelte";
     import PrimAlgo from "./PrimAlgo.svelte";
+    import KnapsackDP from "./KnapsackDP.svelte";
 </script>
 
-<Heading refId=compOptAlgos level=2>
+<Heading refId=combOptAlgos level=2>
     <ProblemRef refId=combOpt link={false} /> algorithms
     <span slot=context>Exploring special-purpose algorithms for some of our example <ProblemRef refId=combOpt link={false} />s</span>
 </Heading>
@@ -44,6 +45,7 @@ In what follows, we will present both algorithms and approximation algorithms fo
 
 <DijkstraAlgo/>
 <PrimAlgo/>
+<KnapsackDP />
 
 <!--
 knapsack (to demonstrate dynamic programming)

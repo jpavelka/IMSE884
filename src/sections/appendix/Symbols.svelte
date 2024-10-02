@@ -55,22 +55,34 @@
         The set of real numbers, i.e. anything on the number line between (though not including!) $$-\infty$$ and $$\infty$$.
     </span>
 </Symbol>
-<Symbol refId=realsPlus searchStr=r+,realplus>
-    $$\R_+$$
+<Symbol refId=realNonneg searchStr={'r>=0,r\\geq0'}>
+    $$\R_{\geq0}$$
     <span slot=desc>
         The set of non-negative real numbers, i.e. anything in $$\R$$ that is greater than or equal to 0.
+    </span>
+</Symbol>
+<Symbol refId=realPos searchStr={'r>0'}>
+    $$\R_{>0}$$
+    <span slot=desc>
+        The set of positive real numbers, i.e. anything in $$\R$$ that is strictly greater than 0.
     </span>
 </Symbol>
 <Symbol refId=integers searchStr=integer,z>
     $$\Z$$
     <span slot=desc>
-        The set of integer numbers, i.e. whole numbers from the set $$\R$$.
+        The set of integers, i.e. whole numbers from the set $$\R$$.
     </span>
 </Symbol>
-<Symbol refId=integersPlus searchStr=integerplus,z+>
-    $$\Z_+$$
+<Symbol refId=integerNonneg searchStr={'z>=0,z\\geq0'}>
+    $$\Z_{\geq0}$$
     <span slot=desc>
-        The set of non-negative integer numbers, i.e. anything in $$\Z$$ that is greater than or equal to 0.
+        The set of non-negative integers, i.e. anything in $$\Z$$ that is greater than or equal to 0.
+    </span>
+</Symbol>
+<Symbol refId=integerPos searchStr={'z>0'}>
+    $$\Z_{>0}$$
+    <span slot=desc>
+        The set of positive integers, i.e. anything in $$\Z$$ that is strictly greater than 0.
     </span>
 </Symbol>
 <Symbol refId=setSize searchStr={'||,size'}>

@@ -6,6 +6,7 @@
 	export let mouseOverFunction = undefined;
 	export let mouseOutFunction = undefined;
 	export let alwaysRender = false;
+	export let extraMacros: {[key: string]: string} = {};
 	const options = {
 		displayMode: false,
 		throwOnError: false,
@@ -27,6 +28,7 @@
 	{mouseOverFunction}
 	{mouseOutFunction}
 	{alwaysRender}
+	{extraMacros}
 >
 	<slot />
 </KatexDisp>

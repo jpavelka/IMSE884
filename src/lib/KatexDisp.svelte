@@ -12,6 +12,7 @@
     export let mouseOverFunction = undefined;
     export let mouseOutFunction = undefined;
     export let alwaysRender = false;
+    export let extraMacros = {};
 
     let data: HTMLElement;
 
@@ -21,7 +22,7 @@
         s = math || `${data?.innerText}`;
         s = s.replaceAll("{:underscore:}", "_");
     }
-    options = { ...options, ...{ macros: macros } };
+    options = { ...options, ...{ macros: {...macros, ...extraMacros} } };
 
     $: seen = false;
     $: if ($eqReferenced.includes(refId)) {
