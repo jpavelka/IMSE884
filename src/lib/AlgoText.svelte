@@ -4,7 +4,7 @@
 
 <span class=algoLine>
     <div style=margin-right:0.5rem;>&#8226;</div>
-    <div>
+    <div style=width:100%>
         {#if type !== ''}
             <span class=directive>
                 {type}

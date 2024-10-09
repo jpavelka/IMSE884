@@ -3,6 +3,7 @@
     import AlgorithmRef from "$lib/AlgorithmRef.svelte";
     import AlgoText from "$lib/AlgoText.svelte";
     import Definition from "$lib/Definition.svelte";
+    import Axes from "$lib/drawing/Axes.svelte";
     import EquationRef from "$lib/EquationRef.svelte";
     import Figure from "$lib/Figure.svelte";
     import FigureRef from "$lib/FigureRef.svelte";
@@ -11,6 +12,7 @@
     import InteractiveKnapsackDp from "$lib/InteractiveKnapsackDP.svelte";
     import MathDisp from "$lib/MathDisp.svelte";
     import ProblemRef from "$lib/ProblemRef.svelte";
+    import Theorem from "$lib/Theorem.svelte";
     import Appendix from "../appendix/Appendix.svelte";
     import Algorithms from "./Algorithms.svelte";
 </script>
@@ -39,11 +41,11 @@ If the optimal solution to $$P_r(s)$$ <em>does</em> includes item $$r$$, then it
 
 On the other hand, if the optimal solution to $$P_r(s)$$ <em>does not</em> include item $$r$$, then it must be true that $$f_r(s)=f_{r-1}(s)$$. Why? Because the optimal solution to $$P_r(s)$$ uses only items $$\{1,2,\cdots,r-1\}$$ to fill the entire weight $$s$$.
 
-So we have two possible scenarios, one of which must hold true. Since we are maximizing, the one that holds must be the maximum of the two. So we can write the recursive equation:
+So we have two possible scenarios, one of which must hold true. Since we are maximizing, the one that holds must be the maximum of the two. So we can write the recursive equation<Footnote>In the terminology of dynamic programming, this type of equation is called a <a href=https://en.wikipedia.org/wiki/Bellman_equation>Bellman equation</a></Footnote>:
 <MathDisp refId=knapsackRecursion>
     f_r(s) = \max\{f_{r-1}(s), v_r + f_{r-1}(s-w_r)\}
 </MathDisp>
-(note that for this to hold in all cases, we should define $$f_{r-1}(s-w_r)=-\infty$$ when $$s-w_r<0$$, i.e. when the item's weight is over the weight limit.)
+(note that for this to hold in all cases, we should define $$f_{r}(s)=-\infty$$ when $$s<0$$. That way the $$v_r + f_{r-1}(s-w_r)$$ term is never the maximum when the $$r$$th item's weight is over the weight limit.)
 
 So we can find values of $$f_r(s)$$ for larger $$r$$ and $$s$$ by checking the solutions to smaller versions of the problem. And, luckily, the smallest knapsack problems are very easy. Trivially, $$f_r(0)=0$$ for all $$r\in\{1,2,\cdots,n\}$$<Footnote>Since the weight limit is 0, but all item weights are greater than 0.</Footnote>. The values of $$f_1(s)$$ are pretty easy to find as well: Either $$f_1(s)=v_1$$ if $$w_1\leq s$$ or otherwise $$f_1(s)=0$$.
 
@@ -57,14 +59,14 @@ The full algorithm looks like this:
         <span slot=child>
             <AlgoText>
                 for all $$r\in\{0,1,\cdots,n\}$$ and $$s\in\{0,1,\cdots,b\}$$, set
-                <MathDisp>
+                <MathDisp fontSize=0.9>
                     f_r(s) \leftarrow \begin{cases}
                         0&\text{if }s=0\text{ or }r=0 \\
                         \text{undefined}&\text{otherwise}
                     \end{cases}
                 </MathDisp>
                 and
-                <MathDisp>
+                <MathDisp fontSize=0.9>
                     S_r(s) \leftarrow \begin{cases}
                         \emptyset&\text{if }s=0\text{ or }r=0 \\
                         \text{undefined}&\text{otherwise}
@@ -125,3 +127,21 @@ Let's work through an example in <FigureRef refId=knapsackExample/>:
     <span slot=caption>Stepping through an example of <AlgorithmRef refId=knapsackDP />.</span>
 </Figure>
 
+We've already discussed why this algorithm works in our discussions on <EquationRef refId=knapsackRecursion/>, but let's go ahead and formalize it with a proof.
+
+<Theorem refId=knapsackDP>
+    <AlgorithmRef refId=knapsackDP /> solves the <ProblemRef refId=knapsack /> by returning a maximum-value set of items whose combined weight does not exceed the weight limit.
+    <span slot=proof>
+        The key to this proof is to show the correctness of the recursive equation <EquationRef refId=knapsackRecursion/>, which we will prove by induction. For the base case, since by definition of the <ProblemRef refId=knapsack /> we have $$w_j>0$$ for all $$j\in J$$, it is clear that $$f_j(0)=0$$ for any $$j\in J$$, which satisfies <EquationRef refId=knapsackRecursion/>.
+
+        For the inductive step, suppose we have some $$s$$ with $$0<s\leq b$$ and $$j\in J$$. It is clear that the solution to $$P_r(s)$$ either includes item $$r$$ or it does not. If item $$r$$ is not included, then the optimal solution to $$P_r(s)$$ is a subset of $$\{1,\cdots,r-1\}$$, meaning the solution value is $$f_{r-1}(s)$$.
+
+        If item $$r$$ <em>is</em> included, then the optimal value is at least $$v_r$$. Furthermore, there is still $$s-w_r$$ available from the weight limit to include items from the set $$\{1,\cdots,r-1\}$$. By definition, the highest value we may attain for that is $$f_{r-1}(s-w_r)$$.
+
+        So the optimal value $$f_r(s)$$ must be the best of these two values, i.e.
+        <MathDisp>
+            f_r(s) = \max\{f_{r-1}(s), v_r + f_{r-1}(s-w_r)\}
+        </MathDisp>
+        as prescribed by <EquationRef refId=knapsackRecursion/>.
+    </span>
+</Theorem>

@@ -130,3 +130,5 @@ Let's go ahead and prove some statement by induction, to give you a feel for it.
         as required.
     </span>
 </Theorem>
+
+There is another form of induction, called <em>strong</em> induction, that works much the same way as above. The difference is that in the inductive step, instead of just assuming that the statement holds for $$k-1$$, we assume it holds for <em>all</em> the values $$k-1,k-2\cdots$$ down until the base case. This is really no different from the regular style of induction, since iterating the inductive assumption gives you the same thing. But it is sometimes more convenient to frame a proof in this manner.

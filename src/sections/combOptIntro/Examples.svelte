@@ -146,6 +146,17 @@ We'll wrap up this section with perhaps the most famous <ProblemRef refId=combOp
     <span slot=abbrev>TSP</span>
     <span slot=instance>A complete graph $$G=(V,E)$$, costs $$c_{ij}\in\R_{\geq0}$$ for each edge $$(i,j)\in E$$.</span>
     <span slot=problem>Find a minimum-distance tour in $$G$$.</span>
+    <span slot=variants>
+        <div>
+            <span style=font-weight:bold;font-style:italic>Metric TSP:</span> Edge costs satisfy the <em>triangle inequality</em>, i.e. we have
+            <MathDisp>
+                c_{ij}+c_{jk}\geq c_{ik}
+            </MathDisp>
+            for any three vertices $$i,j,k\in V$$<Footnote>
+                This is a pretty natural condition that holds for many TSP applications. If you take the nodes of the graph to be cities on a map, then it just says that the quickest way from city $$i$$ to city $$k$$ is to go directly between them. Maybe some other city $$j$$ is on the route between them, so that $$c_{ij} + c_{jk} = c_{ik}$$, but it wouldn't make sense it to be <em>quicker</em> to travel through $$j$$ first.
+            </Footnote>.
+        </div>
+    </span>
     <span slot=plainEnglish>
         A salesman must visit each of $$n$$ cities exactly once and then return to his starting point. The time taken to travel from city $$i$$ to city $$j$$ is $$c_{ij}$$. Find the order in which he should make his tour so as to finish as quickly as possible.
     </span>

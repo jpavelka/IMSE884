@@ -43,6 +43,14 @@
             <span class=sectionHeader>Problem:</span>
             <slot name=problem/>
         </div>
+        {#if $$slots.variants}
+            <div class=section>
+                <span class=sectionHeader>Variants:</span>
+                <div style=margin-left:1rem>
+                    <slot name=variants/>
+                </div>
+            </div>
+        {/if}
         {#if $$slots.plainEnglish}
             <div class=section>
                 <span class=sectionHeader>In English:</span>

@@ -6,6 +6,7 @@
     import DijkstraAlgo from "./DijkstraAlgo.svelte";
     import PrimAlgo from "./PrimAlgo.svelte";
     import KnapsackDP from "./KnapsackDP.svelte";
+    import TSPApprox from "./TSPApprox.svelte";
 </script>
 
 <Heading refId=combOptAlgos level=2>
@@ -45,10 +46,9 @@ In what follows, we will present both algorithms and approximation algorithms fo
 
 <DijkstraAlgo/>
 <PrimAlgo/>
-<KnapsackDP />
+<KnapsackDP/>
+<TSPApprox/>
 
 <!--
-knapsack (to demonstrate dynamic programming)
-tsp 2-approx?
 as much fun as this is, can we take a more unified approach?
 -->

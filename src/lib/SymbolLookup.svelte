@@ -43,5 +43,6 @@
     .matchItem {
         padding: 0.5rem;
         border-top: 1pt solid lightgray;
+        font-size: calc(0.95 * var(--standardFontSize));
     }
 </style>
