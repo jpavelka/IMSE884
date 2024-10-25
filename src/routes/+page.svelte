@@ -226,7 +226,7 @@
         background-color: lightgray;
     }
     :global(button:active) {
-        transform: translateY(1px);
+        transform: translate(1px, 1px);
         background-color: lightgray;
         opacity: 0.8;
     }

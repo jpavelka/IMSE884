@@ -161,4 +161,5 @@ We'll wrap up this section with perhaps the most famous <ProblemRef refId=combOp
         A salesman must visit each of $$n$$ cities exactly once and then return to his starting point. The time taken to travel from city $$i$$ to city $$j$$ is $$c_{ij}$$. Find the order in which he should make his tour so as to finish as quickly as possible.
     </span>
 </Problem>
+
 This intuitive problem, with obvious applications to e.g. routing delivery drivers, has a long and storied history in the world of optimization. We'll revisit it (as well as all the problems we've discussed so far) several times this course.

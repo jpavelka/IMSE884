@@ -34,7 +34,7 @@
     <span style=display:none; bind:this={dispData}><slot name=glossaryDisp/></span>
 {/if}
 <span id={refId} class=inText>
-    <slot />{#if linkToGlossary}<a
+    <slot/>{#if linkToGlossary}<a
         href=#{refId + ':glossaryEntry'}
         class=glossaryLink
         title={'Return to glossary'}
@@ -42,8 +42,7 @@
             linkToGlossary = false;
             removeBlink();
         }}
-    >↩︎</a>{/if}
-</span>
+    >↩︎</a>{/if}</span>
 <div id={refId + ':glossaryEntry'} class=glossaryDisp style=display:none;>
     <div>
         <a

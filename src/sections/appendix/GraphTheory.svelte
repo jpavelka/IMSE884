@@ -239,7 +239,7 @@ A <Definition refId=circuit>
     <span slot=definition>
         A <DefinitionRef refId=trail/> that starts and ends at the same vertex.
     </span>
-</Definition> is a trail that starts and ends at the vertex. Note that the circuit is defined based on a <em>trail</em>, so therefore edges cannot be repeated in a circuit, though vertices <em>can</em> repeat. A similar notion is the <Definition refId=cycle>
+</Definition> is a trail that starts and ends at the same vertex. Note that the circuit is defined based on a <em>trail</em>, so therefore edges cannot be repeated in a circuit, though vertices <em>can</em> repeat. A similar notion is the <Definition refId=cycle>
     cycle
     <span slot=definition>
         A <DefinitionRef refId=path/> that begins and ends at the same vertex.
@@ -249,7 +249,12 @@ A <Definition refId=circuit>
     <span slot=definition>
         A <DefinitionRef refId=cycle/> in which every vertex is visited exactly once.
     </span>
-</Definition> if it visits every vertex exactly once. An example Hamiltonian cycle is shown in <FigureRef refId=exampleHamCycle/>.
+</Definition> if it visits every vertex exactly once. An example Hamiltonian cycle is shown in <FigureRef refId=exampleHamCycle/>. Related to these is the <Definition refId=tour>
+    tour
+    <span slot=definition>
+        A <DefinitionRef refId=walk/> that starts and ends at the same vertex and also visits every vertex at least once.
+    </span>
+</Definition>, which is a walk that starts and ends at the same vertex and also visits every vertex <em>at least</em> once (so a Hamiltonian cycle is also a tour, though not every tour is a Hamiltonian cycle).
 
 <Figure refId=exampleHamCycle>
     <span slot=caption>
@@ -262,7 +267,7 @@ A <Definition refId=circuit>
     />
 </Figure>
 
-Note that walks, trails, paths, circuits, and cycles can all exist on directed graphs as well, with the natural restriction that the underlying walk must travel in the direction of the edges.
+Note that walks, trails, paths, circuits, cycles, and tours can all exist on directed graphs as well, with the natural restriction that the underlying walk must travel in the direction of the edges.
 
 A graph is said to be <Definition refId=connectedGraph>
     connected
