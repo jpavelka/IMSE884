@@ -159,7 +159,7 @@ Let's return to our example graph <FigureRef refId=tsp2ApproxExBase/>. We can qu
     <span slot=caption>A minimum spanning tree in the example graph.</span>
 </Figure>
 
-So we have a spanning tree, but what we really need is a tour! How do we get there from here? Well, for any tree you can build a what is known as a <Definition>
+So we have a spanning tree, but what we really need is a tour! How do we get there from here? Well, for any tree you can build a what is known as a <Definition refId=traversal>
     traversal
     <span slot=definition>A way of visiting every vertex in a <DefinitionRef refId=tree/> using its edges.</span>
 </Definition> of the tree, which is a particular way of visiting every vertex in the tree via the edges. We won't formally specify the algorithm (though you can <a target=_blank href=https://en.wikipedia.org/wiki/Tree_traversal>check here</a> for more discussion), but the notion is very simple. Pick some arbitrary vertex as your starting point, then in a "depth-first" manner, select one of its neighbors, then one of the neighbor's neighbors, and on and on until you reach a node with no other neighbors. Then you traverse back up the tree until you find a node with an unvisited neighbor, and repeat the process.
@@ -177,7 +177,7 @@ Let's go ahead and do that for our tree found in <FigureRef refId=tsp2ApproxExMS
         <button on:click={addTravNode} disabled={travEdges.length === 2 * (algoExNodes.length - 1)}>Next</button>
     </div>
         <div>Traversal: {graphTravNodes.join('-')}</div>
-    <span slot=caption>Building a preorder traversal on a tree, starting from node 1.</span>
+    <span slot=caption>Building a tree traversal, starting from node 1.</span>
 </Figure>
 
 So we build a traversal, which in this case looks like $$1\rightarrow2\rightarrow5\rightarrow3\rightarrow5\rightarrow2\rightarrow4\rightarrow2\rightarrow1$$. This is technically a tour, though a seemingly wasteful one since it visits several vertices multiple times. Nevertheless, we can say something about how the length of this tour, which we'll call $$R$$, relates to the optimal solution for our <ProblemRef refId=tsp/> instance. In particular, we already knew that $$\sum_{e\in T} c_e\leq z^*$$ where $$z^*$$ was the cost of the optimal tour, and $$T$$ was a minimum spanning tree on the graph. Well, by construction, $$R$$ contains all the edges from $$T$$ exactly twice, so that means
@@ -203,7 +203,7 @@ So the final step of the algorithm is to take the traversal we built and simply 
     <span slot=caption>The tour created by <AlgorithmRef refId=tsp2Approx/> on our sample graph.</span>
 </Figure>
 
-There you have it, your first approximation algorithm! Let's formalize this by presenting the algorithm and writing the proof.
+There you have it, your first approximation algorithm! Let's formalize this by presenting the algorithm and writing the proof of correctness.
 
 <Algorithm refId=tsp2Approx>
     <span slot=name>TSP 2-Approximation</span>

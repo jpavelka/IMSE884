@@ -116,7 +116,13 @@ Familiarity with graph theory will be useful for this course. You don't need to 
         See <DefinitionRef refId=edge />.
     </span>
     <span slot=glossaryDisp>arc</span>
-</Definition>), respectively. Graphs are used to model relationships (denoted by the edges) between pairs of entities (represented by the vertices). More concretely, let a graph $$G=(V,E)$$ be defined by the pair of sets $$V$$ and $$E$$. $$V$$ is the set of vertices, and the elements of $$E$$ are pairs of vertices $$(v_1,v_2)$$, with $$v_1, v_2\in V$$.
+</Definition>), respectively. Graphs are used to model relationships (denoted by the edges) between pairs of entities (represented by the vertices). More concretely, let a graph $$G=(V,E)$$ be defined by the pair of sets $$V$$ and $$E$$. $$V$$ is the set of vertices, and the elements of $$E$$ are pairs of vertices $$(v_1,v_2)$$, with $$v_1, v_2\in V$$. Two vertices $$v_1,v_2$$ are said to be <Definition refId=neighbor>
+    neighbors
+    <span slot=definition>
+        In a <DefinitionRef refId=graph/>, a vertex $$v_1\in V$$ is a neighbor of another vertex $$v_2\in V$$ if an edge exists between the two, i.e. if $$(v_1,v_2)\in E$$.
+    </span>
+    <span slot=glossaryDisp>neighbor</span>
+</Definition> if there is and edge between them, i.e. if $$(v_1,v_2)\in E$$.
 
 Initially, these definitions feel rather abstract. But in practice graphs often have very natural interpretations. Generally they are used to model relationships between entities, e.g. the nodes are people signed up for some social network, and an edge is drawn between two people if they are friends. Another common interpretation is as a road network, when the vertices are cities on a map, and an edge is drawn between two cities if it is possible to drive from one city to the other. In this case, there is often a distance $$d_e$$ associated with each $$e\in E$$ that denotes the distance between two cities, and you are perhaps trying to find the shortest route that lets you get from one place to another.
 

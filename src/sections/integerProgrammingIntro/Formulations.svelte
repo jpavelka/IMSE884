@@ -1,0 +1,1 @@
+<!-- equality, geq, minimize, unrestricted variables -->

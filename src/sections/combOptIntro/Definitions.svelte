@@ -38,7 +38,7 @@ Meanwhile, the <Key>definition of "combinatorial"</Key> (also from <a href=https
 
 Most useful for us is definition number 2, "of or relating to the enumeration of the number of ways of doing some specific task or of arranging items in a specific configuration." We will see that <Key>"combinatorial" describes the set of feasible solutions</Key> in the problems we are about to study.
 
-Time to bring it all together. The <a href=https://en.wikipedia.org/wiki/Combinatorial_optimization>Wikipedia page</a> on <Definition>
+Time to bring it all together. The <a href=https://en.wikipedia.org/wiki/Combinatorial_optimization>Wikipedia page</a> on <Definition refId=combOpt>
     <span slot=definition>
         A subfield of mathematical optimization that consists of finding an optimal object from a finite set of objects, where the set of feasible solutions is discrete or can be reduced to a discrete set.
     </span>

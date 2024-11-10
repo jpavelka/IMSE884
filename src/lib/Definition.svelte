@@ -3,6 +3,10 @@
 
     export let refId: string;
     export let plainText = '';
+
+    if (!!!refId) {
+        throw new Error('parameter "refId" must be defined');
+    }
     
     refId = 'def:' + refId;
     let data: HTMLElement;

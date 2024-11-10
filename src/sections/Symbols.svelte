@@ -3,10 +3,7 @@
     import MathDisp from "$lib/MathDisp.svelte";
     import Symbol from "$lib/Symbol.svelte";
 </script>
-<Heading level=2 refId=symbols>
-    Symbol reference
-    <span slot=context>A list of mathematical symbols and their usages.</span>
-</Heading>
+<Heading refId=symbols level=1 includeDispSecNum={false}>Symbols</Heading>
 <Symbol refId=setNotation searchStr={'{}'}>
     $$\{\cdots\}$$
     <span slot=desc>
