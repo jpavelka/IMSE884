@@ -3,6 +3,19 @@
     import Footnote from "$lib/Footnote.svelte";
     import Heading from "$lib/Heading.svelte";
     import Key from "$lib/Key.svelte";
+    import Problem from "$lib/Problem.svelte";
+    import MathDisp from "$lib/MathDisp.svelte";
+    import InteractiveIndependentSet from "$lib/InteractiveIndependentSet.svelte";
+    import Definition from "$lib/Definition.svelte";
+    import DefinitionRef from "$lib/DefinitionRef.svelte";
+    import Figure from "$lib/Figure.svelte";
+    import FigureRef from "$lib/FigureRef.svelte";
+    import ProblemRef from "$lib/ProblemRef.svelte";
+    import RandomIndependentSet from "$lib/RandomIndependentSet.svelte";
+
+    const indSetNodes = {a: 3, b: 6, c: 4, d: 1, e: 2, f: 6, g: 3, h: 2};
+    const indSetEdges = ["a,b", "b,c", "b,e", "c,d", "d,f", "d,g", "e,f", "f,g", "f,h"];
+    const indSetSeed = 3;
 </script>
 
 <Heading level="1" refId="welcome">
@@ -50,3 +63,65 @@ I have an irrational aversion to paper and think digital formats have so much mo
 Additionally, <Key>I'd love to hear your feedback on the notes!</Key> That means both content (the notes are almost surely littered with typos and unclear wordings) and user experience. If you find mistakes or have any ideas for how to make the notes better, I'd love to hear about them! (Though I'm only a hack of a web developer, so my ability to deliver on any of your technical suggestions may be limited.) I will be keeping track of who has contributed to improving these notes, and will have a prize at the end of the semester for the student(s) responsible for the most/best improvements.
 
 <Key>These notes were created for educational use. With proper attribution, readers may freely copy, distribute, or produce derivative work from this content, in whole or in part, for any non-commercial use.</Key>
+
+<Heading refId=iLoveCombOpt level=2>
+    Why I love this stuff (and you might too!)
+    <span slot=context>Sharing my own journey in learning combinatorial optimization and integer programming.</span>
+</Heading>
+
+Alright, admin stuff is over, now's the time we'd usually jump right into the meat of the course. Except I'd like to step back a little. Before we step into it, I'd like to give you a sense for why we bother teaching this stuff anyway. Personally, I find this subject endlessly fascinating in its own right. I get enjoyment out of the inherent puzzle-like nature of the problems we're solving, and I imagine several of you will join me in this. I also marvel in the beauty of the math underlying the techniques we'll be using, and while I suspect that feeling is less universal, I hope to pull at least a few of you in there as well 😊.
+
+But even beyond personal preferences, this stuff is seriously useful in the real world. Businesses from various industries around the world use these techniques every day, with the combined benefits easily topping billions of dollars annually. So even if you don't <em>love</em> this stuff quite like me, the applicability of the techniques is inarguable.
+
+<Heading refId=combOptGames level=3>
+    Fun and games
+</Heading>
+
+Do you enjoy puzzle games? I'm particularly thinking about games like <a href=https://en.wikipedia.org/wiki/Sudoku>sudoku</a>, <a href=https://en.wikipedia.org/wiki/Peg_solitaire>peg solitaire</a>, <a href=https://en.wikipedia.org/wiki/Rush_Hour_(puzzle)>rush hour</a>, or <a href=https://en.wikipedia.org/wiki/Minesweeper_(video_game)>minesweeper</a>. The kind of game with simple rules and a clear goal that require you to think through some logic or sequence of steps to accomplish the goal. There are no opponents, no physical skills to master, and luck plays little to no role in the outcome. It's just you and wits trying to solve the puzzle.
+
+I happen to adore these kinds of games. As a kid, I could spend hours getting lost in them. Fast-forward to my college years, and I'm taking my first class in combinatorial optimization<Footnote>Though maybe it was a graph theory class? I don't remember exactly, some of the material overlaps.</Footnote>. I find that lots of the problems we're studying scratch the same itch as those puzzle games.
+
+Want an example? Let's go ahead and define one right now, though don't worry about reading it in detail yet.
+
+<Problem refId=maxWeightIndSet>
+    <span slot=name>Maximum Weight Independent Set Problem</span>
+    <span slot=instance>
+        Graph $$G=(V,E)$$, non-negative vertex weights $$w_{v}\in\R_{\geq0}$$ for each $$v \in V$$.
+    </span>
+    <span slot=problem>
+        Find a subset of the vertices $$V'\subseteq V$$ where no two vertices in $$V'$$ are adjacent, such that the sum $$\sum_{v\in V'}w_v$$ is maximized. That is, find
+        <MathDisp>
+            \argmax_{V'\subseteq V}\left\{\sum_{v\in V'}w_v:(u,v)\not\in E\ \forall\ u,v\in V'\right\}
+        </MathDisp>
+    </span>
+</Problem>
+
+Excited yet? No? Well, I wouldn't have been the first time I saw this either. Luckily the professor didn't introduce it like that. Instead, he went to the whiteboard and drew something like <FigureRef refId=indSetEx/>.
+
+<Figure refId=indSetEx>
+    <InteractiveIndependentSet
+        nodes={indSetNodes}
+        edges={indSetEdges}
+        seed={indSetSeed}
+    />
+    <span slot=caption>An example <ProblemRef refId=maxWeightIndSet/></span>
+</Figure>
+
+Each of the circles represents a vertex in the graph, and a line drawn between vertices is an edge. There are two pieces of information given inside the vertices. First is the name of the vertex, some letter of the alphabet. Next is the weight associated with the vertex. So, on the far-left of the diagram is vertex $$a$$, whose weight is 3. Then you see vertex $$b$$ with weight 6, and so on.
+
+The game is to create a so-called <Definition refId=independentSet>
+    independent set
+    <span slot=definition>
+        In <DefinitionRef refId=graphTheory/>, a subset $$V'\subseteq V$$ of the vertices such that no two vertices in the set are adjacent.
+    </span>
+</Definition> (also known as a <Definition refId=stableSet>stable set<span slot=definition>See <DefinitionRef refId=independentSet/>.</span></Definition>) of vertices, i.e. a subset $$V'\subseteq V$$ of the vertices such that no two vertices in $$V'$$ are adjacent. Importantly, you'd like the sum of the weights of vertices in $$V'$$ to be as high as possible.
+
+For example, the set $$\{b\}$$ is an independent set with weight 6. The set $$\{b, f\}$$ is also an independent set, and a better one in the context of the game since the total weight of that set is 12 (6 for $$b$$ and 6 for $$f$$). The set $$\{b,f,g\}$$ has weight 15, but it doesn't count for our game since $$f$$ and $$g$$ are adjacent, and hence the set is not independent.
+
+Got the idea? Go ahead and try to find the best independent set you can!
+
+<RandomIndependentSet />
+
+<Heading refId=combOptGames level=3>
+    Serious business
+</Heading>

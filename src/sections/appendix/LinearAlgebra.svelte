@@ -125,7 +125,7 @@ An <Definition refId=identityMatrix>
 The main property of identity matrices is that multiplying another (properly sized) matrix by $$\identity$$ does not alter it, i.e. we have
 
 <MathDisp>
-  \identityA = A,\quad A\identity= A.
+  \identity A = A,\quad A\identity= A.
 </MathDisp>
 
 Note that we usually don't explicitly specify the size of $$\identity$$, since it is usually clear from the context.

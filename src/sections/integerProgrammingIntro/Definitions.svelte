@@ -82,7 +82,7 @@ We now have the vocabulary to properly define linear programming, which is an op
         <MathDisp>
             \argmax_{x\in\R_{\geq0}^n} \{cx: Ax\leq b\}
         </MathDisp>
-        i.e. find vector $$x\in\R^n$$ satisfying the constraints $$Ax\leq b$$ that maximizes the objective $$cx$$.
+        i.e. find nonnegative vector $$x\in\R^n_{\geq0}$$ satisfying the constraints $$Ax\leq b$$ that maximizes the objective $$cx$$.
     </span>
 </Problem>
 
@@ -141,7 +141,7 @@ From linear programming, we come to integer programming simply by requiring that
         <MathDisp>
             \argmax_{x\in\Z_{\geq0}^n} \{cx: Ax\leq b\}
         </MathDisp>
-        i.e. find integer vector $$x\in\Z^n$$ satisfying the constraints $$Ax\leq b$$ that maximizes the objective $$cx$$.
+        i.e. find nonnegative integer vector $$x\in\Z^n_{\geq0}$$ satisfying the constraints $$Ax\leq b$$ that maximizes the objective $$cx$$.
     </span>
 </Problem>
 

@@ -28,6 +28,7 @@
 		"@sveltejs/adapter-static": "^3.0.4",
 		"hull.js": "^1.0.6",
 		"katex": "^0.16.10",
+		"vis-data": "^7.1.9",
 		"vis-network": "^9.1.9"
 	}
 }

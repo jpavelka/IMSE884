@@ -88,6 +88,9 @@
       }
       options.edges.arrows = 'to';
     }
+    if (!options.clickToUse) {
+      options.clickToUse = true;
+    }
     $: finalConvertedNodes = convertedNodes.map(x => {
       if (!!x.extraLabel) {
         x.label += `\n${x.extraLabel}`

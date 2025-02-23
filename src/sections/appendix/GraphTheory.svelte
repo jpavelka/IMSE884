@@ -122,7 +122,11 @@ Familiarity with graph theory will be useful for this course. You don't need to 
         In a <DefinitionRef refId=graph/>, a vertex $$v_1\in V$$ is a neighbor of another vertex $$v_2\in V$$ if an edge exists between the two, i.e. if $$(v_1,v_2)\in E$$.
     </span>
     <span slot=glossaryDisp>neighbor</span>
-</Definition> if there is and edge between them, i.e. if $$(v_1,v_2)\in E$$.
+</Definition> if there is and edge between them, i.e. if $$(v_1,v_2)\in E$$. An alternative term is <Definition refId=adjacent>adjacent
+    <span slot=definition>
+        In a <DefinitionRef refId=graph/>, vertices $$v_1\in V$$ and $$v_2\in V$$ are adjacent if an edge exists between the two, i.e. if $$(v_1,v_2)\in E$$.
+    </span>
+</Definition>, i.e. vertices $$v_1,v_2$$ are neighbors if and only if they are adjacent.
 
 Initially, these definitions feel rather abstract. But in practice graphs often have very natural interpretations. Generally they are used to model relationships between entities, e.g. the nodes are people signed up for some social network, and an edge is drawn between two people if they are friends. Another common interpretation is as a road network, when the vertices are cities on a map, and an edge is drawn between two cities if it is possible to drive from one city to the other. In this case, there is often a distance $$d_e$$ associated with each $$e\in E$$ that denotes the distance between two cities, and you are perhaps trying to find the shortest route that lets you get from one place to another.
 
