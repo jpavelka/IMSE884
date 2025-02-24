@@ -42,9 +42,6 @@
     nodes={nodes}
     edges={edges}
     height={400}
-    allowDrag={true}
-    allowDragNodes={true}
-    allowZoom={true}
 />
 {/key}
 <button on:click={() => generateInstance(numVertices)}>

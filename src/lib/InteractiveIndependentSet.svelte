@@ -4,6 +4,8 @@
   import { DataSet } from "vis-data"
   import { layoutInfo } from "./stores";
   import MathInline from "./MathInline.svelte";
+  import { solve } from "yalps"
+  import { lessEq, equalTo, greaterEq, inRange } from "yalps"
   
   export let nodes;
   export let edges;
@@ -15,7 +17,7 @@
   
   $: width = 0.9 * $layoutInfo.notesWidth;
   let indSet = new Set();
-
+  
   const options = {
     nodes: {
       margin: 1,
@@ -59,6 +61,24 @@
   $: graphEdges = new DataSet(edges.map((x) => {
     return { id: x, from: x.split(",")[0], to: x.split(",")[1], chosen: false };
   }));
+  const addNodeToIndSet = (nodeId) => {
+    const node = graphNodes.get(nodeId);
+    indSet.add(nodeId);
+    indSet = new Set([...indSet].sort((a, b) => a < b ? -1 : 1));
+    node.color = {
+      background: 'orange',
+    }
+    graphNodes.update(node);
+  }
+  const removeNodeFromIndSet = (nodeId) => {
+    const node = graphNodes.get(nodeId);
+    indSet.delete(nodeId);
+    indSet = new Set([...indSet].sort((a, b) => a < b ? -1 : 1));
+    node.color = {
+      background: '#97c2fc',
+    }
+    graphNodes.update(node);
+  }
   onMount(() => {
     network = new Network(container, {}, options);
     setTimeout(() => {
@@ -73,22 +93,14 @@
     });
     network.on( 'click', function(props) {
       for (const nodeId of props.nodes) {
-        const node = graphNodes.get(nodeId);
         if (indSet.has(nodeId)) {
-          indSet.delete(nodeId);
-          indSet = new Set([...indSet].sort((a, b) => a < b ? -1 : 1));
-          node.color = {
-            background: '#97c2fc',
-          }
+          removeNodeFromIndSet(nodeId);
         } else {
+          const node = graphNodes.get(nodeId);
           const neighbors = props.edges.map(e => e.split(',').filter(x => x !== nodeId)[0]);
           const neighborsInSet = indSet.intersection(new Set(neighbors));
           if (neighborsInSet.size === 0) {
-            indSet.add(nodeId);
-            indSet = new Set([...indSet].sort((a, b) => a < b ? -1 : 1));
-            node.color = {
-              background: 'orange',
-            }
+            addNodeToIndSet(nodeId);
           } else {
             const neighborEdges = props.edges.filter(e => {
               return neighborsInSet.has(e.split(',').filter(x => x !== nodeId)[0])
@@ -114,27 +126,67 @@
                 graphEdges.update(edge);
               }
             }, 1000)
+            graphNodes.update(node);
           }
         }
-        graphNodes.update(node);
       }
     });
   });
-  $: if (!!network) {
-    network.setData({
-      nodes: graphNodes,
-      edges: graphEdges,
-    });
-    network.redraw();
+  let solution = undefined;
+  const getOpt = () => {
+    const modelVars = {}
+    const modelConstrs = {}
+    for (const [id, w] of Object.entries(nodes)) {
+      modelVars[id] = { weight: w };
+    }
+    for (const e of edges) {
+      modelConstrs[e] = { max: 1 };
+      for (const n of e.split(',')) {
+        modelVars[n][e] = 1;
+      }
+    }
+    const model = {
+      direction: "maximize" as const,
+      objective: "weight",
+      variables: modelVars,
+      constraints: modelConstrs,
+      binaries: [...Object.keys(modelVars)], // these variables must have an integer value in the solution
+    }
+    solution = solve(model)
+  }
+  const clearSelections = () => {
+    for (const nodeId of indSet) {
+      removeNodeFromIndSet(nodeId);
+    }
+  }
+  const showOpt = () => {
+    clearSelections()
+    for (const nodeId of solution.variables.filter(x => x[1] > 0.9).map(x => x[0])) {
+      addNodeToIndSet(nodeId);
+    }
   }
 </script>
 
 <div style=margin:auto>
   <div bind:this={container} style={`height:${height}px;width:${width}px;`} />
-      <div>
-        <MathInline alwaysRender={true}>V'={'\\{ \\:'}</MathInline>{[...indSet].join(', ')}<MathInline>{'\\}'}</MathInline>
-      </div>
-      <div>
-        Weight: {[...indSet].map(n => nodes[n]).reduce((a, b) => a + b, 0)}
-      </div>
+  <div>
+    <MathInline alwaysRender={true}>V'={'\\{ \\:'}</MathInline>{[...indSet].join(', ')}<MathInline>{'\\}'}</MathInline>
+    {#if [...indSet].length > 0}
+      <button on:click={clearSelections} style=line-height:0.4rem>Clear</button>
+    {/if}
+  </div>
+  <div>
+    Weight: {[...indSet].map(n => nodes[n]).reduce((a, b) => a + b, 0)}
+  </div>
+  {#if !!solution}
+    <span style=font-weight:bold>Optimal solution:</span>
+    <MathInline alwaysRender={true}>V'={'\\{ \\:'}</MathInline>
+    {solution.variables.filter(x => x[1] > 0.9).map(x => x[0]).join(', ')}
+    <MathInline>{'\\}'}</MathInline>
+    (weight {solution.result})
+    <button on:click={showOpt}>Show it</button>
+    <button on:click={() => {solution = undefined}}>Hide</button>
+  {:else}
+    <button on:click={getOpt}>Solve</button>
+  {/if}
 </div>
