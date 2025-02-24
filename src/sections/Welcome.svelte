@@ -113,15 +113,24 @@ The game is to create a so-called <Definition refId=independentSet>
     independent set
     <span slot=definition>
         In <DefinitionRef refId=graphTheory/>, a subset $$V'\subseteq V$$ of the vertices such that no two vertices in the set are adjacent.
-    </span>
-</Definition> (also known as a <Definition refId=stableSet>stable set<span slot=definition>See <DefinitionRef refId=independentSet/>.</span></Definition>) of vertices, i.e. a subset $$V'\subseteq V$$ of the vertices such that no two vertices in $$V'$$ are adjacent. Importantly, you'd like the sum of the weights of vertices in $$V'$$ to be as high as possible.
+    </span></Definition> (also known as a <Definition refId=stableSet>stable set<span slot=definition>See <DefinitionRef refId=independentSet/>.</span></Definition>) of vertices, i.e. a subset $$V'\subseteq V$$ of the vertices such that no two vertices in $$V'$$ share and edge. Importantly, you'd like the sum of the weights of vertices in $$V'$$ to be as high as possible.
 
 For example, the set $$\{b\}$$ is an independent set with weight 6. The set $$\{b, f\}$$ is also an independent set, and a better one in the context of the game since the total weight of that set is 12 (6 for $$b$$ and 6 for $$f$$). The set $$\{b,f,g\}$$ has weight 15, but it doesn't count for our game since $$f$$ and $$g$$ are adjacent, and hence the set is not independent.
 
-Got the idea? Go ahead and try to find the best independent set you can!
+Got the idea? Then go on back to <FigureRef refId=indSetEx/> and try to find the best independent set you can! As you click on vertices, their color will change from blue to orange to indicate they've been added to the independent set. However, if you try to select a vertex with a neighbor already in the set, the vertex flashes red to indicate it may not be added. Under the graphic, we keep track of the members of the set and combined weight of the current members. When you're finished trying to build your best set, you can hit the "Solve" button to see the optimal solution.
 
-<RandomIndependentSet />
+Wanna try some more? We have you covered in <FigureRef refId=randIndSet/>, where you can randomly generate new instances to play around with.
 
-<Heading refId=combOptGames level=3>
+<Figure refId=randIndSet>
+    <RandomIndependentSet />
+    <span slot=caption>
+        Game time! Try out some randomly-generated instances of the <ProblemRef refId=maxWeightIndSet/>
+    </span>
+</Figure>
+
+Now, this is just one example. Several of the problems we'll discuss in this class have the same game-like qualities, which was my first hook. But beyond that, you might be wondering what's going on behind that magic "Solve" button. Can you trust that it's actually identifying the optimal solution?<Footnote>Yes, you can.</Footnote> And how does it work, anyway?<Footnote>We're getting there... solving problems like these is the whole point of the class!</Footnote> Is it just trying all the different possibilities and returning the one with the highest weight?<Footnote>No. Or, at least not usually. Enumeration works, of course, but we generally have better ways to solve these problems. Though <em>how much</em> better is a point of discussion, which is all part of the class!</Footnote> If you find yourself wondering about these kinds of questions, you're in the right place and we'll get along just fine!
+
+<Heading refId=combOptBusiness level=3>
     Serious business
 </Heading>
+

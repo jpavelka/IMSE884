@@ -5,7 +5,6 @@
   import { layoutInfo } from "./stores";
   import MathInline from "./MathInline.svelte";
   import { solve } from "yalps"
-  import { lessEq, equalTo, greaterEq, inRange } from "yalps"
   
   export let nodes;
   export let edges;
@@ -180,8 +179,8 @@
   </div>
   {#if !!solution}
     <span style=font-weight:bold>Optimal solution:</span>
-    <MathInline alwaysRender={true}>V'={'\\{ \\:'}</MathInline>
-    {solution.variables.filter(x => x[1] > 0.9).map(x => x[0]).join(', ')}
+    <MathInline alwaysRender={true}>V'={'\\{ \\:'}</MathInline
+      >{solution.variables.filter(x => x[1] > 0.9).map(x => x[0]).join(', ')}
     <MathInline>{'\\}'}</MathInline>
     (weight {solution.result})
     <button on:click={showOpt}>Show it</button>
