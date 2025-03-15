@@ -45,7 +45,7 @@
         lastSelectedSec = sec;
         const contextEl = document.getElementById(sec + 'Context');
         const dispEl = document.getElementById('sectionContextDisplay') as HTMLElement;
-        dispEl.innerHTML = `<a href=#${sec} style=color:blue;>Link</a>: `;
+        dispEl.innerHTML = `<a href=#${sec} style=color:blue;>Go to</a> | `;
         if (contextEl?.innerHTML !== '') {    
             dispEl.innerHTML += contextEl?.innerHTML;
         } else {

@@ -1,6 +1,7 @@
 <script>
     import Heading from "$lib/Heading.svelte";
     import ProblemRef from "$lib/ProblemRef.svelte";
+    import CombOptIps from "./CombOptIps.svelte";
     import Definitions from "./Definitions.svelte";
     import Formulations from "./Formulations.svelte";
 </script>
@@ -16,6 +17,7 @@ But we're not ready to talk about solving them yet. Our first step is to define 
 
 <Definitions />
 <Formulations />
+<CombOptIps />
 
 <!-- <Heading level=2 refId=ipRecap>
     Recap

@@ -14,7 +14,7 @@
   export let allowDragNodes = false;
   export let height = 300;
   
-  $: width = 0.9 * $layoutInfo.notesWidth;
+  $: width = $layoutInfo.notesWidth;
   let indSet = new Set();
   
   const options = {
@@ -167,7 +167,7 @@
 </script>
 
 <div style=margin:auto>
-  <div bind:this={container} style={`height:${height}px;width:${width}px;`} />
+  <div bind:this={container} />
   <div>
     <MathInline alwaysRender={true}>V'={'\\{ \\:'}</MathInline>{[...indSet].join(', ')}<MathInline>{'\\}'}</MathInline>
     {#if [...indSet].length > 0}

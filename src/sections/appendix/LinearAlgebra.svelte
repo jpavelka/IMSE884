@@ -136,7 +136,7 @@ The <Definition refId=zeroMatrix>
 </Definition>, denoted by $$\zeros$$ is a matrix with all entries equal to 0. Again, we will usually not explicitly specify its size since it will be clear from context. The zero matrix satisfies:
 
 <MathDisp>
-  A + \zeros = A,\quad \zerosA = \zeros,\quad A\zeros = A.
+  A + \zeros = A,\quad \zeros A = \zeros,\quad A\zeros = A.
 </MathDisp>
 
 Note that $$\identity$$ and $$\zeros$$ play roles in matrix operations similar to the roles of 1 and 0 (respectively) in arithmetic.

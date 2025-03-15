@@ -86,7 +86,7 @@ While it may not be obvious from the graph theory framing, the <ProblemRef refId
 Here's another inuitive problem that fits the <ProblemRef refId=combOpt/> framework:
 <Problem refId=knapsack>
     <span slot=name>Knapsack Problem</span>
-    <span slot=instance>A set $$J$$, positive numbers $$w_j\in\Z_{>0}$$ and $$v_j\in\R_{>0}\setminus\{0\}$$ for each $$j\in J$$, positive integer $$b\in\Z_{>0}$$.</span>
+    <span slot=instance>A set $$J$$, positive numbers $$w_j\in\Z_{>0}$$ and $$v_j\in\R_{>0}$$ for each $$j\in J$$, positive integer $$b\in\Z_{>0}$$.</span>
     <span slot=problem>
         Find a subset $$S\subseteq J$$ satisfying $$\sum_{j\in S}w_j\leq b$$ that maximizes the total value $$\sum_{j\in S}v_j$$.
     </span>
@@ -109,7 +109,7 @@ Now that we've worked through it on a few examples, we'll skip formally specifyi
 
 <Problem refId=assignment>
     <span slot=name>Assignment Problem</span>
-    <span slot=instance>A complete bipartite graph $$G=(V_1,V_2,E)$$, edge costs $$c_{ij}\in\R$$ for each $$i\in V_1$$, $$j\in V_2$$.</span>
+    <span slot=instance>A complete bipartite graph $$G=(V_1,V_2,E)$$ with $$|V_1|=|V_2|$$, edge costs $$c_{ij}\in\R$$ for each $$i\in V_1$$, $$j\in V_2$$.</span>
     <span slot=problem>Find a minimum-cost perfect matching in $$G$$.</span>
     <span slot=plainEnglish>
         There are $$n$$ people available to carry out $$n$$ jobs. Each person is assigned to carry out exactly one job. Some individuals are better suited to particular jobs than others, so there is an estimated cost $$c_{ij}$$ if person $$i$$ is assigned to job $$j$$. How can you assign people to jobs such that the sum of the assignment costs is minimized?

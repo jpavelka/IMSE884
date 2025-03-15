@@ -134,3 +134,91 @@ Now, this is just one example. Several of the problems we'll discuss in this cla
     Serious business
 </Heading>
 
+Whether or not the above resonates with you, another reason to learn about these optimization problems is that they can be seriously useful in a business context, and knowledge of these techniques can be very useful on a résumé.
+
+I know this from experience. In my career working in retail, I've built optimization models for improving efficiency in several aspects of online order fulfillment. For example:
+
+<ul>
+    <li>Determining what products are stocked in different warehouses, and in what quantities.</li>
+    <li>When an order comes in from the website, determining from which warehouse(s) the order will be fulfilled.</li>
+    <li>Determining which orders will be picked and shipped during each fulfillment "wave".</li>
+    <li>Determining which size box to ship an order in.</li>    
+</ul>
+
+All that for just online order fulfillment. There are several more examples in different parts of the retail industry, as well as nearly any other industry in the economy.
+
+For other examples, we'll turn to some recent finalists the <a href=https://www.informs.org/Recognizing-Excellence/INFORMS-Prizes/Franz-Edelman-Award>Edelman Award</a>, which is annual prize given out by the professional society known as <a href=https://www.informs.org>INFORMS</a> (the Institute for Operations Research and the Management Sciences). The stated goal of the prize is to "recognize excellence in the execution of operations research on the organizational level" and gives some great case studies of the use of optimization in companies worldwide. The awarded projects apply operations research principles to business problems; combinatorial optimization and integer programming use cases are often featured. Here's a sample of recent finalists that used techniques we'll discuss in class (check the links in the "Year" column for more project descriptions):
+
+<Figure refId=edelman>
+    <table>
+        <tr><th>Year</th><th>Company</th><th>Description</th><th>Reported Benefit</th></tr>
+        <tr>
+            <td><a href=https://3449182.fs1.hubspotusercontent-na1.net/hubfs/3449182/2024_Edelman_Gala_Book.pdf>2024</a></td>
+            <td>American Airlines</td>
+            <td>Large-sized mixed integer program model with a network-flow structure that realistically represents the state of the airline operation in real time.</td>
+            <td>1,000 flight cancellations avoided ($15M revenue loss avoidance) over two years.</td>
+        </tr>
+        <tr>
+            <td><a href=https://3449182.fs1.hubspotusercontent-na1.net/hubfs/3449182/2023_Edelman_Gala_Book.pdf>2023</a></td>
+            <td>DHL Supply Chain</td>
+            <td>Fill trucks for both inbound and outbound operations based on clustering, involving standard branch-and-cut methods.</td>
+            <td>Part of a program with an estimated $98M savings per year.</td>
+        </tr>
+        <tr>
+            <td>2023</td>
+            <td>Meituan</td>
+            <td>A multiperiod, multiobjective optimization problem that assigns food deliveries to available drivers.</td>
+            <td>20% reduction in order delivery time.</td>
+        </tr>
+        <tr>
+            <td>2023</td>
+            <td>Walmart</td>
+            <td>A metaheuristic-based framework integrating a suit of algorithms, including various neighborhood searches, heuristics, and mixed-integer programming models.</td>
+            <td>$75M, 72M pounds of CO2 annually.</td>
+        </tr>
+        <tr>
+            <td><a href=https://3449182.fs1.hubspotusercontent-na1.net/hubfs/3449182/2022_Edelman_Gala_Book.pdf>2022</a></td>
+            <td>US Census Bureau</td>
+            <td>A program leveraging machine learning and optimization techniques to provide daily assignments of cases to workers, along with the route that the workers should take to increase efficiency.</td>
+            <td>$2.5B</td>
+        </tr>
+        <tr>
+            <td><a href=https://tauber.umich.edu/sites/default/files/documents/2021_edelman_award_book.pdf>2021</a></td>
+            <td>JD.com</td>
+            <td>Dispatching automated vehicles with a large-scale integer program with millions of decision variables and constraints, solved via a Lagrangian relaxation together with cutting planes.</td>
+            <td> 90% of JD.com’s first-party retail orders were delivered the same- or next-day after they were placed.</td>
+        </tr>
+        <tr>
+            <td>2021</td>
+            <td>Lenovo</td>
+            <td>An advanced production scheduling solution utilizing machine learning, artificial intelligence, and reinforcement learning, modeled as a very large-scale combinatorial optimization problem.</td>
+            <td>Helped Lenovo increase revenue by more than 4.6 billion over two years.</td>
+        </tr>
+        <tr>
+            <td>2021</td>
+            <td>OCP</td>
+            <td>A mixed-integer, multiperiod optimization model to holistically optimize the entire production, sales, and supply chain</td>
+            <td>$2.3B over a six-year period.</td>
+        </tr>
+    </table>
+    <span slot=caption>A sample of recent Edelman prize finalists using integer programming and/or combinatorial optimization techniques.</span>
+</Figure>
+
+As you can see, businesses from a wide range of industries are making saving lots of money applying the methods we'll be discussing.
+
+
+<style>
+    table {
+        border: 1pt solid black;
+        border-collapse: collapse;
+    }
+    th {
+        font-weight: bold;
+        padding: 0 1rem;
+        border: 1pt solid black;
+    }
+    td {
+        padding: 0 1rem;
+        border: 1pt solid black;
+    }
+</style>

@@ -90,6 +90,3 @@ So, to recap, the linearity of the objective and constraints is not negotiable, 
     <li>Constraints may be of $$\leq$$, $$\geq$$, or $$=$$ form.</li>
     <li>Variables may be bounded or unrestricted.</li>
 </ul>
-
-
-<!-- equality, geq, minimize, unrestricted variables -->
