@@ -17,6 +17,10 @@ import Definition from "$lib/Definition.svelte";
 
 What we'd really like to nail down first is how to describe the running time of certain algorithms. More specifically, we'd like to know how the running time changes as the size of the problem increases. This "size" we're discussing has something to do with the number of items under consideration, for example the number of vertices and edges in the underlying graph in the case of <ProblemRef refId=tsp/> or <ProblemRef refId=mst/>.
 
+<Heading level=3 refId=inputLength>
+    Input length
+</Heading>
+
 To make things a little more precise, let's suppose we have some given problem (say <ProblemRef refId=tsp/>) and let $$X$$ be and instance of that problem (i.e. a specific graph and set of edge costs). We say the <Definition refId=length>
     length
     <span slot=definition>For a given instance $$X$$ of an optimization or decision problem, the length of $$X$$ (denoted $$L(x)$$) is number of characters required in a "standard" binary representation of the instance data. Informally, think of it as the disk space required to save the instance data on your computer.</span>
@@ -58,6 +62,10 @@ This "don't sweat the small stuff" philosophy is codified in the so-called "big-
 
 Basically, this says that for big enough values of $$x$$, $$g(x)$$ is at most a constant away from $$f(x)$$. Colloquially, think of it as saying "$$g$$ grows as fast or faster than $$f$$." The formal definition is a little scary, but the real point is to give us a framework where we can abstract away the little details, and say things like "the length of an instance of the <ProblemRef refId=knapsack/> grows like $$|J|\log|C|$$", but more succinctly: "For instances $$X$$ of the <ProblemRef refId=knapsack/>, $$L(X)=\O{|J|\log|C|}$$".
 
+<Heading level=3 refId=polyTime>
+    Polynomial time
+</Heading>
+
 Now suppose you have some problem $$P$$ (something like the <ProblemRef refId=knapsack/> or <ProblemRef refId=tsp/>) and an algorithm $$A$$ for solving the problem. For any instance $$X$$ of $$P$$, let $$f_A(X)$$ be the number of "elementary calculations" (again, not being precise here, but think things like addition, multiplication, comparison, etc.) required to run algorithm $$A$$ on instance $$X$$. We use these $$f_A(X)$$ values to define $$f_A^*(l)$$, the <Definition refId=runningTime>
     running time
     <span slot=definition>
@@ -68,10 +76,6 @@ Now suppose you have some problem $$P$$ (something like the <ProblemRef refId=kn
 <MathDisp>
     f_A^*(l)=\max_{X\in P}\left\{f_A(X):L(X)=l\right\}
 </MathDisp>
-
-<Heading level=3 refId=polyTime>
-    Polynomial time
-</Heading>
 
 Ok, that was quite a few wonky definitions, but the payoff is we now have a succinct way to describe how an algorithm's running time changes as the size of the problem increases. The holy grail of algorithm design is to create a so-called <Definition refId=polynomialAlgo>
     polynomial
@@ -91,20 +95,12 @@ Ok, that was quite a few wonky definitions, but the payoff is we now have a succ
     f_A^*(l)=\O{l^p}
 </MathDisp>
 
-Let's try to make this more concrete, yes? As luck would have it, we've already seen a few polynomial algorithms. One such example is <AlgorithmRef refId=prim/> for <ProblemRef refId=mst/>. To show this, let's first analyze the input size of an instance $$X$$ of <ProblemRef refId=mst/>. To describe the input, we need to identify the vertices and edges, plus give costs $$c_e$$ for each $$e\in\{i,j\}$$. If we let $$C=\max_{e\in E} c_e$$, then we can safely bound the input length by $$\O{|V| + |E|\log C}$$. We can also note that the total number of edges $$|E|$$ can be on the order of $$|V|^2$$<Footnote>To attain the maximum number of edges in a graph (assuming no repeat edges) you'd need an edge between each pair of vertices. So the maximum number of edges on a graph is $$|V|$$ choose 2, or $$\frac{1}{2}|V|(|V|-1)=\O{|V|^2}$$</Footnote>. So the $$|E|\log C$$ term dominates the $$|V|$$ term in the limit, which justifies us saying
+Let's try to make this more concrete, yes? As luck would have it, we've already seen a few polynomial algorithms. One such example is <AlgorithmRef refId=prim/> for <ProblemRef refId=mst/>. To show this, let's first analyze the length of an instance $$X$$ of <ProblemRef refId=mst/>. Actually, we won't be quite as formal as the above definitions would imply. For our purposes, it is good enough to just determine the main elements of the input length, which we'll loosely define as the quantities we can add and multiply to get (on the order of) the input length. To describe the input for <ProblemRef refId=mst/>, we need to identify the vertices and edges, plus give costs $$c_e$$ for each $$e\in\{i,j\}$$. If we let $$C=\max_{e\in E} c_e$$, then we can safely bound the input length by something on the order of $$|V| + |E|\log C$$.
 
-<MathDisp>
-    L(X)=\O{|E|\log C}.
-</MathDisp>
+Now let's think about the algorithm. How many elementary operations might it take (in a worst case) to complete <AlgorithmRef refId=prim/>? In each pass through the main iteration, we add a new edge to the tree. This keeps going until the tree is a spanning tree, so $$|V|-1$$ iterations in the main loop. Each loop requires us to check the costs on each edge incident to $$U$$. While the size of $$U$$ changes, we know in every case that the number of edges we check can be no more than $$|E|$$. So that's $$\O{|E|}$$ checks of edge costs, over $$|V|-1=\O{|V|}$$ iterations, or $$\O{|V||E|}$$ operations.
 
-How many elementary operations might it take (in a worst case) to complete <AlgorithmRef refId=prim/>? In each pass through the main iteration, we add a new edge to the tree. This keeps going until the tree is a spanning tree, so $$|V|-1$$ iterations in the main loop. Each loop requires us to check the costs on each edge incident to $$U$$. While the size of $$U$$ changes, we know in every case that the number of edges we check can be no more than $$|E|$$. So that's $$\O{|E|}$$ checks of edge costs, over $$|V|-1=\O{|V|}$$ iterations, or $$\O{|V||E|}$$ operations.
+Do we need to keep counting operations? I'd say no. Yes, there is the initialization step, but those are just one-off operations. Whatever we do there won't add up to anything that's $$\O{|V||E|}$$, so the initialization won't effect things asymptotically. Remember, the beauty of using big-O notation is that we don't need to sweat the small stuff!
 
-Do we need to keep counting operations? I'd say no. Yes, there is the initialization step, but that won't add anything beyond the $$\O{|V||E|}$$ operations we already have. Remember, the beauty of using big-O notation is that we don't need to sweat the small stuff! So with $$L(X)=\O{|E|\log C}$$ and the number of operations being $$\O{|V||E|}$$, to show the algorithm is polynomial we need to find $$p\in\Z_{>0}$$ such that
+Now, we have the components of the input length $$|V|,|E|,\log C$$, and as well as an asymptotic bound on the run time $$\O{|V||E|}$$. In our slightly-less-than-formal world, all that's left is to check if $$|V||E|$$ can be written as some polynomial function of the inputs $$|V|,|E|,\log C$$. The answer to that is an obvious yes (a polynomial with $$p=1$$, even)! So <AlgorithmRef refId=prim/> is a polynomial-time algorithm for <ProblemRef refId=mst/>.
 
-<MathDisp>
-    |V||E|=\O{(|E|\log C)^p}
-</MathDisp>
-
-This is pretty easy! Take $$p=2$$, then the right-hand is something greater than $$|E|^2$$, which by itself is bigger than $$|V||E|$$.
-
-It might seem like I was being pretty sloppy there, but we must remember two things: First, we're not being very rigorous in this section 😊. Second, this exercise is all about finding valid bounds, not so much about being precise. Sure, if you get sloppy enough with you bound on steps of the algorithm, you may not be able to prove polynomiality. But in practice, you'd need to get really sloppy to miss it!
+It might seem like I was being pretty sloppy there, but we must remember two things: First, we're not being very rigorous in this section 😊. Second, this exercise is all about finding valid bounds, not so much about being precise. Sure, if you get sloppy enough with your bound on steps of the algorithm, you may not be able to prove polynomiality. But in practice, you'd need to get really sloppy to miss it!

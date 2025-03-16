@@ -7,7 +7,7 @@
     export let ignoreOverflow: boolean = false;
     export let fontSize = '1';
     export let name = '';
-    export let alwaysRender = true;
+    export let alwaysRender = false;
 
     const options = {
         displayMode: true,
@@ -25,8 +25,16 @@
         }
     }
     $: returnId = $equations.returnIds[refId];
+	let el: HTMLElement;
+	$: {
+		if (!!el && !alwaysRender) {
+			const parent = el.parentElement || {classList: []};
+			alwaysRender = ![...parent.classList].includes('notesContent');
+		}
+	}
 </script>
 
+<span bind:this={el}></span>
 <div style="display:flex;align-items:center">
     <div class=mathDisp style={"flex-grow:1;" + (ignoreOverflow ? "" : "overflow-x:auto")} id={refId}>
         <KatexDisp {options} fontSize={fontSize} refId={refId} {alwaysRender}>
