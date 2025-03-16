@@ -230,6 +230,18 @@
         background-color: lightgray;
         opacity: 0.8;
     }
+    :global(.katex .tag span:has(> .mord.text)) {
+        position: relative;
+    }
+    :global(.katex .tag .mord.text) {
+        font-size: 0.8em;
+        position: relative;
+        top: calc(-0.1* var(--standardFontSize));
+    }
+    :global(.katex-display > .katex > .katex-html > .tag) {
+        position: relative !important;
+        margin-left: 5rem;
+    }
     @keyframes -global-line-pulse {
         0% {
             stroke-width: 2;

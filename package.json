@@ -26,6 +26,7 @@
 		"@citation-js/plugin-bibtex": "^0.7.9",
 		"@citation-js/plugin-csl": "^0.7.9",
 		"@sveltejs/adapter-static": "^3.0.4",
+		"chart.js": "^4.4.8",
 		"hull.js": "^1.0.6",
 		"katex": "^0.16.10",
 		"vis-data": "^7.1.9",

@@ -135,7 +135,7 @@ Graphs are typically represented visually as in <FigureRef refId=exampleGraph/>:
     and edges:
     <MathDisp>E=\{(1,2), (1,3), (2,3), (2,4), (2,5), (3,5), (4,5)\}</MathDisp>
 
-    <Figure refId=exampleGraph>
+<Figure refId=exampleGraph>
     <span slot=caption>
         Visualization of a graph.
     </span>

@@ -15,35 +15,6 @@
     });
     $: retId = refId + "-ref" + refNum;
     $: showPopup = false;
-    const followBreadcrumbs = (el: HTMLElement, currentTrail: Array<any> = []) => {
-        let completedPaths: Array<Array<string>> = [];
-        const results = nextBreadcrumbs(el);
-        for (const res of results) {
-            const nextTrail = currentTrail.concat([res[0]])
-            if (res[1] === 'complete') {
-                completedPaths.push(nextTrail);
-            } else {
-                const childEl = el.children[parseInt(res[0])] as HTMLElement;
-                completedPaths = completedPaths.concat(followBreadcrumbs(childEl, nextTrail));
-            }
-        }
-        return completedPaths
-    }
-    const nextBreadcrumbs = (el: HTMLElement) => {
-        const path = [];
-        for (const childInd in el.children) {
-            const childEl = el.children[childInd] as HTMLElement;
-            if (!childEl.tagName) {
-                continue
-            }
-            else if (new Set(childEl.classList).intersection(new Set(['canvasBreadcrumb', 'vis-network'])).size > 0) {
-                path.push([childInd, 'incomplete']);
-            } else if (childEl.tagName.toLowerCase() === 'canvas') {
-                path.push([childInd, 'complete']);
-            }
-        }
-        return path;
-    }
     const popupOpenClose = () => {
         showPopup = !showPopup;
         const popupEl = document.getElementById(retId);
@@ -56,14 +27,10 @@
                 const clonedNode = el.cloneNode(true) as HTMLElement;
                 clonedNode.id = clonedNode.id || '';
                 clonedNode.id += "Ref" + refNum;
-                const canvasPaths = followBreadcrumbs(el);
-                for (const cpath of canvasPaths) {
-                    let cEl = el as HTMLElement;
-                    let cClonedEl = clonedNode as HTMLElement;
-                    for (const c of cpath) {
-                        cEl = cEl.children[parseInt(c)] as HTMLElement;
-                        cClonedEl = cClonedEl.children[parseInt(c)] as HTMLElement;
-                    }
+                const canvasEls = el.querySelectorAll("canvas");
+                const clonedCanvasEls = clonedNode.querySelectorAll("canvas");
+                for (const [i, cEl] of canvasEls.entries()) {
+                    const cClonedEl = clonedCanvasEls[i] as HTMLElement;
                     const context = (cClonedEl as HTMLCanvasElement).getContext('2d');
                     context?.drawImage((cEl as CanvasImageSource), 0, 0);
                 }

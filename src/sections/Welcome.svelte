@@ -86,7 +86,7 @@ Want an example? Let's go ahead and define one right now, though don't worry abo
 <Problem refId=maxWeightIndSet>
     <span slot=name>Maximum Weight Independent Set Problem</span>
     <span slot=instance>
-        Graph $$G=(V,E)$$, non-negative vertex weights $$w_{v}\in\R_{\geq0}$$ for each $$v \in V$$.
+        Graph $$G=(V,E)$$, non-negative vertex weights $$w_{v}\in\Z_{\geq0}$$ for each $$v \in V$$.
     </span>
     <span slot=problem>
         Find a subset of the vertices $$V'\subseteq V$$ where no two vertices in $$V'$$ are adjacent, such that the sum $$\sum_{v\in V'}w_v$$ is maximized. That is, find

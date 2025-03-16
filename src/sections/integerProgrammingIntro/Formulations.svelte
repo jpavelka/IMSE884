@@ -8,7 +8,7 @@
 </script>
 
 <Heading level=2 refId=ipFormulations>
-    Formulations
+    Formulation
     <span slot=context>How do real-world problems fit into the <ProblemRef refId=ip link={false} /> framework?</span>
 </Heading>
 

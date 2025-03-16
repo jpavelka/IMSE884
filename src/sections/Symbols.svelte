@@ -162,3 +162,24 @@
         The "ceiling" of the number $$x\in\R$$, i.e. the value resulting from rounding $$x$$ up to the nearest integer. So $$\ceil{1.3}=2$$.
     </span>
 </Symbol>
+<Symbol refId=lengthComplexity searchStr=l,l(x)>
+    $$L(X)$$
+    <span slot=desc>
+        In complexity theory, $$L(X)$$ is the length of an encoding of some problem instance $$X$$.
+    </span>
+</Symbol>
+<Symbol refId=bigO searchStr="O,big-O,bigO,big O">
+    $$\O{\cdot}$$
+    <span slot=desc>
+        Big-O notation, for describing the long-run behavior of some function. In complexity theory, for two functions $$f,g$$ over the same domain, we say $$f(x)=\O{g(x)}$$ (in English, "$$f(x)$$ is big O of $$g(x)$$") if there exists some positive $$M\in\R_{>0}$$ and $$x_0$$ in the domain such that
+        <MathDisp>
+        |f(x)|\leq M|g(x)|\qquad \forall\ x\geq x_0.
+        </MathDisp>
+    </span>
+</Symbol>
+<Symbol refId=runTime searchStr="runtime,run time,running time">
+    f_A^*(l)
+    <span slot=desc>
+        The running time of algorithm $$A$$ (on some problem $$P$$) over instances of length $$l$$.
+    </span>
+</Symbol>

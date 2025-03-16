@@ -4,6 +4,7 @@
     import CombOptIps from "./CombOptIps.svelte";
     import Definitions from "./Definitions.svelte";
     import Formulations from "./Formulations.svelte";
+    import FormulationSizes from "./formulationSizes.svelte";
 </script>
 
 <Heading level=1 refId=ipIntro>
@@ -18,7 +19,4 @@ But we're not ready to talk about solving them yet. Our first step is to define 
 <Definitions />
 <Formulations />
 <CombOptIps />
-
-<!-- <Heading level=2 refId=ipRecap>
-    Recap
-</Heading> -->
+<FormulationSizes />

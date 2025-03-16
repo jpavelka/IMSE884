@@ -31,7 +31,7 @@ We'll start with a basic one:
 <Problem refId=shortestPath>
     <span slot=name>Shortest Path Problem</span>
     <span slot=instance>
-        Digraph $$G=(V,E)$$, two nodes $$s,t\in V$$, non-negative edge costs $$c_{ij}\in\R_{\geq0}$$ for each $$(i,j)\in E$$.
+        Digraph $$G=(V,E)$$, two nodes $$s,t\in V$$, non-negative edge costs $$c_{ij}\in\Z_{>0}$$ for each $$(i,j)\in E$$.
     </span>
     <span slot=problem>
         Find a minimum-cost path in $$G$$ from $$s$$ to $$t$$, i.e.
@@ -79,6 +79,8 @@ with $$N,c$$, and $$\mathcal{F}$$ as we've just defined them.
 
 While it may not be obvious from the graph theory framing, the <ProblemRef refId=shortestPath/> has <a href=https://en.wikipedia.org/wiki/Shortest_path_problem#Applications target=_blank>several applications</a>. For example, if you were to model a road network as a graph with edge costs representing travel times or distances, a shortest path problem can be used by a navigation app to decide how to route you from one location to another.
 
+Lastly, an important technical note: You may be wondering why we stated the edges costs $$c_ij$$ must be integers. What would be wrong with, say, an edge cost of 2.1? The answer is that there's really nothing <em>wrong</em> with it. But the requirement stems from an acknowledgement that we solve these problems on computers, and computers which can only handle so much precision, and indeed really can't represent irrational numbers like $$\pi$$. Further, there are technical reasons why some of the algorithmic analysis we do only makes sense if the data being used are integers. Besides, if you want to solve an instance where you have an edge cost of 2.1, it should be safe to multiply all your costs by ten, effectively changing the units so that 2.1 turns into the integer 21 (and so on for other constants as needed).
+
 <Heading level=3 refId=knapsackDef>
     Knapsack
     <span slot=context>Another example problem that fits the <ProblemRef refId=combOpt link={false}/> framework</span>
@@ -86,7 +88,7 @@ While it may not be obvious from the graph theory framing, the <ProblemRef refId
 Here's another inuitive problem that fits the <ProblemRef refId=combOpt/> framework:
 <Problem refId=knapsack>
     <span slot=name>Knapsack Problem</span>
-    <span slot=instance>A set $$J$$, positive numbers $$w_j\in\Z_{>0}$$ and $$v_j\in\R_{>0}$$ for each $$j\in J$$, positive integer $$b\in\Z_{>0}$$.</span>
+    <span slot=instance>A set $$J$$, positive numbers $$w_j\in\Z_{>0}$$ and $$v_j\in\Z_{>0}$$ for each $$j\in J$$, positive integer $$b\in\Z_{>0}$$.</span>
     <span slot=problem>
         Find a subset $$S\subseteq J$$ satisfying $$\sum_{j\in S}w_j\leq b$$ that maximizes the total value $$\sum_{j\in S}v_j$$.
     </span>
@@ -109,7 +111,7 @@ Now that we've worked through it on a few examples, we'll skip formally specifyi
 
 <Problem refId=assignment>
     <span slot=name>Assignment Problem</span>
-    <span slot=instance>A complete bipartite graph $$G=(V_1,V_2,E)$$ with $$|V_1|=|V_2|$$, edge costs $$c_{ij}\in\R$$ for each $$i\in V_1$$, $$j\in V_2$$.</span>
+    <span slot=instance>A complete bipartite graph $$G=(V_1,V_2,E)$$ with $$|V_1|=|V_2|$$, edge costs $$c_{ij}\in\Z$$ for each $$i\in V_1$$, $$j\in V_2$$.</span>
     <span slot=problem>Find a minimum-cost perfect matching in $$G$$.</span>
     <span slot=plainEnglish>
         There are $$n$$ people available to carry out $$n$$ jobs. Each person is assigned to carry out exactly one job. Some individuals are better suited to particular jobs than others, so there is an estimated cost $$c_{ij}$$ if person $$i$$ is assigned to job $$j$$. How can you assign people to jobs such that the sum of the assignment costs is minimized?
@@ -122,7 +124,7 @@ Let's look at another graph-centric problem:
 <Problem refId=mst>
     <span slot=name>Minimum Spanning Tree Problem</span>
     <span slot=abbrev>MST</span>
-    <span slot=instance>A connected graph $$G=(V,E)$$, costs $$c_{ij}\in\R$$ for each edge $$(i,j)\in E$$.</span>
+    <span slot=instance>A connected graph $$G=(V,E)$$, costs $$c_{ij}\in\Z$$ for each edge $$(i,j)\in E$$.</span>
     <span slot=problem>Find a minimum-cost spanning tree in $$G$$.</span>
 </Problem>
 An example application here: A utility company is trying to build connections to all the houses in some neighborhood. They need <em>some</em> physical connection from their service to each house, i.e. they need a spanning tree connecting all of the houses.
@@ -130,7 +132,7 @@ An example application here: A utility company is trying to build connections to
 Here's another common problem. Admittedly, the mathematical definition is a little harder to parse initially. Hopefully the "plain English" example helps you work through it.
 <Problem refId=setCover>
     <span slot=name>Set Covering Problem</span>
-    <span slot=instance>Two sets $$M$$ and $$N$$, subsets $$S_j\subseteq M$$ for each $$j\in N$$, costs $$c_j\in\R$$ for each $$j\in N$$.</span>
+    <span slot=instance>Two sets $$M$$ and $$N$$, subsets $$S_j\subseteq M$$ for each $$j\in N$$, costs $$c_j\in\Z$$ for each $$j\in N$$.</span>
     <span slot=problem>Find a minimum-cost cover of $$M$$, i.e.
         <MathDisp>\min_{C\subseteq N}\left\{\sum_{j\in C}c_j: \bigcup_{j\in C}S_j=M\right\}</MathDisp>
     </span>
@@ -144,7 +146,7 @@ We'll wrap up this section with perhaps the most famous <ProblemRef refId=combOp
 <Problem refId=tsp>
     <span slot=name>Traveling Salesman Problem</span>
     <span slot=abbrev>TSP</span>
-    <span slot=instance>A complete graph $$G=(V,E)$$, costs $$c_{ij}\in\R_{\geq0}$$ for each edge $$(i,j)\in E$$.</span>
+    <span slot=instance>A complete graph $$G=(V,E)$$, costs $$c_{ij}\in\Z_{\geq0}$$ for each edge $$(i,j)\in E$$.</span>
     <span slot=problem>Find a minimum-distance tour in $$G$$.</span>
     <span slot=variants>
         <div>

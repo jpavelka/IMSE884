@@ -7,7 +7,7 @@
     export let ignoreOverflow: boolean = false;
     export let fontSize = '1';
     export let name = '';
-    export let alwaysRender = false;
+    export let alwaysRender = true;
 
     const options = {
         displayMode: true,
@@ -28,7 +28,7 @@
 </script>
 
 <div style="display:flex;align-items:center">
-    <div style={"flex-grow:1;" + (ignoreOverflow ? "" : "overflow-x:auto")} id={refId}>
+    <div class=mathDisp style={"flex-grow:1;" + (ignoreOverflow ? "" : "overflow-x:auto")} id={refId}>
         <KatexDisp {options} fontSize={fontSize} refId={refId} {alwaysRender}>
             <slot />
         </KatexDisp>
