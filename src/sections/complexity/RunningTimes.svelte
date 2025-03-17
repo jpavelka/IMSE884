@@ -1,6 +1,6 @@
 <script>
     import AlgorithmRef from "$lib/AlgorithmRef.svelte";
-import Definition from "$lib/Definition.svelte";
+    import Definition from "$lib/Definition.svelte";
     import DefinitionRef from "$lib/DefinitionRef.svelte";
     import Figure from "$lib/Figure.svelte";
     import FigureRef from "$lib/FigureRef.svelte";
@@ -37,23 +37,27 @@ But just in case, let's see an example of what this might mean. Consider the exa
         <tr><td>1&nbsp;&nbsp;111</td></tr>
         <tr><td>110&nbsp;&nbsp;11001</td></tr>
         <tr><td>101&nbsp;&nbsp;11000</td></tr>
+        <tr><td>111</td></tr>
     </table>
     <span slot=caption>A binary representation of the <ProblemRef refId=knapsack/> instance from <FigureRef refId=knapsackExample />.</span>
 </Figure>
 
-Each row has two numbers: the binary representation of each item's weight and value, respectively. The space character separates the weight number from the value number, and new lines separate data for different items. In all, there are 33 total "0", "1", space, and newline characters in the representation, so under this representation the length of the instance is 33.
+Each except the last row has two numbers: the binary representation of each item's weight and value, respectively. The space character separates the weight number from the value number, and new lines separate data for different items. On the last line, we have the binary representation of the weight limit $$b$$. In all, there are 37 total "0", "1", space, and newline characters in the representation, so under this representation the length of the instance is 37.
 
 So figuring out the length for any given instance isn't so bad, but what will be most useful to us is knowing roughly how $$L(X)$$ grows as the relevant inputs to $$X$$ change. In the case of <ProblemRef refId=knapsack/>, the relevant input is the size of the set of items $$J$$, as well as the numbers that make up the weights and values for each item. I think the relationship with $$|J|$$ is pretty clear: we add a new row to the representation for every item added to the instance, so the length scales linearly (roughly 1:1) with $$|J|$$.
 
-What about the weights and values? They affect the size too, but it's not really in proportion to the numeric values, is it? The largest number represented in <FigureRef refId=knapsackExampleInstanceRepresentation/> is 25, but we don't need 25 bits to write down that number. Since 25 written in binary is 11001, we only need 5 bits to describe it. More generally, for some integer $$n$$, we only need $$\ceil{\log_2(n)}$$ bits to represent it. For convenience, let's have $$C$$ equal to the maximum of all the $$v_j$$ and $$w_j$$ values in the instance. Since each row of the representation requires one weight and one value, and we have one row per item in $$|J|$$, we can say that the size of an instance of <ProblemRef refId=knapsack/> is roughly $$|J|(2\log_2(C))$$.
+What about the weights and values? They affect the size too, but it's not really in proportion to the numeric values, is it? The largest number represented in <FigureRef refId=knapsackExampleInstanceRepresentation/> is 25, but we don't need 25 bits to write down that number. Since 25 written in binary is 11001, we only need 5 bits to describe it. More generally, for some integer $$n$$, we only need $$\ceil{\log_2(n)}$$ bits to represent it. For convenience, let's have $$C$$ equal to the maximum of all the $$v_j$$ and $$w_j$$ values in the instance, as well as the weight limit $$b$$. Since all but one row of the representation requires one weight and one value, and we have one of these rows per item in $$|J|$$, we can say that the size of an instance of <ProblemRef refId=knapsack/> is roughly $$|J|(2\log_2(C))$$ plus the contribution from the final weight limit row, giving a total of
+<MathDisp>
+    |J|(2\log_2(C)) + \log_2(C)
+</MathDisp>
 
-You might complain that we're being a little sloppy, by rounding every row of the input up to the worst case $$2\log_2(C)$$. But compared to the conventions of the theory, we're actually being too precise! We're generally interested in worst-case scenarios, and even then not on the specifics of the numbers, but the way they grow as inputs grow. Put another way, we're more interested in shapes than exact magnitudes. So that $$2\log_2(C)$$ term can lose the "2" in front, since that doesn't affect the shape. Indeed, we don't care about the base of the logarithm either, since one of the properties of logs is that for any two bases $$a,b\in\R$$ we have:
+You might complain that we're being a little sloppy, by rounding rows of the input up to the worst case $$2\log_2(C)$$. But compared to the conventions of the theory, we're actually being too precise! We're generally interested in worst-case scenarios, and even then not on the specifics of the numbers, but the way they grow as inputs grow. Put another way, we're more interested in shapes than exact magnitudes. So that $$2\log_2(C)$$ term can lose the "2" in front, since that doesn't affect the shape. Indeed, we don't care about the base of the logarithm either, since one of the properties of logs is that for any two bases $$a,b\in\R$$ we have:
 
 <MathDisp>
     \log_b(x)=\log_a(x)\frac{1}{\log_a(b)}
 </MathDisp>
 
-In other words, for given $$a,b$$, the two logarithms are only off by a constant factor. So many times you'd see that $$|J|(2\log_2(C))$$ simplified to $$|J|\log(C)$$.
+In other words, for given $$a,b$$, the two logarithms are only off by a constant factor. So many times you'd see that $$|J|(2\log_2(C)) + \log_2(C)$$ simplified to $$|J|\log(C)$$.
 
 This "don't sweat the small stuff" philosophy is codified in the so-called "big-O" notation. The formal definition is that for two functions $$f,g$$ over the same domain, we say $$f(x)=\O{g(x)}$$ (in English, "$$f(x)$$ is big O of $$g(x)$$") if there exists some positive $$M\in\R_{>0}$$ and $$x_0$$ in the domain such that
 <MathDisp>

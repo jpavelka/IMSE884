@@ -1,5 +1,6 @@
 <script>
-    import Heading from "$lib/Heading.svelte";
+    import DefinitionRef from "$lib/DefinitionRef.svelte";
+import Heading from "$lib/Heading.svelte";
     import MathDisp from "$lib/MathDisp.svelte";
     import Symbol from "$lib/Symbol.svelte";
 </script>
@@ -178,8 +179,50 @@
     </span>
 </Symbol>
 <Symbol refId=runTime searchStr="runtime,run time,running time">
-    f_A^*(l)
+    $$f_A^*(l)$$
     <span slot=desc>
         The running time of algorithm $$A$$ (on some problem $$P$$) over instances of length $$l$$.
+    </span>
+</Symbol>
+<Symbol refId=runTime searchStr="p,class p,complexity class p">
+    $$\P$$
+    <span slot=desc>
+        The complexity class <DefinitionRef refId=classP/>.
+    </span>
+</Symbol>
+<Symbol refId=runTime searchStr="np,class np,complexity class np">
+    $$\NP$$
+    <span slot=desc>
+        The complexity class <DefinitionRef refId=classNP/>.
+    </span>
+</Symbol>
+<Symbol refId=runTime searchStr="np,class np,complexity class np">
+    $$\NP$$
+    <span slot=desc>
+        The complexity class <DefinitionRef refId=classNP/>.
+    </span>
+</Symbol>
+<Symbol refId=runTime searchStr="conp,class conp,complexity class conp">
+    $$\coNP$$
+    <span slot=desc>
+        The complexity class <DefinitionRef refId=classCoNP/>.
+    </span>
+</Symbol>
+<Symbol refId=boolAnd searchStr="and,conjunction">
+    $$\land$$
+    <span slot=desc>
+        Boolean "and" operator (also known as conjunction).
+    </span>
+</Symbol>
+<Symbol refId=boolOr searchStr="or,disjunction">
+    $$\lor$$
+    <span slot=desc>
+        Boolean "or" operator (also known as disjunction).
+    </span>
+</Symbol>
+<Symbol refId=boolNot searchStr="not,negation">
+    $$\land$$
+    <span slot=desc>
+        Boolean "not" operator (also known as negation).
     </span>
 </Symbol>

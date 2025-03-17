@@ -60,6 +60,7 @@ For a formal specification of the algorithm, we'll need to define a few more obj
                     <AlgoText>Set $$u$$ from $$\argmin\{d(v):v\in U\}$$<Footnote>
                         Choose the vertex with the shortest currently-best-known path from $$s$$. Ties may be broken arbitrarily.
                     </Footnote></AlgoText>
+                    <AlgoText>Set $$U\leftarrow U\setminus\{u\}$$</AlgoText>
                     <AlgoText type=for>
                         $$v\in U: (u, v)\in E$$<Footnote>
                             Iterate through each vertex $$v$$ for which:

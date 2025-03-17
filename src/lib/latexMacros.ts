@@ -16,6 +16,7 @@ const macros = {
     '\\identity': '\\mat{I}',
     '\\P': '\\mathcal{P}',
     '\\NP': '\\mathcal{NP}',
+    '\\coNP': '\\text{co-}\\mathcal{NP}',
     '\\floor': '\\lfloor #1 \\rfloor',
     '\\ceil': '\\lceil #1 \\rceil',
     '\\bpi': '\\mathbb{\\pi}',

@@ -7,7 +7,7 @@
     import RunningTimes from "./RunningTimes.svelte";
     import FurtherReading from "./FurtherReading.svelte";
     import Reductions from "./Reductions.svelte";
-    import ComplexityClasses from "./ComplexityClasses.svelte";
+    import PAndNp from "./PAndNp.svelte";
 
 </script>
 
@@ -26,7 +26,6 @@ I hear you! The thing is, I think the notions we'll discuss here are going to be
 The whole aim of this section is to try to formalize what problem are "easy" vs. "hard", or what it might mean to have a "good" algorithm for a particular class of problems. We won't be fully rigorous here, instead shooting for a good balance of rigorous enough to be meaningful while not getting ourselves lost in the details. As you said in my imagined hypothetical, this isn't a computer science class!<Footnote>Though, if I do my job here, you may be inspired to take one!</Footnote>
 
 <RunningTimes/>
-<ComplexityClasses/>
+<PAndNp/>
 <Reductions/>
-<!-- complexity of our COP problems -->
 <FurtherReading/>

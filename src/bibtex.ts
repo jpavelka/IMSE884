@@ -72,4 +72,15 @@ export default `
   year={2018},
   publisher={Springer Berlin Heidelberg}
 }
+
+@book{sipser2012introduction,
+  title={Introduction to the Theory of Computation},
+  author={Sipser, M.},
+  isbn={9781133187790},
+  lccn={2012938665},
+  url={https://books.google.com/books?id=P3f6CAAAQBAJ},
+  year={2012},
+  publisher={Cengage Learning}
+}
+
 `

@@ -22,6 +22,9 @@ const extras: {[key: string]: {[key: string]: any}} = {
     },
     diestel2018: {
         image: 'https://books.google.com/books/content?id=JQ1XtgEACAAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE708iWMAD4FT-kZAkCWVKmh_dO0fqxql-4aDEIUuGoTqdiNN-XQnf6hflBl1pnlcn4GTJtHXYdy0caqltOSvxv1WlljA7JD__m4qwwT7yhnJvjVhtsgy-PIqnxaXUyPhuvLHR_OM'
+    },
+    sipser2012introduction: {
+        image: 'https://books.google.com/books/publisher/content?id=P3f6CAAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE71u0KYM27Rh-3L1hawhM_6U3Im597q2MoU42OuP3ZfXmocWCTUCcB7mKpOkIpoJcS4w04wdIz02k4_ziAZS7Asqk_fNb7PMzt0Y8l338EEqguc3BygwldjFhfekjZQTi2-HguoA'
     }
 }
 
