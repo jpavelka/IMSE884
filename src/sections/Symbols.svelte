@@ -1,6 +1,6 @@
 <script>
     import DefinitionRef from "$lib/DefinitionRef.svelte";
-import Heading from "$lib/Heading.svelte";
+    import Heading from "$lib/Heading.svelte";
     import MathDisp from "$lib/MathDisp.svelte";
     import Symbol from "$lib/Symbol.svelte";
 </script>

@@ -81,6 +81,8 @@ Now suppose you have some problem $$P$$ (something like the <ProblemRef refId=kn
     f_A^*(l)=\max_{X\in P}\left\{f_A(X):L(X)=l\right\}
 </MathDisp>
 
+It's worth calling out the "$$\max$$" in the definition, meaning that this is necessarily a worse-case measure of difficulty. It's entirely possible that an algorithm runs in short time on almost all inputs, but if the time taken on some small subset of instances grows quickly, that's all that matters for the definition.
+
 Ok, that was quite a few wonky definitions, but the payoff is we now have a succinct way to describe how an algorithm's running time changes as the size of the problem increases. The holy grail of algorithm design is to create a so-called <Definition refId=polynomialAlgo>
     polynomial
     <span slot=glossaryDisp>polynomial algorithm</span>

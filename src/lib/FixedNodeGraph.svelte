@@ -68,8 +68,8 @@
           extraArgs.width = 5;
         }
         const spl = e.split('-');
-        const from = parseInt(spl[0]) || nodeLabelToId[spl[0]];
-        const to = parseInt(spl[1]) || nodeLabelToId[spl[1]];
+        const from = nodeLabelToId[spl[0]];
+        const to = nodeLabelToId[spl[1]];
         e = {from: from, to: to}
         if (spl.length > 2) {
           e.label = `${spl[2]}`

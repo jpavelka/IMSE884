@@ -25,10 +25,12 @@
 		"@citation-js/core": "^0.7.9",
 		"@citation-js/plugin-bibtex": "^0.7.9",
 		"@citation-js/plugin-csl": "^0.7.9",
+		"@kitware/vtk.js": "^32.12.1",
 		"@sveltejs/adapter-static": "^3.0.4",
 		"chart.js": "^4.4.8",
 		"hull.js": "^1.0.6",
 		"katex": "^0.16.10",
+		"threejs-math": "^0.147.0",
 		"vis-data": "^7.1.9",
 		"vis-network": "^9.1.9",
 		"yalps": "^0.5.6"

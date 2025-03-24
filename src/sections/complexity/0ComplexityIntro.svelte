@@ -5,7 +5,7 @@
     import ProblemRef from "$lib/ProblemRef.svelte";
     import SectionRef from "$lib/SectionRef.svelte";
     import RunningTimes from "./RunningTimes.svelte";
-    import FurtherReading from "./FurtherReading.svelte";
+    import Implications from "./Implications.svelte";
     import Reductions from "./Reductions.svelte";
     import PAndNp from "./PAndNp.svelte";
 
@@ -28,4 +28,4 @@ The whole aim of this section is to try to formalize what problem are "easy" vs.
 <RunningTimes/>
 <PAndNp/>
 <Reductions/>
-<FurtherReading/>
+<Implications/>

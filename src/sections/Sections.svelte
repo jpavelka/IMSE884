@@ -7,12 +7,14 @@
     import IntegerProgrammingIntro from "./integerProgrammingIntro/0IntegerProgrammingIntro.svelte";
     import ComplexityIntro from "./complexity/0ComplexityIntro.svelte";
     import Symbols from "./Symbols.svelte";
+    import EasyOpt from "./easyOpt/0easyOpt.svelte";
 </script>
 
 <Welcome />
 <CombOptIntro />
 <IntegerProgrammingIntro />
 <ComplexityIntro />
+<EasyOpt />
 <Appendix />
 <Glossary />
 <Symbols />

@@ -1,6 +1,6 @@
 <script lang=ts>
     import Algorithm from "$lib/Algorithm.svelte";
-import AlgorithmRef from "$lib/AlgorithmRef.svelte";
+    import AlgorithmRef from "$lib/AlgorithmRef.svelte";
     import AlgoText from "$lib/AlgoText.svelte";
     import Definition from "$lib/Definition.svelte";
     import DefinitionRef from "$lib/DefinitionRef.svelte";
@@ -207,7 +207,7 @@ There you have it, your first approximation algorithm! Let's formalize this by p
 
 <Algorithm refId=tsp2Approx>
     <span slot=name>TSP 2-Approximation</span>
-    <span slot=solves><ProblemRef refId=tsp /> (metric variant)</span>
+    <span slot=for>Apporximation of <ProblemRef refId=tsp /> (metric variant)</span>
     <AlgoText>Find a minimum spanning tree $$T$$ of $$G$$.</AlgoText>
     <AlgoText>Find a traversal $$R$$ of $$T$$.</AlgoText>
     <AlgoText>Build the final tour $$R^{\text{final}}$$ iterating through $$R$$ and removing any vertices that have already been visited.</AlgoText>

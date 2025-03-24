@@ -45,3 +45,17 @@ export const exampleShortestPathEdges = [
     'c-t-2',
     'd-t-6'
 ]
+
+export const maximizePlotlyChartArea = (plotDiv) => {
+    const svgs = [...plotDiv.querySelectorAll(".main-svg")];
+    for (const el of svgs.slice(1)) {
+        if (el.tagName.toLowerCase() == 'svg') {
+            el.remove();
+        }
+    }
+    const scene = plotDiv.querySelectorAll(".gl-container")[0].querySelectorAll("#scene")[0];
+    scene.style.left = 0;
+    scene.style.top = 0;
+    scene.style.width = "100%";
+    scene.style.height = "100%";
+}

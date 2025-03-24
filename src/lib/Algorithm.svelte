@@ -29,7 +29,12 @@
             >
         {/if}
     </div>
-    <div class=algoSolves>Solves: <slot name=solves /></div>
+    {#if $$slots.solves}
+        <div class=algoSolves>Solves: <slot name=solves /></div>
+    {/if}
+    {#if $$slots.for}
+        <div class=algoSolves>For: <slot name=for /></div>
+    {/if}
     <slot />
 </div>
 
