@@ -141,15 +141,22 @@
         }
         if (feasibleIntersections.length > 0) {
             const feasiblePointPath = followPointsAroundPath(feasibleIntersections);
+            const x = feasiblePointPath.map(k => c.intersections[k].point.x);
+            const y = feasiblePointPath.map(k => c.intersections[k].point.y);
+            const z = feasiblePointPath.map(k => c.intersections[k].point.z);
             data.push({
                 type: 'scatter3d',
-                x: feasiblePointPath.map(k => c.intersections[k].point.x),
-                y: feasiblePointPath.map(k => c.intersections[k].point.y),
-                z: feasiblePointPath.map(k => c.intersections[k].point.z),
+                x: x,
+                y: y,
+                z: z,
                 mode: 'lines',
                 line: {color: '#000'},
                 hovertemplate: 'Corner point: (%{x}, %{y}, %{z})',
-                name: ''
+                name: '',
+                surfacecolor: '#40109020',
+                surfaceaxis: Math.abs(Math.max(...x) - Math.min(...x)) < 0.000001 ? 0 :
+                    Math.abs(Math.max(...y) - Math.min(...y)) < 0.000001 ? 1 :
+                    2
             })
         } 
     }
